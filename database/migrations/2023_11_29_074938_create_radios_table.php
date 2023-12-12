@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('radios', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('subtitle')->nullable();
+            $table->string('image')->nullable();
+            $table->string('radio_file')->nullable();
+            $table->string('radio_link')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
