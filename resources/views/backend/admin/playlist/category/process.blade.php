@@ -14,7 +14,7 @@
                         </h4>
                         <div class="d-flex gap-2">
                             <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2">Music List</a>
-                            @if(isset($playlistcategory->id)){
+                            @if(isset($playlistcategory->id))
                                 <a href="{{ route('playlistcategory.details', ['id' => $playlistcategory->id])}}" class="btn btn-primary btn-sm ml-2">Details</a>
 
                                 <form action="{{ route('playlistcategory.destroy', ['id' => $playlistcategory->id]) }}" method="post">
@@ -22,7 +22,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this playlistcategory record?')">Delete</button>
                                 </form>
-                            }
+                            
                           @endif
                         </div>
                     </div>

@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="./icons.html">
+                <a class="nav-link" href="{{ route('podcastcategory.index')}}">
                     <i class="nc-icon nc-atom"></i>
                     <p>Icons</p>
                 </a>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\PlaylistManageController;
+use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -60,5 +61,30 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/playlist-music-edit/{id}', [PlaylistManageController::class, 'playlistMusicEdit'])->name('playlistmusic.edit');
     Route::get('/playlist-music-details/{id}', [PlaylistManageController::class, 'playlistMusicDetails'])->name('playlistmusic.details');
     Route::delete('/playlist-music-destroy/{id}', [PlaylistManageController::class, 'playlistMusicDestroy'])->name('playlistmusic.destroy');
+
+
+
+
+
+
+
+
+
+    Route::get('/podcast-category', [PodcastManageController::class, 'podcastCatgoryIndex'])->name('podcastcategory.index');
+    Route::get('/podcast-category-create', [PodcastManageController::class, 'podcastCatgoryCreate'])->name('podcastcategory.create');
+    Route::get('/podcast-category-details/{id}', [PodcastManageController::class, 'podcastCatgorydetails'])->name('podcastcategory.details');
+    Route::get('/podcast-category-edit/{id}', [PodcastManageController::class, 'podcastCatgoryEdit'])->name('podcastcategory.edit');
+    Route::match(['post', 'put'], '/podcast-category-process/{id?}', [PodcastManageController::class, 'podcastCatgoryProcess'])
+    ->name('podcastcategory.process');
+    Route::delete('/podcast-category-destroy/{id}', [PodcastManageController::class, 'podcastCatgorydestroy'])->name('podcastcategory.destroy');
+
+
+    Route::get('/podcast', [PodcastManageController::class, 'podcastall'])->name('podcast.index');
+    Route::get('/podcast-create', [PodcastManageController::class, 'podcastAdd'])->name('podcast.create');
+    Route::match(['post', 'put'], '/podcast-process/{id?}', [PodcastManageController::class, 'podcastPostPut'])
+    ->name('podcast.process');
+    Route::get('/podcast-edit/{id}', [PodcastManageController::class, 'podcastEditpage'])->name('podcast.edit');
+    Route::get('/podcast-details/{id}', [PodcastManageController::class, 'podcastDetails'])->name('podcast.details');
+    Route::delete('/podcast-destroy/{id}', [PodcastManageController::class, 'podcastDestroy'])->name('podcast.destroy');
 
 });
