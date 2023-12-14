@@ -34,7 +34,7 @@
             <li>
                 <a class="nav-link" href="{{ route('podcastcategory.index')}}">
                     <i class="nc-icon nc-atom"></i>
-                    <p>Icons</p>
+                    <p>Podcast Manage</p>
                 </a>
             </li>
             <li>

@@ -129,7 +129,7 @@ class PlaylistManageController extends Controller
                 $input = $request->all();
            
                 if ($image = $request->file('image')) {
-                    $destinationPath = 'image/';
+                    $destinationPath = 'image/playlist';
                     $originalFileName = $image->getClientOriginalName(); 
                     $profileImage = date('YmdHis') . "_" . $originalFileName;
                     $image->move($destinationPath, $profileImage);
