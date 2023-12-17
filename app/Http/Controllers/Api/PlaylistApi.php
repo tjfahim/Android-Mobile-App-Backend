@@ -16,17 +16,18 @@ class PlaylistApi extends Controller
         $playlistCatgory = PlaylistCategory::orderBy('created_at', 'desc')->get();
         foreach ($playlistCatgory as $record) {
             $imageName = $record->image;
-            $imageUrl = asset('image/playlist' . $imageName);
+            $imageUrl = asset('image/playlist/' . $imageName);
             $record->image = $imageUrl;
         }
-        return response()->json($playlistCatgory);
-    }
+            return response()->json([
+                'message' => 'Playlist Category List:',
+                'data' => $playlistCatgory,
+            ]);
+     }
 
    
     public function playlistCategoryMusicshow($id)
     {
-
-    
         $playlistCategoryMusics = PlaylistCategoryMusic::where('playlist_category_id', $id)
             ->orderBy('created_at', 'desc')
             ->get();
@@ -43,7 +44,7 @@ class PlaylistApi extends Controller
                 $music->image = $imageUrl;
     
                 $featureImageName = $music->feature_image;
-                $featureImageUrl = asset('feature_image/music/' . $featureImageName);
+                $featureImageUrl = asset('image/music/' . $featureImageName);
                 $music->feature_image = $featureImageUrl;
     
                 if ($music->music_file) {
@@ -55,8 +56,10 @@ class PlaylistApi extends Controller
                 $musicList[] = $music;
             }
         }
-    
-        return response()->json($musicList);
+        return response()->json([
+            'message' => 'Playlist Single Category All Music List:',
+            'data' => $musicList,
+        ]);
     }
 
     public function playlistMusicDetails($id)
@@ -74,12 +77,21 @@ class PlaylistApi extends Controller
             $feature_imageUrl = asset('image/music/' . $feature_imageName);
             $music->feature_image = $feature_imageUrl;
 
-            if($music->music_file){
-                $musicName = $music->music;
+            if($music->music_link){
+                $musicName = $music->music_link;
+                $music->music_link = $musicName;
+            }elseif($music->music_file){
+                $musicName = $music->music_file;
                 $musicUrl = asset('music_file/' . $musicName);
                 $music->music_link = $musicUrl;
+            }else{
+                $music->music_link = 'No music';
+
             }
 
-        return response()->json($music);
+        return response()->json([
+            'message' => 'Single Music Data:',
+            'data' => $music,
+        ]);
     }
 }

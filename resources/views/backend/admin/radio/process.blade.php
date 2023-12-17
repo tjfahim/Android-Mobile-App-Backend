@@ -80,7 +80,7 @@
                                         <label>Image</label>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($radio) && $radio->image)
-                                            <img src="{{ asset('image/' . $radio->image) }}" alt="{{ $radio->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
                                         @else
                                             <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
                                         @endif

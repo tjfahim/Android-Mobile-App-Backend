@@ -24,6 +24,6 @@ class RoleMiddleware
             }
         }
 
-        return response('Unauthorized.', 401);
+        return redirect()->route('login');
     }
 }

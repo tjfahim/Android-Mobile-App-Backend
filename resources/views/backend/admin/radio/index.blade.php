@@ -22,6 +22,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <!-- Edit option -->
                                     <a class="dropdown-item" href="{{ route('radio.edit', ['id' => $radio->id]) }}">Edit</a>
+                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Section Manage</a>
                                     <!-- Delete option -->
                                     <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
                                         @csrf
@@ -34,7 +35,7 @@
                             <!-- Card Content -->
                             <h4 class="card-title">{{ $radio->title }}</h4>
                             <p class="card-text">{{ $radio->subtitle }}</p>
-                            <img src="{{ asset('image/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%; height: 100%">
+                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%; height: 100%">
                     
                             @if($radio->radio_link)
                                 <a href="{{ $radio->radio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px">Link: {{ $radio->radio_link }}</a>

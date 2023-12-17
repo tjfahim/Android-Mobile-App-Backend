@@ -19,7 +19,10 @@ class PodcastApi extends Controller
             $imageUrl = asset('podcast/image/' . $imageName);
             $record->image = $imageUrl;
         }
-        return response()->json($podcastCategory);
+        return response()->json([
+            'message' => 'Podcast Category List:',
+            'data' => $podcastCategory,
+        ]);
     }
     public function podcastCategoryshow($id)
     {
@@ -29,6 +32,10 @@ class PodcastApi extends Controller
         if (!$podcastCatgory) {
             return response()->json('No Category Exits');
         }
+        $imageNameCategory = $podcastCatgory->image;
+        $imageUrlCategory = asset('podcast/image/' . $imageNameCategory);
+        $podcastCatgory->image = $imageUrlCategory;
+
         foreach ($podcasts as $record) {
             $imageName = $record->image;
             $imageUrl = asset('podcast/image/' . $imageName);
@@ -45,7 +52,11 @@ class PodcastApi extends Controller
                 $record->audio_link = $audioUrl;
             }
         }
-        return response()->json($podcasts);
+        return response()->json([
+            'message' => 'Podcast Category List:',
+            'podcastCatgory' => $podcastCatgory,
+            'podcasts' => $podcasts,
+        ]);
     }
 
     public function podcastDetails($id)
@@ -69,7 +80,10 @@ class PodcastApi extends Controller
                 $podcast->audio_link = $audioUrl;
             }
 
-        return response()->json($podcast);
+        return response()->json([
+            'message' => 'Podcast Details:',
+            'data' => $podcast,
+        ]);
     }
 
 }

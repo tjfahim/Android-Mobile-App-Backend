@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\PlaylistManageController;
 use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
+use App\Http\Controllers\Admin\RadioDetailsManageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,15 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::match(['post', 'put'], '/radio-process/{id?}', [RadioController::class, 'process'])->name('radio.process');
     Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
     Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
+
+    Route::get('/radio/section/{radio_id}', [RadioDetailsManageController::class, 'RadioSectionIndex'])->name('radio.section.index');
+    Route::get('/radio/section-create/{radio_id}', [RadioDetailsManageController::class, 'radioSectionCreate'])->name('radio.section.create');
+    Route::match(['post', 'put'], '/radio/section-process/{radio_id}/{id?}', [RadioDetailsManageController::class, 'radioSectionProcess'])->name('radio.section.process');
+    Route::get('/radio/section-edit/{radio_id}/{id}', [RadioDetailsManageController::class, 'radioSectionEdit'])->name('radio.section.edit');
+    Route::get('/radio/section-details/{id}', [RadioDetailsManageController::class, 'radioSectionDetails'])->name('radio.section.details');
+    Route::delete('/radio/section-destroy/{id}', [RadioDetailsManageController::class, 'radioSectiondestroy'])->name('radio.section.destroy');
+
+
 
 
     Route::get('/playlist-manage', [PlaylistManageController::class, 'playlistIndex'])->name('playlist.index');
