@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('audio')->nullable();
             $table->string('audio_link')->nullable();
             $table->string('image')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
 
             $table->foreign('podcast_category_id')->references('id')->on('podcast_categories')->onDelete('cascade');

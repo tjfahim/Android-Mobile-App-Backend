@@ -9,7 +9,7 @@ class PlaylistMusic extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'feature_image', 'title', 'subtitle', 'artist', 'music_file', 'music_link'];
+    protected $fillable = ['image', 'feature_image', 'title', 'subtitle', 'artist', 'music_file', 'music_link', 'status'];
 
     public function categories()
     {

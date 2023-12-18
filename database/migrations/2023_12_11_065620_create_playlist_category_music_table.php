@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('playlist_category_id');
             $table->unsignedBigInteger('playlist_music_id');
+            $table->string('status')->default('active');
+
             $table->timestamps();
 
             $table->foreign('playlist_category_id')->references('id')->on('playlist_categories')->onDelete('cascade');

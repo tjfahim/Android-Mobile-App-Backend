@@ -25,7 +25,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div>  
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="music">Music:</label>

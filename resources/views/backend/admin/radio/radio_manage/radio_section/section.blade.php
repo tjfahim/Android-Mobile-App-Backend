@@ -31,6 +31,11 @@
                       <!-- Edit option -->
                       <div class="row">
                           <div class="col">
+                              <a class="btn btn-sm btn-primary mb-2" href="{{ route('radio.section.details', ['radio_id' => $radio_id,'id' => $radioSection->id]) }}">Section Item Manage</a>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
                               <a class="btn btn-sm btn-primary" href="{{ route('radio.section.edit', ['radio_id' => $radio_id,'id' => $radioSection->id]) }}">Edit</a>
                           </div>
                       </div>

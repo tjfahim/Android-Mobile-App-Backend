@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('radio_file')->nullable();
             $table->string('radio_link')->nullable();
+            $table->string('background_color')->nullable();
+
             $table->string('status')->default('active');
             $table->timestamps();
         });

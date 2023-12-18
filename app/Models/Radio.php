@@ -10,6 +10,6 @@ class Radio extends Model
     use HasFactory;
    
 
-    protected $fillable = ['title', 'subtitle', 'image', 'radio_file', 'radio_link', 'status'];
+    protected $fillable = ['title', 'subtitle', 'image', 'radio_file', 'radio_link', 'status','background_color'];
 
 }

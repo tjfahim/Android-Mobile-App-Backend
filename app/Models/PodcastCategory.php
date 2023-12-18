@@ -9,7 +9,7 @@ class PodcastCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'image'];
+    protected $fillable = ['title', 'image', 'status'];
 
     public function podcasts()
     {

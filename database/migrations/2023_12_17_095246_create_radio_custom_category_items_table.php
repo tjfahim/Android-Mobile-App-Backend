@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('playlist_music_id')->nullable();
             $table->unsignedBigInteger('podcast_id')->nullable();
             $table->unsignedBigInteger('radio_custom_categorie_id')->nullable();
+            $table->string('status')->default('active');
 
             $table->timestamps();
             $table->foreign('playlist_music_id')->references('id')->on('playlist_music')->onDelete('set null');

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Podcast extends Model
 {
     use HasFactory;
-    protected $fillable = ['podcast_category_id', 'title', 'subtitle', 'video','video_link','audio_link', 'audio', 'image'];
+    protected $fillable = ['podcast_category_id', 'title', 'subtitle', 'video','video_link','audio_link', 'audio', 'image', 'status','background_color'];
 
     public function category()
     {

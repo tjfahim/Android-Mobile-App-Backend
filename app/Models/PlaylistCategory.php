@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlaylistCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ['image', 'title'];
+    protected $fillable = ['image', 'title', 'status'];
 
     public function musics()
     {

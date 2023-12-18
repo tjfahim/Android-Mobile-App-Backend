@@ -10,7 +10,7 @@ class PlaylistCategoryMusic extends Model
     use HasFactory;
     protected $fillable = [
         'playlist_category_id',
-        'playlist_music_id',
+        'playlist_music_id','status'
     ];
 
 

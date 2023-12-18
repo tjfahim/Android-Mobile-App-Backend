@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('music_link')->nullable();
             $table->string('image')->nullable();
             $table->string('feature_image')->nullable();
+            $table->string('status')->default('active');
+
             $table->timestamps();
         });
     }
