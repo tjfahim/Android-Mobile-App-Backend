@@ -44,7 +44,18 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                           
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" id="">
+                                            <option value="active" {{ isset($radioSection->status  === 'active') ? 'selected' : '' }}>Active</option>
+                                            <option value="active" {{ isset($radioSection->status  === 'inactive') ? 'selected' : '' }}>Active</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($radioSection) && $radioSection->id ? 'Update' : 'Add' }}
                             </button>

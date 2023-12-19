@@ -50,7 +50,7 @@
                                         <label>Image</label>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($playlistcategory) && $playlistcategory->image)
-                                            <img src="{{ asset('image/' . $playlistcategory->image) }}" alt="{{ $playlistcategory->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/playlist/' . $playlistcategory->image) }}" alt="{{ $playlistcategory->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
                                         @else
                                             <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
                                         @endif
@@ -60,6 +60,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" id="">
+                                            <option value="active"  {{ $playlistcategory->status === 'active' ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive" {{ $playlistcategory->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($playlistcategory) && $playlistcategory->id ? 'Update' : 'Add Category' }}
                             </button>

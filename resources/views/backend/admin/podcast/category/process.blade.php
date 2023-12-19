@@ -59,6 +59,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="status" id="">
+                                            <option value="active"  {{ $podcastcategory->status === 'active' ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive" {{ $podcastcategory->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($podcastcategory) && $podcastcategory->id ? 'Update' : 'Add Category' }}
                             </button>

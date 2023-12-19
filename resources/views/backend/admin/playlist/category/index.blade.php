@@ -30,7 +30,7 @@
                     </td>
                    
                     <td>
-                        <img src="{{ asset('image/' . $playlistCatgory->image) }}" alt="{{ $playlistCatgory->title }}" style="width: 50px; height: 50px">
+                        <img src="{{ asset('image/playlist/' . $playlistCatgory->image) }}" alt="{{ $playlistCatgory->title }}" style="width: 50px; height: 50px">
                     </td>
                     <td>
                       <!-- Edit option -->

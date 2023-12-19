@@ -12,7 +12,7 @@ class PodcastApi extends Controller
 {
     public function podcastCategoryindex()
     {
-        $podcastCategory = PodcastCategory::orderBy('created_at', 'desc')->get();
+        $podcastCategory = PodcastCategory::where('status','active')->orderBy('created_at', 'desc')->get();
 
         foreach ($podcastCategory as $record) {
             $imageName = $record->image;
@@ -27,7 +27,7 @@ class PodcastApi extends Controller
     public function podcastCategoryshow($id)
     {
         $podcastCatgory = PodcastCategory::find($id);
-        $podcasts = Podcast::where('podcast_category_id', $podcastCatgory->id)->orderBy('created_at', 'desc')->get();
+        $podcasts = Podcast::where('status','active')->where('podcast_category_id', $podcastCatgory->id)->orderBy('created_at', 'desc')->get();
       
         if (!$podcastCatgory) {
             return response()->json('No Category Exits');
@@ -61,7 +61,7 @@ class PodcastApi extends Controller
 
     public function podcastDetails($id)
     {
-        $podcast = podcast::find($id);
+        $podcast = podcast::where('status','active')->find($id);
     
         if (!$podcast) {
             return response()->json('No Podcast Exits');

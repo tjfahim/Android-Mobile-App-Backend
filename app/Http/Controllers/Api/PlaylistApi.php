@@ -13,7 +13,7 @@ class PlaylistApi extends Controller
     
     public function playlistCatgoryIndex()
     {
-        $playlistCatgory = PlaylistCategory::orderBy('created_at', 'desc')->get();
+        $playlistCatgory = PlaylistCategory::where('status','active')->orderBy('created_at', 'desc')->get();
         foreach ($playlistCatgory as $record) {
             $imageName = $record->image;
             $imageUrl = asset('image/playlist/' . $imageName);
@@ -28,7 +28,7 @@ class PlaylistApi extends Controller
    
     public function playlistCategoryMusicshow($id)
     {
-        $playlistCategoryMusics = PlaylistCategoryMusic::where('playlist_category_id', $id)
+        $playlistCategoryMusics = PlaylistCategoryMusic::where('status','active')->where('playlist_category_id', $id)
             ->orderBy('created_at', 'desc')
             ->get();
     
@@ -64,10 +64,10 @@ class PlaylistApi extends Controller
 
     public function playlistMusicDetails($id)
     {
-        $music = PlaylistMusic::find($id);
+        $music = PlaylistMusic::where('status','active')->find($id);
     
         if (!$music) {
-            return response()->json('No Podcast Exits');
+            return response()->json('No Music Exits');
         }
             $imageName = $music->image;
             $imageUrl = asset('image/music/' . $imageName);
