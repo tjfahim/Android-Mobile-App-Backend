@@ -14,9 +14,10 @@
             <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">title</th>
-                    <th scope="col">image</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -26,12 +27,19 @@
                   <tr>
                     <th scope="row"> {{ $playlistCatgory->id }}</th>
                     <td>
-               {{ $playlistCatgory->title }}</small> 
+               {{ $playlistCatgory->title }}
                     </td>
                    
                     <td>
                         <img src="{{ asset('image/playlist/' . $playlistCatgory->image) }}" alt="{{ $playlistCatgory->title }}" style="width: 50px; height: 50px">
                     </td>
+                    <td>
+                        @if($playlistCatgory->status =='active')
+                        <span class="badge badge-success">{{$playlistCatgory->status}}</span>
+                        @endif
+                        @if($playlistCatgory->status =='inactive')
+                        <span class="badge badge-danger">{{$playlistCatgory->status}}</span>
+                        @endif 
                     <td>
                       <!-- Edit option -->
                       <div class="row">

@@ -31,7 +31,14 @@
                                 </div>
                             </div>
                     
-                            <h4 class="card-title">{{ $podcastCatgory->title }}</h4>
+                            <h4 class="card-title">{{ $podcastCatgory->title }}
+                                    @if($podcastCatgory->status =='active')
+                                    <span class="badge badge-success">{{$podcastCatgory->status}}</span>
+                                    @endif
+                                    @if($podcastCatgory->status =='inactive')
+                                    <span class="badge badge-danger">{{$podcastCatgory->status}}</span>
+                                    @endif
+                            </h4>
                            
                             <a href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}"><img src="{{ asset('podcast/image/' . $podcastCatgory->image) }}" alt="{{ $podcastCatgory->title }}" style="width: 100%; height: 100%"></a>
 

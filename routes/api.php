@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\HomeApi;
 use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
+use App\Http\Controllers\Api\RadioApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +26,11 @@ Route::get('/podcast-category-get-podcast/{id}', [PodcastApi::class, 'podcastCat
 Route::get('/podcast-category-get-podcast-details/{id}', [PodcastApi::class, 'podcastDetails']);
 
 Route::get('/playlist-category-get', [PlaylistApi::class, 'playlistCatgoryIndex']);
-Route::get('/playlist-category-get-music/{id}', [PlaylistApi::class, 'playlistCategoryMusicshow']);
-Route::get('/playlist-category-get-music-details/{id}', [PlaylistApi::class, 'playlistMusicDetails']);
+Route::get('/playlist-category-get-music/{id}', [PlaylistApi::class, 'playlistCategoryMusicshow'])->name('playlistcategory.details.fetch');
+Route::get('/playlist-category-get-music-details/{id}', [PlaylistApi::class, 'playlistMusicDetails'])->name('podcast.details.fetch');
+
+Route::get('/RadioSectionIndexfetch/{id}', [RadioApi::class, 'RadioSectionIndexfetch']);
+Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
+Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 
 

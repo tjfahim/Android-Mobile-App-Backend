@@ -50,8 +50,10 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" id="">
-                                            <option value="active" {{ isset($radioSection->status  === 'active') ? 'selected' : '' }}>Active</option>
-                                            <option value="active" {{ isset($radioSection->status  === 'inactive') ? 'selected' : '' }}>Active</option>
+                                    
+                                            <option value="active" {{ isset($radioSection) && $radioSection->status === 'active' ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive" {{ isset($radioSection) && $radioSection->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+
                                         </select>
                                     </div>
                                 </div>

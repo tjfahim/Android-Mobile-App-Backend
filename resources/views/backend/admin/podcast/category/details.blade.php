@@ -39,6 +39,7 @@
                 <th scope="col">Podcast Title</th>
                 <th scope="col">Audio</th>
                 <th scope="col">Image</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -72,6 +73,13 @@
                 <td>
                     <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" style="width: 50px; height: 50px">
                 </td>
+                <td>
+                    @if($podcast->status =='active')
+                    <span class="badge badge-success">{{$podcast->status}}</span>
+                    @endif
+                    @if($podcast->status =='inactive')
+                    <span class="badge badge-danger">{{$podcast->status}}</span>
+                    @endif
                 <td>
                     <!-- Edit option -->
                     <div class="btn-group-vertical">

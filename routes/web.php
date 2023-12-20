@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PlaylistManageController;
 use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
@@ -38,6 +39,25 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/radio', [RadioController::class, 'index'])->name('radio.index');
     Route::get('/radio-create', [RadioController::class, 'create'])->name('radio.create');
     Route::match(['post', 'put'], '/radio-process/{id?}', [RadioController::class, 'process'])->name('radio.process');
+
+    Route::get('/home/section', [HomeController::class, 'homeSectionIndex'])->name('home.section.index');
+    Route::get('/home/section-create', [HomeController::class, 'homeSectionCreate'])->name('home.section.create');
+    Route::match(['post', 'put'], '/home/section-process/{id?}', [HomeController::class, 'homeSectionProcess'])->name('home.section.process');
+    Route::get('/home/section-edit/{id}', [HomeController::class, 'homeSectionEdit'])->name('home.section.edit');
+    Route::get('/home/section-details/{id}', [HomeController::class, 'homeSectionDetails'])->name('home.section.details');
+    Route::post('/home/section/item-create/{home_section_id}', [HomeController::class, 'homeSectionItemCreate'])->name('home.section.item.create');
+    Route::delete('/home/section-destroy/{id}', [HomeController::class, 'homeSectiondestroy'])->name('home.section.destroy');
+    Route::delete('/home/section-item-destroy/{id}', [HomeController::class, 'homeSectionItemDelete'])->name('home.section.item.destroy');
+
+    Route::get('/home/section-event', [HomeController::class, 'homeSectionEventIndex'])->name('home.section.event.index');
+    Route::get('/home/section-event-create', [HomeController::class, 'homeSectionEventCreate'])->name('home.section.event.create');
+    Route::match(['post', 'put'], '/home/section-event-process/{id?}', [HomeController::class, 'homeSectionEventProcess'])->name('home.section.event.process');
+    Route::get('/home/section-event-details/{id}', [HomeController::class, 'homeSectionEventDetails'])->name('home.section.event.details');
+
+    Route::delete('/home/section-event-destroy/{id}', [HomeController::class, 'homeSectionEventdestroy'])->name('home.section.event.destroy');
+
+
+
     Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
     Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
 
@@ -49,7 +69,7 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::post('/radio/section/item-create/{radio_custom_categorie_id}', [RadioDetailsManageController::class, 'radioSectionItemCreate'])->name('radio.section.item.create');
     Route::delete('/radio/section-destroy/{id}', [RadioDetailsManageController::class, 'radioSectiondestroy'])->name('radio.section.destroy');
     Route::delete('/radio/section-item-destroy/{radioSectionItemId}', [RadioDetailsManageController::class, 'radioSectionItemDelete'])->name('radio.section.item.destroy');
-
+    
 
 
 
@@ -72,11 +92,8 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     ->name('playlistmusic.process');
     Route::get('/playlist-music-edit/{id}', [PlaylistManageController::class, 'playlistMusicEdit'])->name('playlistmusic.edit');
     Route::get('/playlist-music-details/{id}', [PlaylistManageController::class, 'playlistMusicDetails'])->name('playlistmusic.details');
+   
     Route::delete('/playlist-music-destroy/{id}', [PlaylistManageController::class, 'playlistMusicDestroy'])->name('playlistmusic.destroy');
-
-
-
-
 
 
 

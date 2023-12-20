@@ -33,8 +33,19 @@
                             </div>
                     
                             <!-- Card Content -->
-                            <h4 class="card-title">{{ $radio->title }}</h4>
+                            <h4 class="card-title">{{ $radio->title }} <span>
+                                
+                                    @if($radio->status =='active')
+                                    <span class="badge badge-success">{{$radio->status}}</span>
+                                    @endif
+                                    @if($radio->status =='inactive')
+                                    <span class="badge badge-danger">{{$radio->status}}</span>
+                                    @endif
+                            </span></h4>
                             <p class="card-text">{{ $radio->subtitle }}</p>
+                            <p class="card-text">
+                                
+                            </p>
                             <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%; height: 100%">
                     
                             @if($radio->radio_link)

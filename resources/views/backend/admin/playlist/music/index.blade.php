@@ -15,11 +15,12 @@
             <thead>
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">title</th>
-                <th scope="col">subtitle</th>
-                <th scope="col">music</th>
-                <th scope="col">image</th>
-                <th scope="col">feature image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Subtitle</th>
+                <th scope="col">Music</th>
+                <th scope="col">Image</th>
+                <th scope="col">Feature Image</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -29,10 +30,10 @@
               <tr>
                 <th scope="row"> {{ $playlistmusic->id }}</th>
                 <td>
-           {{ $playlistmusic->title }}-<small>{{ $playlistmusic->artist }}</small> 
+           {{ $playlistmusic->title }}-<small>{{ $playlistmusic->artist }}
                 </td>
                 <td>
-                  <small>{{ $playlistmusic->subtitle }}</small>  
+                  <small>{{ $playlistmusic->subtitle }}
                 </td>
                 <td style="width: 30%">
                     @if($playlistmusic->music_link)
@@ -59,6 +60,13 @@
                 <td>
                     <img src="{{ asset('image/music/' . $playlistmusic->feature_image) }}" alt="{{ $playlistmusic->title }}" style="width: 50px; height: 50px">
                 </td>
+                <td>
+                    @if($playlistmusic->status =='active')
+                    <span class="badge badge-success">{{$playlistmusic->status}}</span>
+                    @endif
+                    @if($playlistmusic->status =='inactive')
+                    <span class="badge badge-danger">{{$playlistmusic->status}}</span>
+                    @endif
                 
                 <td>
                         <!-- Edit option -->
@@ -68,7 +76,7 @@
                         <form action="{{ route('playlistmusic.destroy', ['id' => $playlistmusic->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger mt-2" onclick="return confirm('Are you sure you want to delete this playlistmusic record?')">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger mt-2" onclick="return confirm('Are you sure you want to delete this playlimusic record?')">Delete</button>
                         </form>
                 </td>
               </tr>

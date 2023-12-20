@@ -29,10 +29,10 @@
               <tr>
                 <th scope="row"> {{ $playlistmusic->id }}</th>
                 <td>
-           {{ $playlistmusic->title }}-<small>{{ $playlistmusic->artist }}</small> 
+           {{ $playlistmusic->title }}-<small>{{ $playlistmusic->artist }}
                 </td>
                 <td>
-                  <small>{{ $playlistmusic->subtitle }}</small>  
+                  <small>{{ $playlistmusic->subtitle }}
                 </td>
                 <td style="width: 30%">
                     @if($playlistmusic->music_link)
