@@ -6,40 +6,40 @@
             </a>
         </div>
         <ul class="nav">
-            <li class="nav-item{{ url()->current() == route('admin.dashboard') ? ' active' : '' }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/dashboard') ? ' active' : '' }}">
                 <a class="nav-link " href="{{ route('admin.dashboard')}}">
                     <i class="nc-icon nc-chart-pie-35"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link{{ url()->current() == route('home.section.index') ? ' active' : '' }}" href="{{ route('home.section.index')}}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/home/section') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('home.section.index')}}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>Home Section</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="">
+                <a class="nav-link" href="#">
                     <i class="nc-icon nc-circle-09"></i>
                     <p>User Profile</p>
                 </a>
             </li>
             
-            <li class="nav-item{{ url()->current() == route('radio.index') ? ' active' : '' }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/radio') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('radio.index') }}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Radio Manage</p>
                 </a>
             </li>
             
-            <li class="nav-item{{ url()->current() == route('playlist.index') ? ' active' : '' }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/playlist') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('playlist.index') }}">
                     <i class="nc-icon nc-paper-2"></i>
                     <p>Playlist Manage</p>
                 </a>
             </li>
-            <li>
-                <a class="nav-link{{ url()->current() == route('podcastcategory.index') ? ' active' : '' }}" href="{{ route('podcastcategory.index')}}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/podcast') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('podcastcategory.index') }}">
                     <i class="nc-icon nc-atom"></i>
                     <p>Podcast Manage</p>
                 </a>

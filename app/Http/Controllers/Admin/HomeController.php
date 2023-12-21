@@ -142,7 +142,7 @@ class HomeController extends Controller
        return redirect()->back()->with('success', 'Home Section Item Deleted Successfully.');
    }
   
-   public function homeSectiondestroy($id)
+   public function homeSectionDestroy($id)
    {
        $homeSection = HomeSection::find($id);
        $homeSection->delete();
@@ -219,7 +219,7 @@ class HomeController extends Controller
       }
 
 
-  public function homeSectionEventDetails($id)
+  public function homeSectionEventEdit($id)
   {
       $event = EventHome::find($id);
       return view('backend.admin.home.event.sectionProcess', ['event' => $event]);

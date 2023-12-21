@@ -6,6 +6,7 @@
         <h4>Section Manage</h4>
         <a href="{{ route('home.section.create')}}" class="btn btn-primary">Home Section Create</a>
         <a href="{{ route('home.section.event.index')}}" class="btn btn-primary">Event</a>
+        <a href="{{ route('home.slider.index')}}" class="btn btn-primary">Slider</a>
 
         @if(session('success'))
             <div class="alert alert-success mt-2">

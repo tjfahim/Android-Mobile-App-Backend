@@ -4,7 +4,8 @@
 <div class="content">
     <div class="container-fluid">
         <h4 >Section Manage</h4>
-        <a href="{{ route('radio.section.create', ['radio_id' => $radio_id])}}" class="btn btn-primary">Radio Section Manage</a>
+        <a href="{{ route('radio.section.create', ['radio_id' => $radio_id])}}" class="btn btn-primary">Radio Section Create</a>
+        <a href="{{ route('radio.index')}}" class="btn btn-primary">Radio List</a>
 
         @if(session('success'))
             <div class="alert alert-success mt-2">

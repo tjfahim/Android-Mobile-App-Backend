@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PlaylistManageController;
 use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\Admin\RadioDetailsManageController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -52,9 +53,14 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/home/section-event', [HomeController::class, 'homeSectionEventIndex'])->name('home.section.event.index');
     Route::get('/home/section-event-create', [HomeController::class, 'homeSectionEventCreate'])->name('home.section.event.create');
     Route::match(['post', 'put'], '/home/section-event-process/{id?}', [HomeController::class, 'homeSectionEventProcess'])->name('home.section.event.process');
-    Route::get('/home/section-event-details/{id}', [HomeController::class, 'homeSectionEventDetails'])->name('home.section.event.details');
+    Route::get('/home/section-event-details/{id}', [HomeController::class, 'homeSectionEventEdit'])->name('home.section.event.edit');
+    Route::delete('/home/section-event-destroy/{id}', [HomeController::class, 'homeSectionEventDestroy'])->name('home.section.event.destroy');
 
-    Route::delete('/home/section-event-destroy/{id}', [HomeController::class, 'homeSectionEventdestroy'])->name('home.section.event.destroy');
+    Route::get('/home/slider', [SliderController::class, 'homeSliderIndex'])->name('home.slider.index');
+    Route::get('/home/slider-create', [SliderController::class, 'homeSliderCreate'])->name('home.slider.create');
+    Route::match(['post', 'put'], '/home/-slider-process/{id?}', [SliderController::class, 'homesliderProcess'])->name('home.slider.process');
+    Route::get('/home/slider-details/{id}', [SliderController::class, 'homeSliderEdit'])->name('home.slider.edit');
+    Route::delete('/home/slider-destroy/{id}', [SliderController::class, 'homeSliderDestroy'])->name('home.slider.destroy');
 
 
 

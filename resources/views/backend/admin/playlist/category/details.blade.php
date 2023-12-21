@@ -7,8 +7,6 @@
         <div class="row text-center">
             <div class="col-md-12">
                 <div class="card">
-                 
-
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Category Details Page</h4>
                         <div class="d-flex gap-2">
@@ -38,7 +36,7 @@
                                         <label>Image: </label><br>
                                       
                                         @if(isset($playlistcategory) && $playlistcategory->image)
-                                            <img src="{{ asset('image/' . $playlistcategory->image) }}" alt="{{ $playlistcategory->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/playlist/' . $playlistcategory->image) }}" alt="{{ $playlistcategory->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
                                         @else
                                             <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
                                         @endif

@@ -13,7 +13,7 @@
                             {{ isset($playlistcategory) && $playlistcategory->id ? 'Category Edit' : 'Category Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2">Music List</a>
+                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2">Category List</a>
                             @if(isset($playlistcategory->id))
                                 <a href="{{ route('playlistcategory.details', ['id' => $playlistcategory->id])}}" class="btn btn-primary btn-sm ml-2">Details</a>
 
@@ -64,9 +64,16 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status</label>
+                         
                                         <select name="status" id="">
+                                            @if(isset($playlistcategory) && $playlistcategory->status)
+
                                             <option value="active"  {{ $playlistcategory->status === 'active' ? 'selected' : '' }}>Active</option>
                                             <option value="inactive" {{ $playlistcategory->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                            @else
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        @endif
                                         </select>
                                     </div>
                                 </div>

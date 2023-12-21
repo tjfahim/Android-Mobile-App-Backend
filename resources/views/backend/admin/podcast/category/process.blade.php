@@ -64,8 +64,14 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" id="">
+                                            @if(isset($podcastcategory) && $podcastcategory->status)
+
                                             <option value="active"  {{ $podcastcategory->status === 'active' ? 'selected' : '' }}>Active</option>
                                             <option value="inactive" {{ $podcastcategory->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                            @else
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        @endif
                                         </select>
                                     </div>
                                 </div>

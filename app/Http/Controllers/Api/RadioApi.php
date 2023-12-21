@@ -42,6 +42,20 @@ class RadioApi extends Controller
     }
     public function RadioSectionIndexfetch($id)
     {
+
+
+        $RadioRecords = Radio::find($id);
+        if (!is_null($RadioRecords->image)) {
+            $RadioRecords['image'] = asset('image/radio/' . $RadioRecords->image);
+        }
+        if (!is_null($RadioRecords->radio_file)) {
+            $RadioRecords['radio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
+        } elseif (!is_null($RadioRecords->radio_link)) {
+            $RadioRecords['radio_link'] = $RadioRecords->radio_link;
+        } else {
+            $RadioRecords['radio_link'] = 'There is no radio';
+        }
+
         $radioSections = RadioCustomCategory::where('radio_id', $id)->orderBy('created_at', 'desc')->get();
     
         $response = [];
@@ -113,6 +127,7 @@ class RadioApi extends Controller
         }
         return response()->json([
             'message' => 'All Section With Item List:',
+            'radio' => $RadioRecords,
             'data' => $response,
         ]);
     }

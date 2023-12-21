@@ -91,7 +91,7 @@
                                                     <td>Sign contract for "What are conference organizers afraid of?"</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
@@ -110,7 +110,7 @@
                                                     <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
@@ -130,7 +130,7 @@
                                                     </td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
@@ -149,7 +149,7 @@
                                                     <td>Create 4 Invisible User Experiences you Never Knew About</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
@@ -168,7 +168,7 @@
                                                     <td>Read "Following makes Medium better"</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
@@ -187,7 +187,7 @@
                                                     <td>Unfollow 5 enemies from twitter</td>
                                                     <td class="td-actions text-right">
                                                         <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
-                                                            <i class="fa fa-edit"></i>
+                                                            </i>
                                                         </button>
                                                         <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
                                                             <i class="fa fa-times"></i>
