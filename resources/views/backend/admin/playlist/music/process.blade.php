@@ -13,8 +13,8 @@
                             {{ isset($playlistmusic) && $playlistmusic->id ? 'Music Edit' : 'Music Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('playlistmusic.index')}}" class="btn btn-primary btn-sm ml-2">Music List</a>
-                            @if(isset($playlistmusic->id)){
+                            <a href="{{ route('playlistmusic.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Music List</a>
+                            @if(isset($playlistmusic->id))
 
                             <a href="{{ route('playlistmusic.details', ['id' => $playlistmusic->id])}}" class="btn btn-primary btn-sm ml-2">Details</a>
                             <form action="{{ route('playlistmusic.destroy', ['id' => $playlistmusic->id]) }}" method="post">
@@ -22,7 +22,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this playlistmusic record?')">Delete</button>
                             </form>
-                        }
+                        
                         @endif
                         </div>
                     </div>

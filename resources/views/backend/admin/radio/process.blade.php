@@ -7,11 +7,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
+                  
+
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">
                             {{ isset($radio) && $radio->id ? 'Radio Edit' : 'Radio Create' }}
                         </h4>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('radio.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Radio List</a>
+                            @if(isset($radio->id))
+                                <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this radio record?')">Delete</button>
+                                </form>
+                            
+                          @endif
+                        </div>
                     </div>
+
                     <div class="card-body">
                         <form method="POST" action="{{ isset($radio) && $radio->id ? route('radio.process', ['id' => $radio->id]) : route('radio.process') }}" enctype="multipart/form-data">
                             @csrf

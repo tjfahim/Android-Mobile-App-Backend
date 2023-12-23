@@ -12,14 +12,14 @@
                             {{ isset($podcastcategory) && $podcastcategory->id ? 'Category Edit' : 'Category Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('podcastcategory.index')}}" class="btn btn-primary btn-sm ml-2">Category List</a>
+                            <a href="{{ route('podcastcategory.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Category List</a>
                             @if(isset($podcastcategory->id))
                                 <a href="{{ route('podcastcategory.details', ['id' => $podcastcategory->id])}}" class="btn btn-primary btn-sm ml-2">Details</a>
 
                                 <form action="{{ route('podcastcategory.destroy', ['id' => $podcastcategory->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this podcastcategory record?')">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this podcast category record?')">Delete</button>
                                 </form>
                             
                           @endif

@@ -13,7 +13,8 @@
                             {{ isset($radioSection) && $radioSection->id ? 'Section Edit' : 'Section Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('radio.section.index',['radio_id' => $radio_id])}}" class="btn btn-primary btn-sm ml-2">Section List</a>
+                            <a href="{{ route('radio.section.index',['radio_id' => $radio_id])}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>
+                                Section List</a>
 
                             @if(isset($radioSection->id))
                                

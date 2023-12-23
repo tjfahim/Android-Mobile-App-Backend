@@ -83,6 +83,19 @@ class RadioDetailsManageController extends Controller
         $radioSection = RadioCustomCategory::find($id);
         return view('backend.admin.radio.radio_manage.radio_section.sectionProcess', ['radioSection' => $radioSection,'radio_id' => $radio_id]);
     }
+
+
+    
+
+    public function radioSectionstatus(Request $request, $id = null)
+    {
+            $radioSectionstatus = RadioCustomCategory::find($id);
+    
+            $radioSectionstatus->status = $request->status;
+            $radioSectionstatus->save();
+            return redirect()->back();
+
+    }
     public function radioSectionItemCreate(Request $request,$radio_custom_categorie_id)
     {
         $validator = Validator::make($request->all(), [

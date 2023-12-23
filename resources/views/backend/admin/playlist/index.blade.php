@@ -48,6 +48,13 @@
             <thead>
                 <tr>
                     <th scope="col">
+                    Action
+                    </th>
+                    <th scope="col">
+                    Id
+                    </th>
+
+                    <th scope="col">
                         <form method="get" action="{{ route('playlist.index') }}" class="row">
                             <label for="filter_category" class="col-md-3 mt-2">Category:</label>
                             <select class="form-control col-md-5 mr-2" name="filter_category" id="filter_category">
@@ -69,9 +76,18 @@
                 @foreach($playlists as $playlist)
                     <tr>
                         <td>
+                            <form class="" action="{{ route('playlist.destroy', ['id' => $playlist->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this playlist record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                            </form>
+
+                        </td>
+                        <td>{{ $playlist->id }}</td>
+                        <td>
                             <a class="" href="{{ route('playlistcategory.details', ['id' => $playlist->category->id]) }}">  {{ $playlist->category->title }}</a>
 
-                          </td>
+                        </td>
                         <td>
                             <a class="" href="{{ route('playlistmusic.details', ['id' => $playlist->music->id]) }}">{{ $playlist->music->title }}</a>
                             </td>

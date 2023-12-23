@@ -159,6 +159,14 @@ class RadioController extends Controller
         }
         return view('backend.admin.radio.process', ['radio' => $radio]);
     }
+    public function radioStatus(Request $request,$id)
+    {
+        $radioStatus = Radio::find($id);
+    
+        $radioStatus->status = $request->status;
+        $radioStatus->save();
+        return redirect()->back();
+    }
 
     /**
      * Update the specified resource in storage.

@@ -13,7 +13,7 @@
                             {{ isset($playlistcategory) && $playlistcategory->id ? 'Category Edit' : 'Category Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2">Category List</a>
+                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i> Category List</a>
                             @if(isset($playlistcategory->id))
                                 <a href="{{ route('playlistcategory.details', ['id' => $playlistcategory->id])}}" class="btn btn-primary btn-sm ml-2">Details</a>
 

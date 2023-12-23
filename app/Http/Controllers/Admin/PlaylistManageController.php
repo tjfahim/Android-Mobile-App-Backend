@@ -60,7 +60,13 @@ class PlaylistManageController extends Controller
 }
 
 
+    public function playlistDestroy($id)
+    {
+        $playlist = PlaylistCategoryMusic::find($id);
+        $playlist->delete();
+        return redirect()->back()->with('success', 'deleted successfully.');
 
+    }
 
     public function playlistCatgoryIndex()
     {
@@ -165,6 +171,16 @@ class PlaylistManageController extends Controller
             return redirect()->route('playlistcategory.index')->with('error', 'Playlist Category not found.');
         }
         return view('backend.admin.playlist.category.details', ['playlistcategory' => $playlistCatgory]);
+    }
+
+    public function playlistcategoryStatus(Request $request, $id = null)
+    {
+            $playlistcategoryStatus = PlaylistCategory::find($id);
+    
+            $playlistcategoryStatus->status = $request->status;
+            $playlistcategoryStatus->save();
+            return redirect()->back();
+  
     }
 
     /**
@@ -354,7 +370,16 @@ class PlaylistManageController extends Controller
      * Update the specified resource in storage.
      */
 
-    
+     public function playlistStatus(Request $request, $id = null)
+     {
+             $playlistStatus = PlaylistMusic::find($id);
+     
+             $playlistStatus->status = $request->status;
+             $playlistStatus->save();
+             return redirect()->back();
+   
+     }
+
     /**
      * Remove the specified resource from storage.
      */

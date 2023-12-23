@@ -5,6 +5,8 @@
     <div class="container-fluid">
         <h4 >Music Manage</h4>
         <a href="{{ route('playlistmusic.create')}}" class="btn btn-primary">Add New Music</a>
+        <a href="{{ route('playlist.index')}}" class="btn btn-primary"><i class="fa fa-caret-square-o-left"></i>Playlist Manage</a>
+
         @if(session('success'))
             <div class="alert alert-success mt-2">
                 {{ session('success') }}
@@ -14,20 +16,36 @@
         <table class="table table-hover">
             <thead>
               <tr>
+                <th scope="col">Action</th>
                 <th scope="col">id</th>
                 <th scope="col">Title</th>
                 <th scope="col">Subtitle</th>
                 <th scope="col">Music</th>
                 <th scope="col">Image</th>
-                <th scope="col">Feature Image</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
                 @foreach($playlistMusic as $playlistmusic)
 
               <tr>
+                <td>
+                 
+
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-sm btn-primary mb-2 mx-1" href="{{ route('playlistmusic.edit', ['id' => $playlistmusic->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                        
+                        <a class="btn btn-sm btn-primary mb-2 mx-1 "  href="{{ route('playlistmusic.details', ['id' => $playlistmusic->id]) }}" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                        <!-- Delete option -->
+                        <form class="" action="{{ route('playlistmusic.destroy', ['id' => $playlistmusic->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this playlimusic record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+                 </td>
                 <th scope="row"> {{ $playlistmusic->id }}</th>
                 <td>
            {{ $playlistmusic->title }}-<small>{{ $playlistmusic->artist }}
@@ -58,27 +76,25 @@
                     <img src="{{ asset('image/music/' . $playlistmusic->image) }}" alt="{{ $playlistmusic->title }}" style="width: 50px; height: 50px">
                 </td>
                 <td>
-                    <img src="{{ asset('image/music/' . $playlistmusic->feature_image) }}" alt="{{ $playlistmusic->title }}" style="width: 50px; height: 50px">
-                </td>
-                <td>
-                    @if($playlistmusic->status =='active')
-                    <span class="badge badge-success">{{$playlistmusic->status}}</span>
-                    @endif
-                    @if($playlistmusic->status =='inactive')
-                    <span class="badge badge-danger">{{$playlistmusic->status}}</span>
-                    @endif
+                    <form class="" action="{{ route('playlistmusic.status', ['id' => $playlistmusic->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        @if($playlistmusic->status =='active')
+                            <input type="hidden" value="inactive" name="status">
+                            <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                {{$playlistmusic->status}}
+                            </button>
+                        @endif
+                        @if($playlistmusic->status =='inactive')
+                            <input type="hidden" value="active" name="status">
+                            <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                {{$playlistmusic->status}}
+                            </button>
+                        @endif
+                    </form>
                 
-                <td>
-                        <!-- Edit option -->
-                        <a class="btn btn-sm btn-primary" href="{{ route('playlistmusic.edit', ['id' => $playlistmusic->id]) }}">Edit</a>
-                        <a class="btn btn-sm btn-primary mt-2" href="{{ route('playlistmusic.details', ['id' => $playlistmusic->id]) }}">Details</a>
-                        <!-- Delete option -->
-                        <form action="{{ route('playlistmusic.destroy', ['id' => $playlistmusic->id]) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger mt-2" onclick="return confirm('Are you sure you want to delete this playlimusic record?')">Delete</button>
-                        </form>
                 </td>
+              
               </tr>
               @endforeach
 

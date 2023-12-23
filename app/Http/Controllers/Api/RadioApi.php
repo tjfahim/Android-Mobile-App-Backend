@@ -23,7 +23,8 @@ class RadioApi extends Controller
                 'title' => $radio->title,
                 'subtitle' => $radio->subtitle,
                 'image' => asset('image/radio/' . $radio->image),
-                'background_color' => $radio->background_color,
+                'background_color' => 'oxff' . ltrim($radio->background_color, '#'),
+
             ];
             if (!is_null($radio->radio_file)) {
                 $radioData['radio_link'] = asset('radio_file/' . $radio->radio_file);

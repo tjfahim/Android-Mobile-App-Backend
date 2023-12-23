@@ -12,7 +12,8 @@
                             {{ isset($radioSection) ? $radioSection->title : old('title') }} - Manage
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('radio.section.index',['radio_id' => $radio_id])}}" class="btn btn-primary btn-sm ml-2">Section List</a>
+                            <a href="{{ route('radio.section.index',['radio_id' => $radio_id])}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>
+                                Section List</a>
 
                             @if(isset($radioSection->id))
                                
@@ -93,16 +94,42 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Id</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">File</th>
                                     <th scope="col">Image</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($categoryItems as $categoryItem)
                                     <tr>
+                                            <td>
+                                                <!-- Edit option -->
+                    <div class="d-flex gap-2">
+                    
+                        @if(isset($categoryItem->playlist_music_id))
+                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('playlistmusic.details',['id' => $categoryItem->music->id])}}" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                    @else
+                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details',['id' => $categoryItem->podcast->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                    @endif
+                       
+                   
+                        <form class="" action="{{ route('radio.section.item.destroy', ['radioSectionItemId' => $categoryItem->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this section record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+                                        </td>
+                                        <td>
+                                            {{ $categoryItem->id}}
+                                        </td>
                                         <td>
                                                 @if(isset($categoryItem->playlist_music_id))
                                                 <a href="{{ route('playlistmusic.details',['id' => $categoryItem->music->id])}}" class="">{{ $categoryItem->music->title }}
@@ -180,25 +207,12 @@
                                                 @endif
 
                                         </td>
-                                        <td>
-                                            @if(isset($categoryItem->playlist_music_id))
-                                                <a href="{{ route('playlistmusic.details',['id' => $categoryItem->music->id])}}" class=" mt-2 btn btn-primary btn-sm mx-auto">Music Details</a>
-                                            @else
-                                                <a href="{{ route('podcast.details',['id' => $categoryItem->podcast->id])}}" class=" mt-2 btn btn-primary btn-sm mx-auto">Podcast Details</a>
-                                            @endif
-                                        
-                                            <form action="{{ route('radio.section.item.destroy', ['radioSectionItemId' => $categoryItem->id]) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class=" mt-2 btn btn-sm btn-danger mx-auto" onclick="return confirm('Are you sure you want to delete this Radio Section Item Record?')">Delete</button>
-                                            </form>
-                                        </td>
+                                       
                                         
                                     </tr>
                                 @empty
                                     <tr>
                                         <td colspan="12">No data available</td>
-                                        <!-- Adjust colspan based on the number of columns in your table -->
                                     </tr>
                                 @endforelse                            
                             </tbody>

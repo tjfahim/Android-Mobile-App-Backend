@@ -10,7 +10,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Category Details Page</h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2">Music List</a>
+                            <a href="{{ route('playlistcategory.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Category List</a>
                             <a href="{{ route('playlistcategory.edit', ['id' => $playlistcategory->id])}}" class="btn btn-primary btn-sm ml-2">Edit</a>
                             <form action="{{ route('playlistcategory.destroy', ['id' => $playlistcategory->id]) }}" method="post">
                                 @csrf

@@ -92,7 +92,15 @@ class PodcastManageController extends Controller
         }
 
 
-
+        public function podcastcategoryStatus(Request $request, $id = null)
+        {
+                $podcastcategory = PodcastCategory::find($id);
+        
+                $podcastcategory->status = $request->status;
+                $podcastcategory->save();
+                return redirect()->back();
+      
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -134,11 +142,6 @@ class PodcastManageController extends Controller
         return redirect()->route('podcastcategory.index')->with('success', 'podcast Category Deleted Successfully.');
     }
 
-    public function podcastall()
-    {
-        $podcast = Podcast::orderBy('created_at', 'desc')->paginate(12);
-        return view('backend.admin.podcast.podcast.index', ['podcast' => $podcast]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -222,7 +225,9 @@ class PodcastManageController extends Controller
                     }
                 }
                 $input['podcast_category_id'] = $request->podcast_category_id;
+                $input['status'] = $request->status;
 
+            
                 $podcast->update($input);
 
                 return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Updated successfully.');
@@ -285,6 +290,16 @@ class PodcastManageController extends Controller
                 return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Added successfully.');
 
             }
+
+        }
+     public function podcastStatus(Request $request, $id = null)
+        {
+                $podcast = Podcast::find($id);
+        
+                $podcast->status = $request->status;
+                $podcast->save();
+                return redirect()->back();
+      
 
         }
 

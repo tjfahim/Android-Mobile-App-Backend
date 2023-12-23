@@ -15,14 +15,7 @@
                                 <button type="submit" class="btn btn-primary btn-sm ml-2">Add Podcast</button>
                             </form>
                             <a href="{{ route('podcastcategory.index')}}" class="btn btn-primary btn-sm ml-2">Category List</a>
-                            <a href="{{ route('podcastcategory.edit', ['id' => $podcastcategory->id])}}" class="btn btn-primary btn-sm ml-2">Edit</a>
-                            <form action="{{ route('podcastcategory.destroy', ['id' => $podcastcategory->id]) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                       
-
-                                <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this Category Record?')">Delete</button>
-                            </form>
+                           
                    
                         </div>
                     </div>
@@ -35,17 +28,41 @@
         <table class="table table-hover table-sm">
             <thead>
               <tr>
+                <th scope="col">Action</th>
                 <th scope="col">id</th>
                 <th scope="col">Podcast Title</th>
                 <th scope="col">Audio</th>
                 <th scope="col">Image</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
                 @foreach($podcasts as $podcast)
               <tr style="">
+                <td>
+                    <!-- Edit option -->
+                    <div class="d-flex gap-2">
+                    
+                        
+                        <form class="" action="{{ route('podcast.edit', ['id' => $podcast->id]) }}">
+                            <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
+                            <button type="submit" class="btn btn-sm btn-primary mb-2" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </form>
+                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details', ['id' => $podcast->id]) }}" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                        <!-- Delete option -->
+                        <form class="" action="{{ route('podcast.destroy', ['id' => $podcast->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this podcast record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                        </form>
+                    </div>
+                </td>
+                
                 <th scope="row"> {{ $podcast->id }}</th>
                 <td>
            {{ $podcast->title }}
@@ -68,39 +85,33 @@
                     </audio>
                 @endif
                 </td>
-              
-           
                 <td>
                     <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" style="width: 50px; height: 50px">
                 </td>
                 <td>
-                    @if($podcast->status =='active')
-                    <span class="badge badge-success">{{$podcast->status}}</span>
-                    @endif
-                    @if($podcast->status =='inactive')
-                    <span class="badge badge-danger">{{$podcast->status}}</span>
-                    @endif
-                <td>
-                    <!-- Edit option -->
-                    <div class="btn-group-vertical">
                     
-                        <form action="{{ route('podcast.edit', ['id' => $podcast->id]) }}">
-                            <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
-                            <button type="submit" class="btn btn-sm btn-primary mb-2">Edit</button>
-                        </form>
-                        <a class="btn btn-sm btn-primary mb-2" href="{{ route('podcast.details', ['id' => $podcast->id]) }}">Details</a>
-                        <!-- Delete option -->
-                        <form action="{{ route('podcast.destroy', ['id' => $podcast->id]) }}" method="post">
+                    <div class="mt-5 d-flex align-items-center">
+                        <form class="" action="{{ route('podcast.status', ['id' => $podcast->id]) }}" method="POST">
                             @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this podcast record?')">Delete</button>
+                            @method('PUT')
+                            @if($podcast->status =='active')
+                                <input type="hidden" value="inactive" name="status">
+                                <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                    {{$podcast->status}}
+                                </button>
+                            @endif
+                            @if($podcast->status =='inactive')
+                                <input type="hidden" value="active" name="status">
+                                <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                    {{$podcast->status}}
+                                </button>
+                            @endif
                         </form>
+                        
+                       
                     </div>
+                    
                 </td>
-                
-
-                
               </tr>
               @endforeach
 
@@ -108,7 +119,6 @@
             </tbody>
             {{ $podcasts->links('pagination::bootstrap-4') }}
           </table>
-        
         
                 </div>
             </div>

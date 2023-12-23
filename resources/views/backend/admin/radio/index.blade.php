@@ -15,15 +15,14 @@
                 <div class="col-md-4 mt-3">
                     <div class="card">
                         <div class="card-body">
-                            <!-- Three-dot button (Bootstrap dropdown) -->
                             <div class="dropdown float-right">
-                                <button class="btn btn-sm btn-secondary dropdown-toggle dropdown-btn-bg-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;font-size: 25px;">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle dropdown-btn-bg-none " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;font-size: 25px;margin-top: -6px;
+                                padding-right: 18px;">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <!-- Edit option -->
+                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Manage</a>
                                     <a class="dropdown-item" href="{{ route('radio.edit', ['id' => $radio->id]) }}">Edit</a>
-                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Section Manage</a>
-                                    <!-- Delete option -->
+                                  
                                     <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
@@ -33,15 +32,26 @@
                             </div>
                     
                             <!-- Card Content -->
-                            <h4 class="card-title">{{ $radio->title }} <span>
-                                
+        
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">{{ $radio->title }}</h4>
+                                <form class="ml-auto" action="{{ route('radio.status', ['id' => $radio->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
                                     @if($radio->status =='active')
-                                    <span class="badge badge-success">{{$radio->status}}</span>
+                                        <input type="hidden" value="inactive" name="status">
+                                        <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                            {{ $radio->status }}
+                                        </button>
                                     @endif
                                     @if($radio->status =='inactive')
-                                    <span class="badge badge-danger">{{$radio->status}}</span>
+                                        <input type="hidden" value="active" name="status">
+                                        <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                            {{ $radio->status }}
+                                        </button>
                                     @endif
-                            </span></h4>
+                                </form>
+                            </div>
                             <p class="card-text">{{ $radio->subtitle }}</p>
                             <p class="card-text">
                                 
