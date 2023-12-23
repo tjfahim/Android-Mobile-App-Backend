@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="{{ route('admin.dashboard')}}" class="simple-text">
-                Creative Tim
+                Candelita
             </a>
         </div>
         <ul class="nav">

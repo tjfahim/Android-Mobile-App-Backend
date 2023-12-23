@@ -12,7 +12,8 @@
                             {{ isset($homeSection) ? $homeSection->title : old('title') }} - Manage
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-2">Section List</a>
+                            <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>
+                                Section List</a>
 
                             @if(isset($homeSection->id))
                                
@@ -129,15 +130,50 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Id</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Image</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($sectionItems as $sectionItem)
                                     <tr>
+                                        <td style="width:20%">
+                                            <div class="d-flex gap-2">
+                                            @if(isset($sectionItem->playlist_categorie_id))
+                                                
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" data-toggle="tooltip" data-placement="top" title="Playlist Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                                            @elseif(isset($sectionItem->playlist_music_id))
+                                                
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('playlistmusic.details',['id' => $sectionItem->music->id])}}" data-toggle="tooltip" data-placement="top" title=" Music Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                                            @elseif(isset($sectionItem->podcast_categorie_id))
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcastcategory.details',['id' => $sectionItem->podcastCategory->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Catgory Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                                            @elseif(isset($sectionItem->podcast_id))
+                                           
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
+                                       
+                                    @endif
+                                     
+                                            <form class="" action="{{ route('home.section.item.destroy', ['id' => $sectionItem->id]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Section Item record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                                            </form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                               {{ $sectionItem->id }}
+                                        </td>
                                         <td>
                                                 @if(isset($sectionItem->playlist_categorie_id))
                                                 <a href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" class="">{{ $sectionItem->playlistMusic->title }}
@@ -198,31 +234,7 @@
                                                 @endif
 
                                         </td>
-                                        <td>
-                                            @if(isset($sectionItem->playlist_categorie_id))
-                                                    <a href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" class="">
-                                                    Playlist Details
-                                                    </a>
-                                            @elseif(isset($sectionItem->playlist_music_id))
-                                                    <a href="{{ route('playlistmusic.details',['id' => $sectionItem->music->id])}}" class="">
-                                                        Music Details
-                                                    </a>
-                                            @elseif(isset($sectionItem->podcast_categorie_id))
-                                                    <a href="{{ route('podcastcategory.details',['id' => $sectionItem->podcastCategory->id])}}" class="">
-                                                       Podcast Catgory Details
-                                                    </a>
-                                            @elseif(isset($sectionItem->podcast_id))
-                                                    <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
-                                                        Podcast Details
-                                                    </a>
-                                       
-                                    @endif
-                                            <form action="{{ route('home.section.item.destroy', ['id' => $sectionItem->id]) }}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class=" mt-2 btn btn-sm btn-danger mx-auto" onclick="return confirm('Are you sure you want to delete this Home Section Item Record?')">Delete</button>
-                                            </form>
-                                        </td>
+                                      
                                         
                                     </tr>
                                 @empty

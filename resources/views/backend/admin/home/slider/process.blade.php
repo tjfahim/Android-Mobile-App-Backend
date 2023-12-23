@@ -12,7 +12,7 @@
                             {{ isset($slider) && $slider->id ? 'Slider Edit' : 'Slider Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('home.slider.index')}}" class="btn btn-primary btn-sm ml-2">Slider List</a>
+                            <a href="{{ route('home.slider.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Slider List</a>
 
                             @if(isset($slider->id))
                                 <form action="{{ route('home.slider.destroy', ['id' => $slider->id]) }}" method="post">
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Slider Link</label>
@@ -52,7 +52,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
 
                                 <div class="col-md-6">

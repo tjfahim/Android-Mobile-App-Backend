@@ -150,6 +150,15 @@ class HomeController extends Controller
    }
    
 
+   public function homeSectionStatus(Request $request, $id)
+   {
+           $homeSectionDestroy = HomeSection::find($id);
+   
+           $homeSectionDestroy->status = $request->status;
+           $homeSectionDestroy->save();
+           return redirect()->back();
+ 
+   }
 
    public function homeSectionEventIndex()
    {
@@ -223,6 +232,14 @@ class HomeController extends Controller
   {
       $event = EventHome::find($id);
       return view('backend.admin.home.event.sectionProcess', ['event' => $event]);
+  }
+  
+  public function homeeventStatus(Request $request,$id)
+  {
+      $event = EventHome::find($id);
+      $event->status = $request->status;
+        $event->save();
+        return redirect()->back();
   }
   
    public function homeSectionEventdestroy($id)

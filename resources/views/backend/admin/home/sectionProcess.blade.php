@@ -13,7 +13,7 @@
                             {{ isset($homeSection) && $homeSection->id ? 'Section Edit' : 'Section Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-2">Section List</a>
+                            <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Section List</a>
 
                             @if(isset($homeSection->id))
                                

@@ -4,11 +4,11 @@
         <nav>
            
             <p class="mt-3 text-sm text-center">
-                ©
+                ©   
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                <a href="">Creative Tim</a>, made with love for a better web
+                <a href="">Candelita</a>, made with love for a better web
             </p>
         </nav>
     </div>

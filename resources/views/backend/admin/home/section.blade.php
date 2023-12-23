@@ -17,16 +17,37 @@
             <table class="table table-hover">
                 <thead>
                   <tr>
+                      <th scope="col">Action</th>
                     <th scope="col">id</th>
                     <th scope="col">Title</th>
                     <th scope="col">Image</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                     @foreach($homeSections as $homeSection)
                   <tr>
+                  
+                    
+                    <td style="width:20%">
+                        <!-- Edit option -->
+                        <div class="d-flex gap-2">
+                     
+                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.section.details',['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Section Manage"><i class="fa fa-info	
+                                "></i>
+                            </a>
+                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.section.edit', ['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
+                                "></i>
+                            </a>
+                            <!-- Delete option -->
+                            <form class="" action="{{ route('home.section.destroy', ['id' => $homeSection->id]) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Section record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+                    </td>
+
                     <th scope="row"> {{ $homeSection->id }}</th>
                     <td>
                          {{ $homeSection->title }}
@@ -35,36 +56,24 @@
                         <img src="{{ asset('image/home/' . $homeSection->image) }}" alt="{{ $homeSection->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
                     </td>
                     <td>
-                        @if($homeSection->status =='active')
-                        <span class="badge badge-success">{{$homeSection->status}}</span>
-                        @endif
-                        @if($homeSection->status =='inactive')
-                        <span class="badge badge-danger">{{$homeSection->status}}</span>
-                        @endif
+                        <form class="" action="{{ route('homesection.status', ['id' => $homeSection->id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            @if($homeSection->status =='active')
+                                <input type="hidden" value="inactive" name="status">
+                                <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                    {{$homeSection->status}}
+                                </button>
+                            @endif
+                            @if($homeSection->status =='inactive')
+                                <input type="hidden" value="active" name="status">
+                                <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                    {{$homeSection->status}}
+                                </button>
+                            @endif
+                        </form>
                     </td>
-                    <td>
-                      <!-- Edit option -->
-                      <div class="row">
-                          <div class="col">
-                              <a class="btn btn-sm btn-primary mb-2" href="{{ route('home.section.details',['id' => $homeSection->id]) }}">Section Item Manage</a>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col">
-                              <a class="btn btn-sm btn-primary" href="{{ route('home.section.edit', ['id' => $homeSection->id]) }}">Edit</a>
-                          </div>
-                      </div>
-                      <!-- Delete option -->
-                      <div class="row">
-                          <div class="col">
-                              <form action="{{ route('home.section.destroy', ['id' => $homeSection->id]) }}" method="post">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-sm btn-danger mt-2" onclick="return confirm('Are you sure you want to delete this Section record?')">Delete</button>
-                              </form>
-                          </div>
-                      </div>
-                  </td>
+                   
                   </tr>
                   @endforeach
                 </tbody>

@@ -83,6 +83,15 @@ class SliderController extends Controller
       $slider = Slider::find($id);
       return view('backend.admin.home.slider.process', ['slider' => $slider]);
   }
+
+
+  public function homeSliderStatus(Request $request,$id)
+  {
+      $slider = Slider::find($id);
+      $slider->status = $request->status;
+        $slider->save();
+        return redirect()->back();
+  }
   
    public function homeSliderDestroy($id)
    {

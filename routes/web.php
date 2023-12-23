@@ -14,18 +14,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        $user = Auth::user();
-        $role = $user->role; 
-        if ($role === 'admin') {
-            return view('backend.admin.dashboard');
-        }
-    }
-
-    return redirect('/login');
-});
-
 
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -48,18 +36,23 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/home/section-details/{id}', [HomeController::class, 'homeSectionDetails'])->name('home.section.details');
     Route::post('/home/section/item-create/{home_section_id}', [HomeController::class, 'homeSectionItemCreate'])->name('home.section.item.create');
     Route::delete('/home/section-destroy/{id}', [HomeController::class, 'homeSectiondestroy'])->name('home.section.destroy');
+    Route::put('/home/home-section/{id}', [HomeController::class, 'homeSectionStatus'])->name('homesection.status');
+
     Route::delete('/home/section-item-destroy/{id}', [HomeController::class, 'homeSectionItemDelete'])->name('home.section.item.destroy');
 
     Route::get('/home/section-event', [HomeController::class, 'homeSectionEventIndex'])->name('home.section.event.index');
     Route::get('/home/section-event-create', [HomeController::class, 'homeSectionEventCreate'])->name('home.section.event.create');
     Route::match(['post', 'put'], '/home/section-event-process/{id?}', [HomeController::class, 'homeSectionEventProcess'])->name('home.section.event.process');
     Route::get('/home/section-event-details/{id}', [HomeController::class, 'homeSectionEventEdit'])->name('home.section.event.edit');
+    Route::put('/home/event-status/{id}', [HomeController::class, 'homeeventStatus'])->name('event.status');
+
     Route::delete('/home/section-event-destroy/{id}', [HomeController::class, 'homeSectionEventDestroy'])->name('home.section.event.destroy');
 
     Route::get('/home/slider', [SliderController::class, 'homeSliderIndex'])->name('home.slider.index');
     Route::get('/home/slider-create', [SliderController::class, 'homeSliderCreate'])->name('home.slider.create');
     Route::match(['post', 'put'], '/home/-slider-process/{id?}', [SliderController::class, 'homesliderProcess'])->name('home.slider.process');
     Route::get('/home/slider-details/{id}', [SliderController::class, 'homeSliderEdit'])->name('home.slider.edit');
+    Route::put('/home/slider-status/{id}', [SliderController::class, 'homeSliderStatus'])->name('slider.status');
     Route::delete('/home/slider-destroy/{id}', [SliderController::class, 'homeSliderDestroy'])->name('home.slider.destroy');
 
 

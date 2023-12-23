@@ -13,7 +13,7 @@
                             {{ isset($event) && $event->id ? 'Event Edit' : 'Event Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('home.section.event.index')}}" class="btn btn-primary btn-sm ml-2">Event List</a>
+                            <a href="{{ route('home.section.event.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Event List</a>
 
                             @if(isset($event->id))
                                

@@ -118,8 +118,6 @@
                             "></i>
                         </a>
                     @endif
-                       
-                   
                         <form class="" action="{{ route('radio.section.item.destroy', ['radioSectionItemId' => $categoryItem->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
