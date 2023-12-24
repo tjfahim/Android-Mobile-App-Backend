@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\HomeApi;
 use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
 use App\Http\Controllers\Api\RadioApi;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,7 @@ Route::get('/RadioSectionIndexfetch/{id}', [RadioApi::class, 'RadioSectionIndexf
 Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
 Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 
+Route::post('/register', [AuthController::class, 'registerApi']);
+Route::post('/login', [AuthController::class, 'loginApi']);
+Route::post('/logout', [AuthController::class, 'logoutApi']);
 

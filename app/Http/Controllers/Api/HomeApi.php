@@ -11,13 +11,14 @@ use App\Models\PlaylistMusic;
 use App\Models\Podcast;
 use App\Models\PodcastCategory;
 use App\Models\Radio;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeApi extends Controller
 {
     public function HomeSectionIndexfetch()
     {
-        $homeSections = HomeSection::orderBy('created_at', 'desc')->get();
+        $homeSections = HomeSection::where('status','active')->orderBy('created_at', 'desc')->get();
     
         $response = [];
     
@@ -28,7 +29,7 @@ class HomeApi extends Controller
                 'items' => [],
             ];
     
-            $sectionItems = HomeSectionItem::where('home_section_id', $section->id)->get();
+            $sectionItems = HomeSectionItem::where('status','active')->where('home_section_id', $section->id)->get();
             foreach ($sectionItems as $item) {
                 $itemTitle = null;
                 $itemSubTitle = null;
@@ -87,6 +88,14 @@ class HomeApi extends Controller
                         $itemDetailsLink = route('podcast.details.fetch', ['id' => $podcast->id]);
 
                     }
+                } elseif (!is_null($item->event_id)) {
+                    $event = EventHome::find($item->event_id);
+                    if ($event) {
+                        $itemTitle = $event->title;
+                        $itemType = 'Event';
+                        $itemImage_link = asset('image/event' . $event->image);
+                        $itemDetailsLink = $event->event_link;
+                    }
                 }
     
                 if (!is_null($itemTitle)) {
@@ -106,14 +115,41 @@ class HomeApi extends Controller
     
             $response[] = $sectionDataItem;
         }
-        $radioDate = Radio::orderBy('created_at', 'desc')->get();
-        $evetsData = EventHome::orderBy('created_at', 'desc')->get();
-
+        $RadioRecords = Radio::where('status','active')->orderBy('created_at', 'desc')->get();
+        $sliders = Slider::where('status','active')->orderBy('created_at', 'desc')->get();
+        foreach ($RadioRecords as $radio) {
+            $radioData = [
+                'id' => $radio->id,
+                'title' => $radio->title,
+                'subtitle' => $radio->subtitle,
+                'image' => asset('image/radio/' . $radio->image),
+                'background_color' => 'oxff' . ltrim($radio->background_color, '#'),
+            ];
+            if (!is_null($radio->radio_file)) {
+                $radioData['radio_link'] = asset('radio_file/' . $radio->radio_file);
+            } elseif (!is_null($radio->radio_link)) {
+                $radioData['radio_link'] = $radio->radio_link;
+            } else {
+                $radioData['radio_link'] = 'There is no radio';
+            }
+    
+            $responseRadio[] = $radioData;
+        }
+        foreach ($sliders as $slider) {
+            $sliderData = [
+                'id' => $slider->id,
+                'title' => $slider->title,
+                'slider_link' => $slider->slider_link,
+                'image' => asset('image/slider/' . $slider->image),
+            ];
+          
+            $responseSlider[] = $sliderData;
+        }
         return response()->json([
             'message' => 'All Section With Item List:',
-            'Section data' => $radioDate,
+            'Slider Data' => $responseSlider,
+            'Radio data' => $responseRadio,
             'Section data' => $response,
-            'Events' => $evetsData,
         ]);
     }
     

@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slider_link')->nullable();
             $table->string('image');
             $table->string('status')->default('active');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

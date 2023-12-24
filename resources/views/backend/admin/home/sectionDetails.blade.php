@@ -61,6 +61,10 @@
                                         <input class="mt-3 " type="radio" name="content_type" id="homeMusic" value="music">
                                         <label class="ml-2" for="homeMusic">Music</label>
                                     </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="mt-3 " type="radio" name="content_type" id="homeEvent" value="event">
+                                        <label class="ml-2" for="homeEvent">Event</label>
+                                    </div>
                                 </div>
                                 <div class="podcast-category-section" style="display: none;">
                                     <div class=" mt-2">
@@ -111,9 +115,21 @@
                                             <label for="music">Music:</label>
                                             <select name="playlist_music_id" id="playlist_music_id" class="form-control">
                                                 <option value="">Select Music</option>
-
                                                 @foreach ($musics as $music)
                                                     <option value="{{ $music->id }}">{{ $music->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="event-section" style="display: none;">
+                                    <div class="mt-2">
+                                        <div class="">
+                                            <label for="event">Event:</label>
+                                            <select name="event_id" id="event_id" class="form-control">
+                                                <option value="">Select Event</option>
+                                                @foreach ($events as $event)
+                                                    <option value="{{ $event->id }}">{{ $event->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -161,6 +177,11 @@
                                                     <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Details"><i class="fa fa-info-circle	
                             "></i>
                         </a>
+                                            @elseif(isset($sectionItem->event_id))
+                                           
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" data-toggle="tooltip" data-placement="top" title="Event Details"><i class="fa fa-info-circle	
+                            "></i>
+                        </a>
                                        
                                     @endif
                                      
@@ -193,6 +214,10 @@
                                                     <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
                                                         {{ $sectionItem->podcast->title }}
                                                     </a>
+                                                @elseif(isset($sectionItem->event_id))
+                                                    <a href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" class="">
+                                                        {{ $sectionItem->eventHome->title }}
+                                                    </a>
 
                                                 @endif
                                         </td>
@@ -210,6 +235,8 @@
 
                                                 @elseif(isset($sectionItem->podcast_id))
                                                 <span class="badge badge-success">Podcast</span>
+                                                @elseif(isset($sectionItem->event_id))
+                                                <span class="badge badge-success">Event</span>
                                                 @endif
                                         </td>
                                    
@@ -229,6 +256,10 @@
                                             @elseif(isset($sectionItem->podcast_id))
                                                       <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
                                                         <img src="{{ asset('podcast/image/' . $sectionItem->podcast->image) }}" alt="{{ $sectionItem->podcast->title }}" style="width: 50px; height: 50px">
+                                                      </a>
+                                            @elseif(isset($sectionItem->event_id))
+                                                      <a href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" class="">
+                                                        <img src="{{ asset('image/event/' . $sectionItem->eventHome->image) }}" alt="{{ $sectionItem->eventHome->title }}" style="width: 50px; height: 50px">
                                                       </a>
                                                    
                                                 @endif
@@ -262,17 +293,21 @@
     const homeMusic = document.getElementById('homeMusic');
     const homePodcast = document.getElementById('homePodcast');
     const homePlaylist = document.getElementById('homePlaylist');
+    const homeEvent = document.getElementById('homeEvent');
 
     const podcastSection = document.querySelector('.podcast-section');
     const musicSection = document.querySelector('.music-section');
     const podcastCategorySection = document.querySelector('.podcast-category-section');
     const playlistSection = document.querySelector('.playlist-section');
+    const eventSection = document.querySelector('.event-section');
 
     homePodcastCategory.addEventListener('change', function () {
         podcastCategorySection.style.display = this.checked ? 'block' : 'none';
         podcastSection.style.display = 'none';
         musicSection.style.display = 'none';
         playlistSection.style.display = 'none';
+                eventSection.style.display = 'none';
+
     });
 
     homePlaylist.addEventListener('change', function () {
@@ -280,6 +315,8 @@
         podcastSection.style.display = 'none';
         musicSection.style.display = 'none';
         playlistSection.style.display = this.checked ? 'block' : 'none';
+                eventSection.style.display = 'none';
+
     });
 
     homePodcast.addEventListener('change', function () {
@@ -287,6 +324,8 @@
         podcastSection.style.display = this.checked ? 'block' : 'none';
         musicSection.style.display = 'none';
         playlistSection.style.display = 'none';
+                eventSection.style.display = 'none';
+
     });
 
     homeMusic.addEventListener('change', function () {
@@ -294,6 +333,15 @@
         podcastSection.style.display = 'none';
         musicSection.style.display = this.checked ? 'block' : 'none';
         playlistSection.style.display = 'none';
+        eventSection.style.display = 'none';
+
+    });
+    homeEvent.addEventListener('change', function () {
+        podcastCategorySection.style.display = 'none';
+        podcastSection.style.display = 'none';
+        musicSection.style.display = 'none';
+        playlistSection.style.display = 'none';
+        eventSection.style.display = this.checked ? 'block' : 'none';
     });
 });
 </script>

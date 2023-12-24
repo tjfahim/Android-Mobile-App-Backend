@@ -25,13 +25,14 @@ class HomeController extends Controller
    {
        $homeSection = HomeSection::find($id);
        $home_section_id=$homeSection->id;
-       $podcasts = Podcast::all();
-       $musics = PlaylistMusic::all();
-       $playlist_catgory = PlaylistCategory::all();
-       $podcast_catgory = PodcastCategory::all();
+       $podcasts = Podcast::where('status','active')->get();
+       $musics = PlaylistMusic::where('status','active')->get();
+       $playlist_catgory = PlaylistCategory::where('status','active')->get();
+       $podcast_catgory = PodcastCategory::where('status','active')->get();
+       $events = EventHome::where('status','active')->get();
        $sectionItems = HomeSectionItem::where('home_section_id',$homeSection->id)->get();
 
-       return view('backend.admin.home.sectionDetails', compact('homeSection','musics','podcasts','sectionItems','home_section_id','playlist_catgory','podcast_catgory'));
+       return view('backend.admin.home.sectionDetails', compact('homeSection','musics','podcasts','sectionItems','home_section_id','playlist_catgory','podcast_catgory','events'));
 
    }
     public function homeSectionCreate()
@@ -113,6 +114,7 @@ class HomeController extends Controller
            'podcast_categorie_id' => 'nullable|numeric',
            'playlist_categorie_id' => 'nullable|numeric',
            'playlist_music_id' => 'nullable|numeric',
+           'event_id' => 'nullable|numeric',
        ]);
    
        if ($validator->fails()) {
@@ -128,6 +130,7 @@ class HomeController extends Controller
            'playlist_music_id' => $request->playlist_music_id,
            'playlist_categorie_id' => $request->playlist_categorie_id,
            'podcast_categorie_id' => $request->podcast_categorie_id,
+           'event_id' => $request->event_id,
            'home_section_id' => $home_section_id,
        ];
        HomeSectionItem::create($data);

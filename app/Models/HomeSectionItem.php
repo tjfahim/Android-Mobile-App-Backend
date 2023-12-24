@@ -9,7 +9,7 @@ class HomeSectionItem extends Model
 {
     use HasFactory;
     
-    protected $fillable = [ 'playlist_categorie_id','podcast_categorie_id','playlist_music_id', 'podcast_id','home_section_id','status'];
+    protected $fillable = [ 'playlist_categorie_id','event_id','podcast_categorie_id','playlist_music_id', 'podcast_id','home_section_id','status'];
 
 
     public function music()
@@ -27,6 +27,10 @@ class HomeSectionItem extends Model
     public function playlistMusic()
     {
         return $this->belongsTo(PlaylistCategory::class, 'playlist_categorie_id');
+    }
+    public function eventHome()
+    {
+        return $this->belongsTo(EventHome::class, 'event_id');
     }
 
 

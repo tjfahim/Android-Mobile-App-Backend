@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\Admin\RadioDetailsManageController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Api\PlaylistApi;
+use App\Http\Controllers\Api\PodcastApi;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('loginSubmit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::get('api/playlist-category-get-music-details/{id}', [PlaylistApi::class, 'playlistMusicDetails'])->name('podcast.details.fetch');
+Route::get('api/podcast-category-get-podcast-details/{id}', [PodcastApi::class, 'podcastDetails'])->name('podcastDetails');
+    
 
 
 Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
@@ -101,8 +107,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/playlist-music-details/{id}', [PlaylistManageController::class, 'playlistMusicDetails'])->name('playlistmusic.details');
    
     Route::delete('/playlist-music-destroy/{id}', [PlaylistManageController::class, 'playlistMusicDestroy'])->name('playlistmusic.destroy');
-
-
 
     Route::get('/podcast-category', [PodcastManageController::class, 'podcastCatgoryIndex'])->name('podcastcategory.index');
     Route::get('/podcast-category-create', [PodcastManageController::class, 'podcastCatgoryCreate'])->name('podcastcategory.create');

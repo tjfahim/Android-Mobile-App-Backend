@@ -12,7 +12,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/home/section') ? ' active' : '' }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/home') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('home.section.index')}}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>Home Section</p>

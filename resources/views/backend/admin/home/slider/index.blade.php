@@ -6,9 +6,7 @@
         <h4>Slider Manage</h4>
         <a href="{{ route('home.slider.create')}}" class="btn btn-primary">Slider Create</a>
         <a href="{{ route('home.section.index')}}" class="btn btn-primary"><i class="fa fa-caret-square-o-left"></i>
-
             Section List</a>
-
         @if(session('success'))
             <div class="alert alert-success mt-2">
                 {{ session('success') }}
@@ -21,7 +19,7 @@
                     <th scope="col">Action</th>
                     <th scope="col">id</th>
                     <th scope="col">Title</th>
-                    {{-- <th scope="col">Link</th> --}}
+                    <th scope="col">Type</th>
                     <th scope="col">Image</th>
                     <th scope="col">Status</th>
                   </tr>
@@ -34,10 +32,6 @@
 
                         <div class="d-flex gap-2">
                         
-                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{ route('home.slider.edit', ['id' => $slider->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
-                                "></i>
-                            </a>
-                            <!-- Delete option -->
                             <form class="" action="{{ route('home.slider.destroy', ['id' => $slider->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
@@ -49,9 +43,9 @@
                     <td>
                          {{ $slider->title }}
                     </td>
-                    {{-- <td>
-                         {{ $slider->slider_link }}
-                    </td> --}}
+                    <td>
+                         {{ $slider->type }}
+                    </td>
                     <td>
                         <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
                     </td>

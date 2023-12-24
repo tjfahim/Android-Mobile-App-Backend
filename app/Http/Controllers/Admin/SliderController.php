@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\HomeSection;
+use App\Models\HomeSectionItem;
+use App\Models\PlaylistCategory;
+use App\Models\PlaylistMusic;
+use App\Models\Podcast;
+use App\Models\PodcastCategory;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +24,12 @@ class SliderController extends Controller
    }
    public function homeSliderCreate()
    {
-       return view('backend.admin.home.slider.process');
+    $podcasts = Podcast::all();
+    $musics = PlaylistMusic::all();
+    $playlist_catgory = PlaylistCategory::all();
+    $podcast_catgory = PodcastCategory::all();
+
+    return view('backend.admin.home.slider.process', compact('musics','podcasts','playlist_catgory','podcast_catgory'));
    }
    public function homeSliderProcess(Request $request, $id = null)
       {
@@ -70,7 +81,25 @@ class SliderController extends Controller
                $image->move($destinationPath, $profileImage);
                $input['image'] = $profileImage;
            }
-                      
+           
+           if ( $request->podcast_id) {
+            $input['slider_link'] = route('podcastDetails', ['id' => $request->podcast_id]);
+            $input['type'] = 'podcast';
+            
+           }elseif($request->playlist_music_id){
+            $input['slider_link'] = route('podcast.details.fetch', ['id' => $request->playlist_music_id]);
+            $input['type'] ='music';
+           }elseif($request->playlist_categorie_id){
+            $input['slider_link'] =  $request->playlist_categorie_id;
+            $input['type'] =  'playlist_category';
+           }elseif( $request->podcast_categorie_id){
+            $input['slider_link'] = $request->podcast_categorie_id;
+            $input['type'] = 'podcast_category';
+           }elseif( $request->custom_input){
+            $input['slider_link'] = $request->custom_input;
+            $input['type'] = 'link';
+           }
+
            Slider::create($input);
            return redirect()->route('home.slider.index')->with('success', 'slider Added successfully.');
           }

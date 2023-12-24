@@ -16,7 +16,7 @@ class RadioApi extends Controller
     public function radioIndexFetch()
     {
 
-        $RadioRecords = Radio::orderBy('created_at', 'desc')->get();
+        $RadioRecords = Radio::where('status','active')->orderBy('created_at', 'desc')->get();
         foreach ($RadioRecords as $radio) {
             $radioData = [
                 'id' => $radio->id,
@@ -57,7 +57,7 @@ class RadioApi extends Controller
             $RadioRecords['radio_link'] = 'There is no radio';
         }
 
-        $radioSections = RadioCustomCategory::where('radio_id', $id)->orderBy('created_at', 'desc')->get();
+        $radioSections = RadioCustomCategory::where('status','active')->where('radio_id', $id)->orderBy('created_at', 'desc')->get();
     
         $response = [];
     
@@ -68,7 +68,7 @@ class RadioApi extends Controller
                 'items' => [],
             ];
     
-            $sectionItems = RadioCustomCategoryItem::where('radio_custom_categorie_id', $section->id)->get();
+            $sectionItems = RadioCustomCategoryItem::where('status','active')->where('radio_custom_categorie_id', $section->id)->get();
             foreach ($sectionItems as $item) {
                 $itemTitle = null;
                 $itemSubTitle = null;

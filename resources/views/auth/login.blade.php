@@ -132,7 +132,7 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="{{ route('login') }}" method="post" role="form" style="display: block;">
+								<form id="login-form" action="{{ route('loginSubmit') }}" method="post" role="form" style="display: block;">
                                     @csrf
 									<div class="form-group">
 										<input required type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="admin@admin.com">
