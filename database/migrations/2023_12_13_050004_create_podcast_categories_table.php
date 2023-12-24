@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('image')->nullable();
             $table->string('status')->default('active');
+            $table->string('background_color')->nullable();
 
             $table->timestamps();
         });

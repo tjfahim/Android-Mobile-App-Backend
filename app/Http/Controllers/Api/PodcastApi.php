@@ -18,7 +18,10 @@ class PodcastApi extends Controller
             $imageName = $record->image;
             $imageUrl = asset('podcast/image/' . $imageName);
             $record->image = $imageUrl;
+             $record->background_color = '0xff' . ltrim($record->background_color, '#');
         }
+               
+
         return response()->json([
             'message' => 'Podcast Category List:',
             'data' => $podcastCategory,
@@ -27,6 +30,8 @@ class PodcastApi extends Controller
     public function podcastCategoryshow($id)
     {
         $podcastCatgory = PodcastCategory::find($id);
+                $podcastCatgory->background_color = '0xff' . ltrim($podcastCatgory->background_color, '#');
+
         $podcasts = Podcast::where('status','active')->where('podcast_category_id', $podcastCatgory->id)->orderBy('created_at', 'desc')->get();
       
         if (!$podcastCatgory) {

@@ -144,14 +144,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Color Code</label>
                                         <input type="color" class="form-control" name="background_color" value="{{ $podcast->background_color ?? '#000000' }}" placeholder="Select color">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

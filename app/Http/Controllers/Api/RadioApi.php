@@ -23,7 +23,7 @@ class RadioApi extends Controller
                 'title' => $radio->title,
                 'subtitle' => $radio->subtitle,
                 'image' => asset('image/radio/' . $radio->image),
-                'background_color' => 'oxff' . ltrim($radio->background_color, '#'),
+                'background_color' => '0xff' . ltrim($radio->background_color, '#'),
 
             ];
             if (!is_null($radio->radio_file)) {
@@ -44,11 +44,13 @@ class RadioApi extends Controller
     public function RadioSectionIndexfetch($id)
     {
 
-
         $RadioRecords = Radio::find($id);
         if (!is_null($RadioRecords->image)) {
             $RadioRecords['image'] = asset('image/radio/' . $RadioRecords->image);
         }
+                        $RadioRecords->background_color = '0xff' . ltrim($RadioRecords->background_color, '#');
+
+        
         if (!is_null($RadioRecords->radio_file)) {
             $RadioRecords['radio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
         } elseif (!is_null($RadioRecords->radio_link)) {
