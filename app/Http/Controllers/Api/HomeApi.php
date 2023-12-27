@@ -6,16 +6,78 @@ use App\Http\Controllers\Controller;
 use App\Models\EventHome;
 use App\Models\HomeSection;
 use App\Models\HomeSectionItem;
+use App\Models\MenuBar;
 use App\Models\PlaylistCategory;
 use App\Models\PlaylistMusic;
 use App\Models\Podcast;
 use App\Models\PodcastCategory;
 use App\Models\Radio;
 use App\Models\Slider;
+use App\Models\VideoReel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeApi extends Controller
 {
+    public function search(Request $request,$query)
+    {
+        {
+            $eventHomeResults = EventHome::where('title', 'like', "%{$query}%")
+            ->where('status', 'active')
+            ->get()
+            ->map(function ($result) {
+                $result['itemType'] = 'event';
+                return $result;
+            });
+
+            // Search in the PlaylistMusic table
+            $playlistMusicResults = PlaylistMusic::where('title', 'like', "%{$query}%")
+                ->where('status', 'active')
+                ->get()
+                ->map(function ($result) {
+                    $result['itemType'] = 'music';
+                    return $result;
+                });
+
+            // Search in the Podcast table
+            $podcastResults = Podcast::where('title', 'like', "%{$query}%")
+                ->where('status', 'active')
+                ->get()
+                ->map(function ($result) {
+                    $result['itemType'] = 'podcast';
+                    return $result;
+                });
+
+            // Search in the Radio table
+            $radioResults = Radio::where('title', 'like', "%{$query}%")
+                ->where('status', 'active')
+                ->get()
+                ->map(function ($result) {
+                    $result['itemType'] = 'radio';
+                    return $result;
+                });
+
+            $videoReelResults = VideoReel::where('title', 'like', "%{$query}%")
+                ->where('status', 'active')
+                ->get()
+                ->map(function ($result) {
+                    $result['itemType'] = 'reel';
+                    return $result;
+                });
+
+            $results = $eventHomeResults
+                ->merge($playlistMusicResults)
+                ->merge($podcastResults)
+                ->merge($radioResults)
+                ->merge($videoReelResults)
+                ->toArray();
+
+            return response()->json($results);
+        }
+    }
+    
+
+
     public function HomeSectionIndexfetch()
     {
         $homeSections = HomeSection::where('status','active')->orderBy('created_at', 'desc')->get();
@@ -58,7 +120,6 @@ class HomeApi extends Controller
                     if ($podcast) {
                         $itemTitle = $podcast->title;
                         $itemType = 'Podcast';
-
                         $itemSubTitle = $podcast->subtitle;
                         $itemImage_link = asset('podcast/image/' . $podcast->image);
                         if(!is_null($podcast->audio)){
@@ -75,25 +136,25 @@ class HomeApi extends Controller
                         $itemTitle = $playlist->title;
                         $itemType = 'Playlist';
                         $itemImage_link = asset('image/playlist/' . $playlist->image);
-                        $itemDetailsLink = route('playlistcategory.details.fetch', ['id' => $playlist->id]);
+                        $itemDetailsLink =  $playlist->id;
 
                         
                     }
                 } elseif (!is_null($item->podcast_categorie_id)) {
-                    $podcast = PodcastCategory::find($item->podcast_categorie_id);
-                    if ($podcast) {
-                        $itemTitle = $podcast->title;
-                        $itemType = 'Podcast';
-                        $itemImage_link = asset('podcast/image/' . $podcast->image);
-                        $itemDetailsLink = route('podcast.details.fetch', ['id' => $podcast->id]);
+                    $PodcastCategory = PodcastCategory::find($item->podcast_categorie_id);
+                    if ($PodcastCategory) {
+                        $itemTitle = $PodcastCategory->title;
+                        $itemType = 'PodcastCategory';
+                        $itemImage_link = asset('podcast/image/' . $PodcastCategory->image);
+                        $itemDetailsLink =  $PodcastCategory->id;
 
                     }
                 } elseif (!is_null($item->event_id)) {
                     $event = EventHome::find($item->event_id);
                     if ($event) {
                         $itemTitle = $event->title;
-                        $itemType = 'Event';
-                        $itemImage_link = asset('image/event' . $event->image);
+                        $itemType = count($sectionItems) === 1 ? 'singleEvent' : 'Event';
+                        $itemImage_link = asset('image/event/' . $event->image);
                         $itemDetailsLink = $event->event_link;
                     }
                 }
@@ -106,7 +167,7 @@ class HomeApi extends Controller
                         'image_link' => $itemImage_link,
                         'audio' => $itemAudio_link,
                         'detailsPageLink' => $itemDetailsLink,
-                        'type' => $itemType,
+                        'item_type' => $itemType,
                         'created_at' => $item->created_at,
                         'updated_at' => $item->updated_at,
                     ];
@@ -151,6 +212,27 @@ class HomeApi extends Controller
             'Radio data' => $responseRadio,
             'Section data' => $response,
         ]);
+    }
+
+
+    public function bar()
+    {
+        $menus = MenuBar::where('status','active')->orderBy('created_at', 'desc')->get();
+        foreach ($menus as $menu) {
+            $menuData = [
+                'id' => $menu->id,
+                'name' => $menu->name,
+                'link' => $menu->link,
+                'image' => asset('image/menu_bar/' . $menu->image),
+            ];
+    
+            $response[] = $menuData;
+        }
+        return response()->json([
+            'message' => 'Manu List:',
+            'data' => $response,
+        ]);
+    
     }
     
 }

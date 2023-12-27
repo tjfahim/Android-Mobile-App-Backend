@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PlaylistManageController;
 use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\Admin\RadioDetailsManageController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\VideoReelController;
 use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
 use App\Http\Controllers\AuthController;
@@ -18,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginSubmit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -60,6 +62,23 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/home/slider-details/{id}', [SliderController::class, 'homeSliderEdit'])->name('home.slider.edit');
     Route::put('/home/slider-status/{id}', [SliderController::class, 'homeSliderStatus'])->name('slider.status');
     Route::delete('/home/slider-destroy/{id}', [SliderController::class, 'homeSliderDestroy'])->name('home.slider.destroy');
+
+
+    Route::get('/menu-bar', [MenuBarController::class, 'MenuBarIndex'])->name('menu_bar.index');
+    Route::get('/menu-bar-create', [MenuBarController::class, 'MenuBarCreate'])->name('menu.bar.create');
+    Route::match(['post', 'put'], '/menu-bar-process/{id?}', [MenuBarController::class, 'MenuBarProcess'])->name('menu.bar.process');
+    Route::get('/menu-bar-details/{id}', [MenuBarController::class, 'MenuBarEdit'])->name('menu.bar.edit');
+    Route::put('/menu-bar-status/{id}', [MenuBarController::class, 'MenuBarStatus'])->name('menu.bar.status');
+    Route::delete('/menu-bar-destroy/{id}', [MenuBarController::class, 'MenuBarDestroy'])->name('menu.bar.destroy');
+
+    Route::get('/reels', [VideoReelController::class, 'VideoReelIndex'])->name('reel.index');
+    Route::get('/reels-create', [VideoReelController::class, 'VideoReelCreate'])->name('reel.create');
+    Route::match(['post', 'put'], '/reels-process/{id?}', [VideoReelController::class, 'VideoReelProcess'])->name('reel.process');
+    Route::get('/reels-details/{id}', [VideoReelController::class, 'VideoReelEdit'])->name('reel.edit');
+    Route::put('/reels-status/{id}', [VideoReelController::class, 'VideoReelStatus'])->name('reel.status');
+    Route::delete('/reels-destroy/{id}', [VideoReelController::class, 'VideoReelDestroy'])->name('reel.destroy');
+
+
 
 
 

@@ -259,7 +259,10 @@ class PlaylistManageController extends Controller
                     $input['image'] = $profileImage;
                     
                     if ($music->image) {
-                        unlink(public_path($destinationPath . $music->image));
+                        $filePath = public_path($destinationPath . $music->image);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
                 }
             
@@ -271,8 +274,12 @@ class PlaylistManageController extends Controller
                     $input['feature_image'] = $profilefeature_image;
                     
                     if ($music->feature_image) {
-                        unlink(public_path($destinationPath . $music->feature_image));
+                        $filePath = public_path($destinationPath . $music->feature_image);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
+                
                 }
             
                 if ($music_file = $request->file('music_file')) {
@@ -282,8 +289,12 @@ class PlaylistManageController extends Controller
                     $music_file->move($destinationPath, $music_fileFileName);
                     $input['music_file'] = $music_fileFileName;
                     
+                    
                     if ($music->music_file) {
-                        unlink(public_path($destinationPath . $music->music_file));
+                        $filePath = public_path($destinationPath . $music->music_file);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
                 }
             

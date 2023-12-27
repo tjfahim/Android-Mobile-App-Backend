@@ -82,8 +82,12 @@ class RadioController extends Controller
                     $input['image'] = $profileImage;
                     
                     if ($radio->image) {
-                        unlink(public_path($destinationPath . $radio->image));
+                        $filePath = public_path($destinationPath . $radio->image);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
+                 
                 }
             
                 if ($radio_file = $request->file('radio_file')) {

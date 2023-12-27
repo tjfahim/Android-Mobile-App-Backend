@@ -44,6 +44,18 @@
                     <p>Podcast Manage</p>
                 </a>
             </li>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/reel') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('reel.index') }}">
+                    <i class="nc-icon nc-atom"></i>
+                    <p>Reel</p>
+                </a>
+            </li>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/menu') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('menu_bar.index') }}">
+                    <i class="nc-icon nc-atom"></i>
+                    <p>Settings</p>
+                </a>
+            </li>
           
       
         </ul>

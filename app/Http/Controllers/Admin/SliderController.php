@@ -47,14 +47,20 @@ class SliderController extends Controller
                return Redirect::back()->withInput()->withErrors($validator);
            }
            $input = $request->all();
-           if ($image = $request->file('image')) {
-               $destinationPath = 'image/slider/';
-               $originalFileName = $image->getClientOriginalName(); 
-               $profileImage = date('YmdHis') . "_" . $originalFileName;
-               $image->move($destinationPath, $profileImage);
-               $input['image'] = $profileImage;
+            if ($image = $request->file('image')) {
+                $destinationPath = 'image/slider/';
+                $originalFileName = $image->getClientOriginalName(); 
+                $profileImage = date('YmdHis') . "_" . $originalFileName;
+                $image->move($destinationPath, $profileImage);
+                $input['image'] = $profileImage;
 
-           }
+                if ($slider->image) {
+                    $filePath = public_path($destinationPath . $slider->image);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            }
       
            $slider->update($input);
            

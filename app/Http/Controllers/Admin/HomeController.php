@@ -66,6 +66,12 @@ class HomeController extends Controller
                 $image->move($destinationPath, $profileImage);
                 $input['image'] = $profileImage;
 
+                if ($homeSection->image) {
+                    $filePath = public_path($destinationPath . $homeSection->image);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
             }
        
             $homeSection->update($input);
@@ -196,6 +202,12 @@ class HomeController extends Controller
                $image->move($destinationPath, $profileImage);
                $input['image'] = $profileImage;
 
+               if ($event->image) {
+                $filePath = public_path($destinationPath . $event->image);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
            }
       
            $event->update($input);

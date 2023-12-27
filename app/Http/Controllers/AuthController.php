@@ -43,7 +43,6 @@ class AuthController extends Controller
         } else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Invalid email']);
             }
-
     }
     public function loginApi(Request $request)
     {
@@ -53,7 +52,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 404);
         }
 
         $credentials = $request->only('email', 'password');
@@ -68,9 +67,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
-            return response()->json(['password' => 'Incorrect password']);
+            return response()->json(['message' => 'Incorrect password'], 404);
         } else {
-            return response()->json(['email' => 'Invalid email']);
+            return response()->json(['message' => 'Invalid email'], 404);
             }
 
     }
@@ -78,7 +77,6 @@ class AuthController extends Controller
 
     public function registerApi(Request $request)
     {
-    
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -86,7 +84,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 404);
         }
 
         $user = new User();
@@ -99,9 +97,32 @@ class AuthController extends Controller
 
         Auth::login($user);
         $user = Auth::user();
-        return response()->json(['user' => $user, 'message' => 'User registered successfully'], 201);
+        return response()->json(['user' => $user, 'message' => 'User registered successfully'], 200);
 
     }
+    public function updateProfile(Request $request,$id)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'password' => 'nullable|min:6', 
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 400);
+    }
+
+    $user = User::find($id);
+    $user->name = $request->input('name');
+
+    if ($request->input('password')) {
+        $user->password = bcrypt($request->input('password'));
+    }
+
+    $user->save();
+
+    return response()->json(['user' => $user, 'message' => 'Profile updated successfully'], 200);
+}
+
 
 
     public function logout(Request $request)
@@ -109,10 +130,19 @@ class AuthController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+    public function profile(Request $request,$id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return response()->json(['user' => $user]);
+        } else {
+            return response()->json(['error' => 'Unauthenticated'], 404);
+        }
+    }
     public function logoutApi(Request $request)
     {
         Auth::logout();
-        return response()->json(['message' => 'User logout successfully'], 201);
+        return response()->json(['message' => 'User logout successfully'], 200);
     }
     
 }

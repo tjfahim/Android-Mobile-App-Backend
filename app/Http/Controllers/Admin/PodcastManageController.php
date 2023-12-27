@@ -58,8 +58,12 @@ class PodcastManageController extends Controller
                     $input['image'] = $profileImage;
                     
                     if ($podcastCatgory->image) {
-                        unlink(public_path($destinationPath . $podcastCatgory->image));
+                        $filePath = public_path($destinationPath . $podcastCatgory->image);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
+                   
                 }
             
             
@@ -197,8 +201,12 @@ class PodcastManageController extends Controller
                     $image->move($destinationPath, $profileImage);
                     $input['image'] = $profileImage;
                     
+                 
                     if ($podcast->image) {
-                        unlink(public_path($destinationPath . $podcast->image));
+                        $filePath = public_path($destinationPath . $podcast->image);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
                 }
             

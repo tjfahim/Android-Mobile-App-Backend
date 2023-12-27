@@ -22,7 +22,10 @@ class User extends Authenticatable
         'email',
         'password', 'status'
     ];
-
+    public function videoReelFavorites()
+    {
+        return $this->hasMany(VideoReelFavorite::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
