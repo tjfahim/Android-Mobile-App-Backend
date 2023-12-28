@@ -170,7 +170,7 @@ class PodcastManageController extends Controller
                     'title' => 'required|string|max:255',
                     'subtitle' => 'nullable|string|max:255',
                     'audio_link' => 'nullable|url',
-                    'video_link' => 'nullable|url',
+                    'video_link' => 'nullable',
                 ]);
                 if ($request->hasFile('image')) {
                     $validator->addRules([
@@ -247,7 +247,7 @@ class PodcastManageController extends Controller
                     'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                     'audio' => 'file|mimes:mp3,wav|max:20480',
                     'video' => 'file|mimes:mp4,avi,mov',
-                    'video_link' => 'nullable|url',
+                    'video_link' => 'nullable',
                     'audio_link' => 'nullable|url',
                   
                 ]);

@@ -13,6 +13,7 @@ use App\Models\Podcast;
 use App\Models\PodcastCategory;
 use App\Models\Radio;
 use App\Models\Slider;
+use App\Models\User;
 use App\Models\VideoReel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class HomeApi extends Controller
             ->get()
             ->map(function ($result) {
                 $result['itemType'] = 'event';
+                $result['image'] = asset('image/event/' . $result['image']);
                 return $result;
             });
 
@@ -36,6 +38,16 @@ class HomeApi extends Controller
                 ->get()
                 ->map(function ($result) {
                     $result['itemType'] = 'music';
+
+                    $result['image'] = asset('image/music/' .  $result['image']);
+                    $result['feature_image'] = asset('image/music/' .  $result['feature_image']);
+                    if(!is_null($result['music_file'])){
+                        $result['music_link'] = asset('music_file/' .  $result['music_file']);
+                    }elseif(!is_null($result['music_file'])){
+                       $result['music_link'] = $result['music_link'];
+                    }else(
+                       $result['music_link'] = 'There is no audio'
+                    );
                     return $result;
                 });
 
@@ -45,6 +57,14 @@ class HomeApi extends Controller
                 ->get()
                 ->map(function ($result) {
                     $result['itemType'] = 'podcast';
+                    $result['image']  = asset('podcast/image/' . $result['image']);
+                        if(!is_null($result['audio'])){
+                            $result['audio_link'] = asset('podcast/audio/' . $result['audio']);
+                        }elseif(!is_null($result['audio_file'])){
+                            $result['audio_link'] = $result['audio_link'];
+                        }else(
+                            $result['audio_link'] = 'There is no audio'
+                        );
                     return $result;
                 });
 
@@ -54,6 +74,15 @@ class HomeApi extends Controller
                 ->get()
                 ->map(function ($result) {
                     $result['itemType'] = 'radio';
+                    $result['image']  = asset('image/radio/' . $result['image']);
+                    $result['background_color']  = 'oxff' . ltrim($result['background_color'], '#');
+                    if (!is_null($result['radio_file'])) {
+                        $result['radio_link'] = asset('radio_file/' . $result['radio_file']);
+                    } elseif (!is_null($result['radio_link'])) {
+                        $result['radio_link'] = $result['radio_link'];
+                    } else {
+                        $result['radio_link'] = 'There is no radio';
+                    }
                     return $result;
                 });
 
@@ -173,9 +202,9 @@ class HomeApi extends Controller
                     ];
                 }
             }
-    
             $response[] = $sectionDataItem;
         }
+
         $RadioRecords = Radio::where('status','active')->orderBy('created_at', 'desc')->get();
         $sliders = Slider::where('status','active')->orderBy('created_at', 'desc')->get();
         foreach ($RadioRecords as $radio) {
@@ -215,7 +244,7 @@ class HomeApi extends Controller
     }
 
 
-    public function bar()
+    public function bar($id=null)
     {
         $menus = MenuBar::where('status','active')->orderBy('created_at', 'desc')->get();
         foreach ($menus as $menu) {
@@ -225,13 +254,21 @@ class HomeApi extends Controller
                 'link' => $menu->link,
                 'image' => asset('image/menu_bar/' . $menu->image),
             ];
-    
             $response[] = $menuData;
+        }
+        if($id){
+            $user = User::find($id);
+            return response()->json([
+                'message' => 'Manu List:',
+                'data' => $response,
+                'user' => $user,
+            ]);
         }
         return response()->json([
             'message' => 'Manu List:',
             'data' => $response,
         ]);
+       
     
     }
     

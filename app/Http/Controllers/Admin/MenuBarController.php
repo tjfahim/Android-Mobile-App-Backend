@@ -75,9 +75,6 @@ class MenuBarController extends Controller
                 $image->move($destinationPath, $profileImage);
                 $input['image'] = $profileImage;
             }
-            
-           
- 
             MenuBar::create($input);
             return redirect()->route('menu_bar.index')->with('success', 'Menu Added successfully.');
            }

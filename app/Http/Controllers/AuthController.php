@@ -31,8 +31,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->role === 'admin') {
+            if ($user->role === 'admin' && $user->status === 'active') {
                 return redirect()->route('admin.dashboard');
+            }else{
+                return response()->json(['message' => 'Your Account is Deactivate'], 404);
             }
         
         }
@@ -59,8 +61,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->role === 'user') {
+            if ($user->role === 'user' && $user->status === 'active') {
                 return response()->json(['user' => $user, 'message' => 'Login successful'], 200);
+            }else{
+                return response()->json(['message' => 'Your Account is Deactivate'], 404);
             }
         
         }
@@ -128,7 +132,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect()->route('login');
     }
     public function profile(Request $request,$id)
     {
@@ -143,6 +147,88 @@ class AuthController extends Controller
     {
         Auth::logout();
         return response()->json(['message' => 'User logout successfully'], 200);
+    }
+
+
+
+    public function userIndex()
+    {
+        $users = User::orderBy('created_at', 'desc')->paginate(12);
+        return view('backend.admin.user.index', ['users' => $users]);
+    }
+    public function userCreate()
+    {
+     return view('backend.admin.user.process');
+    }
+    public function userProcess(Request $request, $id = null)
+       {
+           if ($id) {
+            $user = User::find($id);
+            $validator = Validator::make($request->all(), [
+                'name' => 'string',
+            ]);
+          
+            if ($validator->fails()) {
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
+            $user->name = $request->input('name');
+            $user->role = $request->input('role');
+            $user->status = $request->input('status');
+
+            if ($request->input('password')) {
+                $user->password = bcrypt($request->input('password'));
+            }
+            
+            $user->save();
+            
+            return redirect()->route('user.index')->with('success', 'User Updated successfully.');
+ 
+              
+           } else {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required',
+            ]);
+    
+            if ($validator->fails()) {
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->role = $request->input('role');
+            $user->status = $request->input('status');
+            $user->save();
+
+            return redirect()->route('user.index')->with('success', 'User Added successfully.');
+           }
+ 
+       }
+ 
+ 
+   public function userEdit($id)
+   {
+       $user = User::find($id);
+       return view('backend.admin.user.process', ['user' => $user]);
+   }
+ 
+ 
+   public function userStatus(Request $request,$id)
+   {
+       $user = User::find($id);
+       $user->status = $request->status;
+         $user->save();
+         return redirect()->back();
+   }
+
+   
+    public function userDestroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'User Deleted Successfully.');
     }
     
 }

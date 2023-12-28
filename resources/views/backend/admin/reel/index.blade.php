@@ -46,7 +46,14 @@
                          {{ $reel->subtitle }}
                     </td>
                     <td>
-                         {{ $reel->video_link }}
+                        <div>   {{ $reel->video_link }}</div>
+                      
+                         @if(isset($reel) ? $reel->video_link : old('video_link') )
+                         <video width="300" height="150" controls>
+                             <source src="{{ isset($reel) ? $reel->video_link : old('video_link') }}" type="video/mp4">
+                             Your browser does not support the video.
+                         </video>
+                         @endif
                     </td>
                     <td>
                          {{ $reel->favourite }}
@@ -74,7 +81,9 @@
                   </tr>
                   @endforeach
                 </tbody>
-              </table>
+                
+            </table>
+            {{ $reels->links('pagination::bootstrap-4') }}
         </div>
     </div>
 </div>

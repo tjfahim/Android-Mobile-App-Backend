@@ -78,6 +78,6 @@ class VideoReelController extends Controller
     {
         $reel = VideoReel::find($id);
         $reel->delete();
-        return redirect()->back()->with('success', 'Reel Deleted Successfully.');
+        return redirect()->route('reel.index')->with('success', 'Reel Deleted Successfully.');
     }
 }

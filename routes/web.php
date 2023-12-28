@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PlaylistManageController;
 use App\Http\Controllers\Admin\PodcastManageController;
 use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\Admin\RadioDetailsManageController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\VideoReelController;
 use App\Http\Controllers\Api\PlaylistApi;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginSubmit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -64,12 +65,14 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::delete('/home/slider-destroy/{id}', [SliderController::class, 'homeSliderDestroy'])->name('home.slider.destroy');
 
 
-    Route::get('/menu-bar', [MenuBarController::class, 'MenuBarIndex'])->name('menu_bar.index');
-    Route::get('/menu-bar-create', [MenuBarController::class, 'MenuBarCreate'])->name('menu.bar.create');
+    Route::get('/setting', [SettingController::class, 'settingindex'])->name('settings.index');
+    Route::put('/settingProcess', [SettingController::class, 'settingProcess'])->name('settings.process');
+    Route::get('/setting/menu-bar', [MenuBarController::class, 'MenuBarIndex'])->name('menu_bar.index');
+    Route::get('/setting/menu-bar-create', [MenuBarController::class, 'MenuBarCreate'])->name('menu.bar.create');
     Route::match(['post', 'put'], '/menu-bar-process/{id?}', [MenuBarController::class, 'MenuBarProcess'])->name('menu.bar.process');
-    Route::get('/menu-bar-details/{id}', [MenuBarController::class, 'MenuBarEdit'])->name('menu.bar.edit');
-    Route::put('/menu-bar-status/{id}', [MenuBarController::class, 'MenuBarStatus'])->name('menu.bar.status');
-    Route::delete('/menu-bar-destroy/{id}', [MenuBarController::class, 'MenuBarDestroy'])->name('menu.bar.destroy');
+    Route::get('/setting/menu-bar-details/{id}', [MenuBarController::class, 'MenuBarEdit'])->name('menu.bar.edit');
+    Route::put('/setting/menu-bar-status/{id}', [MenuBarController::class, 'MenuBarStatus'])->name('menu.bar.status');
+    Route::delete('/setting/menu-bar-destroy/{id}', [MenuBarController::class, 'MenuBarDestroy'])->name('menu.bar.destroy');
 
     Route::get('/reels', [VideoReelController::class, 'VideoReelIndex'])->name('reel.index');
     Route::get('/reels-create', [VideoReelController::class, 'VideoReelCreate'])->name('reel.create');
@@ -78,15 +81,18 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::put('/reels-status/{id}', [VideoReelController::class, 'VideoReelStatus'])->name('reel.status');
     Route::delete('/reels-destroy/{id}', [VideoReelController::class, 'VideoReelDestroy'])->name('reel.destroy');
 
-
+    Route::get('/users', [AuthController::class, 'userIndex'])->name('user.index');
+    Route::get('/users-create', [AuthController::class, 'userCreate'])->name('user.create');
+    Route::match(['post', 'put'], '/users-process/{id?}', [AuthController::class, 'userProcess'])->name('user.process');
+    Route::get('/users-details/{id}', [AuthController::class, 'userEdit'])->name('user.edit');
+    Route::put('/users-status/{id}', [AuthController::class, 'userStatus'])->name('user.status');
+    Route::delete('/users-destroy/{id}', [AuthController::class, 'userDestroy'])->name('user.destroy');
 
 
 
     Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
     Route::put('/radio-status/{id}', [RadioController::class, 'radioStatus'])->name('radio.status');
-
     Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
-
     Route::get('/radio/section/{radio_id}', [RadioDetailsManageController::class, 'RadioSectionIndex'])->name('radio.section.index');
     Route::get('/radio/section-create/{radio_id}', [RadioDetailsManageController::class, 'radioSectionCreate'])->name('radio.section.create');
     Route::match(['post', 'put'], '/radio/section-process/{radio_id}/{id?}', [RadioDetailsManageController::class, 'radioSectionProcess'])->name('radio.section.process');
@@ -112,7 +118,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::match(['post', 'put'], '/playlist-category-process/{id?}', [PlaylistManageController::class, 'playlistCatgoryProcess'])
     ->name('playlistcategory.process');
     Route::put('/playlistcategory-status/{id}', [PlaylistManageController::class, 'playlistcategoryStatus'])->name('playlistcategory.status');
-
     Route::delete('/playlist-category-destroy/{id}', [PlaylistManageController::class, 'playlistCatgorydestroy'])->name('playlistcategory.destroy');
 
 
@@ -121,10 +126,8 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::match(['post', 'put'], '/playlist-music-process/{id?}', [PlaylistManageController::class, 'playlistMusicProcess'])
     ->name('playlistmusic.process');
     Route::put('/playlist-status/{id}', [PlaylistManageController::class, 'playlistStatus'])->name('playlistmusic.status');
-
     Route::get('/playlist-music-edit/{id}', [PlaylistManageController::class, 'playlistMusicEdit'])->name('playlistmusic.edit');
     Route::get('/playlist-music-details/{id}', [PlaylistManageController::class, 'playlistMusicDetails'])->name('playlistmusic.details');
-   
     Route::delete('/playlist-music-destroy/{id}', [PlaylistManageController::class, 'playlistMusicDestroy'])->name('playlistmusic.destroy');
 
     Route::get('/podcast-category', [PodcastManageController::class, 'podcastCatgoryIndex'])->name('podcastcategory.index');
@@ -134,7 +137,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/podcast-category-edit-status/{id}', [PodcastManageController::class, 'podcastCatgoryEditStatus'])->name('podcastcategory.status');
     Route::match(['post', 'put'], '/podcast-category-process/{id?}', [PodcastManageController::class, 'podcastCatgoryProcess'])->name('podcastcategory.process');
     Route::put('/podcastcategory-status/{id}', [PodcastManageController::class, 'podcastcategoryStatus'])->name('podcastcategory.status');
-
     Route::delete('/podcast-category-destroy/{id}', [PodcastManageController::class, 'podcastCatgorydestroy'])->name('podcastcategory.destroy');
 
 

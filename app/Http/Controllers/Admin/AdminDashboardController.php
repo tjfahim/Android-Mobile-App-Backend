@@ -9,6 +9,8 @@ use App\Models\PlaylistMusic;
 use App\Models\Podcast;
 use App\Models\PodcastCategory;
 use App\Models\Radio;
+use App\Models\User;
+use App\Models\VideoReel;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -21,6 +23,8 @@ class AdminDashboardController extends Controller
         $playlistCategory = PlaylistCategory::count();
         $playlistMusic = PlaylistMusic::count();
         $podcastCategory = PodcastCategory::count();
-        return view('backend.admin.dashboard', compact('radio', 'playlistCategory', 'playlistMusic', 'podcastCategory','homeSection'));
+        $user = User::count();
+        $reel = VideoReel::count();
+        return view('backend.admin.dashboard', compact('radio', 'playlistCategory', 'playlistMusic', 'podcastCategory','homeSection','user','reel'));
     }
 }

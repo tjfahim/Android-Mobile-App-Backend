@@ -235,7 +235,7 @@ class PlaylistManageController extends Controller
                 }
                 if ($request->hasFile('feature_image')) {
                     $validator->addRules([
-                        'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                        'feature_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                     ]);
                 }
                 if ($request->hasFile('music_file')) {

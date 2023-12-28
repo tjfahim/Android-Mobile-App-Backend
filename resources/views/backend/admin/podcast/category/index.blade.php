@@ -21,7 +21,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                    
-                                    <a class="dropdown-item" href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}">Details</a>
+                                    <a class="dropdown-item" href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}">Manage</a>
                                     <a class="dropdown-item" href="{{ route('podcastcategory.edit', ['id' => $podcastCatgory->id]) }}">Edit</a>
                                     <form action="{{ route('podcastcategory.destroy', ['id' => $podcastCatgory->id]) }}" method="post">
                                         @csrf
@@ -51,7 +51,7 @@
                                 </form>
                             </div>
                             
-                            <a href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}"><img src="{{ asset('podcast/image/' . $podcastCatgory->image) }}" alt="{{ $podcastCatgory->title }}" style="width: 100%; height: 100%"></a>
+                            <a href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}"><img src="{{ asset('podcast/image/' . $podcastCatgory->image) }}" alt="{{ $podcastCatgory->title }}" style="width: 100%; height: 177px; object-fit:cover;overflow:hidden;"></a>
 
                             
                         </div>

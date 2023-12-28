@@ -42,8 +42,6 @@
                 <td>
                     <!-- Edit option -->
                     <div class="d-flex gap-2">
-                    
-                        
                         <form class="" action="{{ route('podcast.edit', ['id' => $podcast->id]) }}">
                             <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
                             <button type="submit" class="btn btn-sm btn-primary mb-2" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -62,12 +60,13 @@
                         </form>
                     </div>
                 </td>
+              
                 
                 <th scope="row"> {{ $podcast->id }}</th>
                 <td>
            {{ $podcast->title }}
                 </td>
-                <td style="width: 20%">
+                <td style="width: 350px;display:block">
                     @if($podcast->audio_link)
                             <a href="{{ $podcast->audio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px;width:50%">Link: {{ $podcast->audio_link }}</a>
                     @else
@@ -89,27 +88,25 @@
                     <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" style="width: 50px; height: 50px">
                 </td>
                 <td>
-                    
-                    <div class="mt-5 d-flex align-items-center">
-                        <form class="" action="{{ route('podcast.status', ['id' => $podcast->id]) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            @if($podcast->status =='active')
-                                <input type="hidden" value="inactive" name="status">
-                                <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                    {{$podcast->status}}
-                                </button>
-                            @endif
-                            @if($podcast->status =='inactive')
-                                <input type="hidden" value="active" name="status">
-                                <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                    {{$podcast->status}}
-                                </button>
-                            @endif
-                        </form>
-                        
-                       
-                    </div>
+                    <form class="" action="{{ route('podcast.status', ['id' => $podcast->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        @if($podcast->status =='active')
+                            <input type="hidden" value="inactive" name="status">
+                            <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                {{$podcast->status}}
+                            </button>
+                        @endif
+                        @if($podcast->status =='inactive')
+                            <input type="hidden" value="active" name="status">
+                            <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
+                                {{$podcast->status}}
+                            </button>
+                        @endif
+                    </form>
+                </td>
+                <td style="display: none">
+                   
                     
                 </td>
               </tr>
@@ -117,8 +114,8 @@
 
              
             </tbody>
-            {{ $podcasts->links('pagination::bootstrap-4') }}
-          </table>
+        </table>
+        {{ $podcasts->links('pagination::bootstrap-4') }}
         
                 </div>
             </div>

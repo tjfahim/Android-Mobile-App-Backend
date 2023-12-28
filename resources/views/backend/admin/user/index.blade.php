@@ -3,8 +3,8 @@
 @section('main_content')
 <div class="content">
     <div class="container-fluid">
-        <h4>Menu Manage</h4>
-        <a href="{{ route('menu.bar.create')}}" class="btn btn-primary">Menu Create</a>
+        <h4>User Manage</h4>
+        <a href="{{ route('user.create')}}" class="btn btn-primary">User Create</a>
         @if(session('success'))
             <div class="alert alert-success mt-2">
                 {{ session('success') }}
@@ -17,52 +17,50 @@
                     <th scope="col">Action</th>
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Link</th>
-                    <th scope="col">Image</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach($bars as $bar)
+                    @foreach($users as $user)
                   <tr>
                     <td style="width:20%">
-
-
                         <div class="d-flex gap-2">
-                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('menu.bar.edit', ['id' => $bar->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
+                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('user.edit', ['id' => $user->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
                                 "></i>
                             </a>
-                            <form class="" action="{{ route('menu.bar.destroy', ['id' => $bar->id]) }}" method="post">
+                            <form class="" action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Menu Bar Item record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this User record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
                     </td>
-                    <th scope="row"> {{ $bar->id }}</th>
+                    <th scope="row"> {{ $user->id }}</th>
                     <td>
-                         {{ $bar->name }}
+                         {{ $user->name }}
                     </td>
                     <td>
-                         {{ $bar->link }}
+                         {{ $user->email }}
                     </td>
                     <td>
-                        <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px; margin-top: 10px;">
+                         {{ $user->role }}
                     </td>
                     <td>
-                        <form class="" action="{{ route('menu.bar.status', ['id' => $bar->id]) }}" method="POST">
+                        <form class="" action="{{ route('user.status', ['id' => $user->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            @if($bar->status =='active')
+                            @if($user->status =='active')
                                 <input type="hidden" value="inactive" name="status">
                                 <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                    {{$bar->status}}
+                                    {{$user->status}}
                                 </button>
                             @endif
-                            @if($bar->status =='inactive')
+                            @if($user->status =='inactive')
                                 <input type="hidden" value="active" name="status">
                                 <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                    {{$bar->status}}
+                                    {{$user->status}}
                                 </button>
                             @endif
                         </form>
@@ -71,9 +69,9 @@
                   </tr>
                   @endforeach
                 </tbody>
-              </table>
-              {{ $bars->links('pagination::bootstrap-4') }}
-
+                
+            </table>
+            {{ $users->links('pagination::bootstrap-4') }}
         </div>
     </div>
 </div>

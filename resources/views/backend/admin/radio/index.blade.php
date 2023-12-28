@@ -56,7 +56,7 @@
                             <p class="card-text">
                                 
                             </p>
-                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%; height: 100%">
+                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%;height:200px;object-fit: cover;overfollow:hidden; ">
                     
                             @if($radio->radio_link)
                                 <a href="{{ $radio->radio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px">Link: {{ $radio->radio_link }}</a>

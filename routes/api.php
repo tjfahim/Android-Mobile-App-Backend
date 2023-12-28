@@ -36,7 +36,7 @@ Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
 
 Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 Route::get('/search/{query}', [HomeApi::class, 'search']);  
-Route::get('/menu-bar', [HomeApi::class, 'bar']);  
+Route::get('/menu-bar/{id?}', [HomeApi::class, 'bar']);  
 
 Route::post('/register', [AuthController::class, 'registerApi']);
 Route::post('/login', [AuthController::class, 'loginApi']);

@@ -7,8 +7,8 @@
                 ©   
                 <script>
                     document.write(new Date().getFullYear())
-                </script>
-                <a href="">Candelita</a>, made with love for a better web
+                </script> All rights reserved by
+                <a href="">{{ $settings->title ?? 'Candelita'}}</a>
             </p>
         </nav>
     </div>
@@ -22,7 +22,6 @@
 <script src="{{ asset('backend/assets/js/core/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/js/plugins/bootstrap-switch.js')}}"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<script src="{{ asset('backend/assets/js/plugins/chartist.min.js')}}"></script>
 <script src="{{ asset('backend/assets/js/plugins/bootstrap-notify.js')}}"></script>
 <script src="{{ asset('backend/assets/js/light-bootstrap-dashboard.js?v=2.0.0')}} " type="text/javascript"></script>
 <script src="{{ asset('backend/assets/js/demo.js')}}"></script>
@@ -31,7 +30,7 @@
 
 $(document).ready(function() {
 // Javascript method's body can be found in assets/js/demos.js
-demo.initDashboardPageCharts();
+// demo.initDashboardPageCharts();
 
 // demo.showNotification();
 

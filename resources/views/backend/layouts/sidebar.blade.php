@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="{{ route('admin.dashboard')}}" class="simple-text">
-                Candelita
+                {{ $settings->title ?? 'Candelita'}}
             </a>
         </div>
         <ul class="nav">
@@ -18,10 +18,10 @@
                     <p>Home Section</p>
                 </a>
             </li>
-            <li>
-                <a class="nav-link" href="#">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/user') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('user.index')}}">
                     <i class="nc-icon nc-circle-09"></i>
-                    <p>User Profile</p>
+                    <p>Users</p>
                 </a>
             </li>
             
@@ -46,18 +46,16 @@
             </li>
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/reel') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('reel.index') }}">
-                    <i class="nc-icon nc-atom"></i>
+                    <i class="nc-icon nc-button-play"></i>
                     <p>Reel</p>
                 </a>
             </li>
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/menu') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('menu_bar.index') }}">
-                    <i class="nc-icon nc-atom"></i>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/setting') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('settings.index') }}">
+                    <i class="nc-icon nc-settings-gear-64"></i>
                     <p>Settings</p>
                 </a>
             </li>
-          
-      
         </ul>
     </div>
 </div>

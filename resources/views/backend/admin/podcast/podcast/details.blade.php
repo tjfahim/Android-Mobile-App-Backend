@@ -71,7 +71,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Video Link: </label><br>
@@ -79,8 +79,8 @@
                                         
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div> --}}
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Video: </label><br>
@@ -97,7 +97,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             
 
 

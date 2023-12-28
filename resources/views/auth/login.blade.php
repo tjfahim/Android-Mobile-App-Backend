@@ -135,7 +135,7 @@
 								<form id="login-form" action="{{ route('loginSubmit') }}" method="post" role="form" style="display: block;">
                                     @csrf
 									<div class="form-group">
-										<input required type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="admin@admin.com">
+										<input required type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
                                         @if ($errors->has('email'))
                                             <div >
                                                     @foreach ($errors->get('email') as $error)
@@ -145,7 +145,7 @@
                                         @endif
 									</div>
 									<div class="form-group">
-										<input required type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="admin@admin.com">
+										<input required type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="">
                                         @if ($errors->has('password'))
                                             <div >
                                                     @foreach ($errors->get('password') as $error)
@@ -159,15 +159,6 @@
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input required type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="text-center">
-													<a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-												</div>
 											</div>
 										</div>
 									</div>

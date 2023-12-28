@@ -148,14 +148,14 @@ class HomeController extends Controller
    {
        $homeSection = HomeSectionItem::find($id);
        $homeSection->delete();
-       return redirect()->back()->with('success', 'Home Section Item Deleted Successfully.');
+       return redirect()->route('home.section.index')->with('success', 'Home Section Item Deleted Successfully.');
    }
   
    public function homeSectionDestroy($id)
    {
        $homeSection = HomeSection::find($id);
        $homeSection->delete();
-       return redirect()->back()->with('success', 'Home Section Deleted Successfully.');
+       return redirect()->route('home.section.index')->with('success', 'Home Section Deleted Successfully.');
    }
    
 

@@ -132,6 +132,6 @@ class SliderController extends Controller
    {
        $slider = Slider::find($id);
        $slider->delete();
-       return redirect()->back()->with('success', 'Slider Deleted Successfully.');
+       return redirect()->route('home.slider.index')->with('success', 'Slider Deleted Successfully.');
    }
 }

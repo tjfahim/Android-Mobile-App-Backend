@@ -100,8 +100,8 @@
 
              
             </tbody>
-            {{ $playlistMusic->links('pagination::bootstrap-4') }}
-          </table>
+        </table>
+        {{ $playlistMusic->links('pagination::bootstrap-4') }}
         
         
     </div>

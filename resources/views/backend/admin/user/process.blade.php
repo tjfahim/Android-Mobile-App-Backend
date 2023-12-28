@@ -9,16 +9,16 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">
-                            {{ isset($reel) && $reel->id ? 'Reel Edit' : 'Reel Create' }}
+                            {{ isset($user) && $user->id ? 'User Edit' : 'User Create' }}
                         </h4>
                         <div class="d-flex gap-2">
-                            <a href="{{ route('reel.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Reel List</a>
+                            <a href="{{ route('user.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>User List</a>
 
-                            @if(isset($reel->id))
-                                <form action="{{ route('reel.destroy', ['id' => $reel->id]) }}" method="post">
+                            @if(isset($user->id))
+                                <form action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this Reel record?')">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this User record?')">Delete</button>
                                 </form>
                             
                           @endif
@@ -26,17 +26,17 @@
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ isset($reel) && $reel->id ? route('reel.process', ['id' => $reel->id]) : route('reel.process') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ isset($user) && $user->id ? route('user.process', ['id' => $user->id]) : route('user.process') }}" enctype="multipart/form-data">
                             @csrf
-                            @if(isset($reel) && $reel->id)
+                            @if(isset($user) && $user->id)
                                 @method('PUT')
                             @endif
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Reel Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter Title" value="{{ isset($reel) ? $reel->title : old('title') }}" name="title">
-                                        @error('title')
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter Name" value="{{ isset($user) ? $user->name : old('name') }}" name="name">
+                                        @error('name')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -45,9 +45,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Reel Sub Title</label>
-                                        <input type="text" class="form-control" placeholder="Enter Sub Title" value="{{ isset($reel) ? $reel->subtitle : old('subtitle') }}" name="subtitle">
-                                        @error('subtitle')
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" placeholder="Enter email" value="{{ isset($user) ? $user->email : old('email') }}" name="email">
+                                        @error('email')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -56,34 +56,40 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Reel Link</label>
-                                        <input type="text" class="form-control" placeholder="Enter video_link" value="{{ isset($reel) ? $reel->video_link : old('video_link') }}" name="video_link">
-                                        @error('video_link')
+                                        <label>Passoword</label>
+                                        <input type="password" class="form-control" placeholder="Enter Password" value="" name="password">
+                                        @error('password')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
-                            @if(isset($reel) ? $reel->video_link : old('video_link') )
-                            <video width="320" height="180" controls>
-                                <source src="{{ isset($reel) ? $reel->video_link : old('video_link') }}" type="video/mp4">
-                                Your browser does not support the video.
-                            </video>
-                            @endif
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <select name="role" id="">
+                                            <option value="user" {{ isset($user) && $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                            <option value="admin" {{ isset($user) && $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" id="">
-                                            <option value="active" {{ isset($reel) && $reel->status === 'active' ? 'selected' : '' }}>Active</option>
-                                            <option value="inactive" {{ isset($reel) && $reel->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                            <option value="active" {{ isset($user) && $user->status === 'active' ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive" {{ isset($user) && $user->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
 
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($reel) && $reel->id ? 'Update' : 'Add' }}
+                                {{ isset($user) && $user->id ? 'Update' : 'Add' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>
