@@ -11,6 +11,14 @@
             </div>
         @endif
         <div class="row">
+            <div class="row justify-content-center col-12">
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                        <label for="search" class="form-label mb-0 mr-2">Search: </label>
+                        <input type="text" class="form-control ms-2" id="search">
+                    </div>
+                </div>
+            </div>
             <table class="table table-hover">
                 <thead>
                   <tr>
@@ -24,8 +32,8 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
-                  <tr>
-                    <td style="width:20%">
+                    <tr id="user_{{ $user->id }}">
+                        <td style="width:20%">
                         <div class="d-flex gap-2">
                             <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('user.edit', ['id' => $user->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
                                 "></i>
@@ -45,7 +53,13 @@
                          {{ $user->email }}
                     </td>
                     <td>
-                         {{ $user->role }}
+                        @if($user->role =='user')
+                                <span class="badge badge-primary">User</span>
+                            @endif
+                            @if($user->role =='admin')
+                                <span class="badge badge-secondary">Admin</span>
+
+                            @endif
                     </td>
                     <td>
                         <form class="" action="{{ route('user.status', ['id' => $user->id]) }}" method="POST">
@@ -75,4 +89,24 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#search').on('input', function(){
+            var searchTerm = $(this).val().toLowerCase();
+            filterTable(searchTerm);
+        });
+
+        function filterTable(searchTerm){
+            $('tbody tr').each(function(){
+                var rowText = $(this).text().toLowerCase();
+                if(rowText.indexOf(searchTerm) === -1){
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+    });
+</script>
 @endsection

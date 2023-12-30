@@ -14,6 +14,7 @@
      <link href="{{ asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
      <link href="{{ asset('backend/assets/css/light-bootstrap-dashboard.css?v=2.0.0')}} " rel="stylesheet" />
      <link href="{{ asset('backend/assets/css/demo.css')}}" rel="stylesheet" />
+     
  </head>
  
  <body>

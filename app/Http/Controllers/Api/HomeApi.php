@@ -12,6 +12,7 @@ use App\Models\PlaylistMusic;
 use App\Models\Podcast;
 use App\Models\PodcastCategory;
 use App\Models\Radio;
+use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\User;
 use App\Models\VideoReel;
@@ -270,6 +271,16 @@ class HomeApi extends Controller
         ]);
        
     
+    }
+    public function settingIndexApi()
+    {
+        $setting = Settings::first();
+        $setting['logo']  = asset('image/setting/' . $setting['logo']);
+        $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
+        return response()->json([
+            'message' => 'Setting:',
+            'data' => $setting,
+        ]);
     }
     
 }

@@ -12,7 +12,14 @@
                 {{ session('success') }}
             </div>
         @endif
-      
+        <div class="row justify-content-center col-12 my-3">
+            <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-center">
+                    <label for="search" class="form-label mb-0 mr-2">Search:</label>
+                    <input type="text" class="form-control ms-2" id="search">
+                </div>
+            </div>
+        </div>
         <table class="table table-hover">
             <thead>
               <tr>
@@ -28,8 +35,8 @@
             <tbody>
                 @foreach($playlistMusic as $playlistmusic)
 
-              <tr>
-                <td>
+                <tr id="playlistmusic_{{ $playlistmusic->id }}">
+                    <td>
                  
 
                     <div class="d-flex gap-2">
@@ -106,4 +113,24 @@
         
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#search').on('input', function(){
+            var searchTerm = $(this).val().toLowerCase();
+            filterTable(searchTerm);
+        });
+
+        function filterTable(searchTerm){
+            $('tbody tr').each(function(){
+                var rowText = $(this).text().toLowerCase();
+                if(rowText.indexOf(searchTerm) === -1){
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        }
+    });
+</script>
 @endsection
