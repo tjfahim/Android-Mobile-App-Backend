@@ -15,7 +15,6 @@ class RadioApi extends Controller
     
     public function radioIndexFetch()
     {
-
         $RadioRecords = Radio::where('status','active')->orderBy('created_at', 'desc')->get();
         foreach ($RadioRecords as $radio) {
             $radioData = [
@@ -27,11 +26,11 @@ class RadioApi extends Controller
 
             ];
             if (!is_null($radio->radio_file)) {
-                $radioData['radio_link'] = asset('radio_file/' . $radio->radio_file);
+                $radioData['audio_link'] = asset('radio_file/' . $radio->radio_file);
             } elseif (!is_null($radio->radio_link)) {
-                $radioData['radio_link'] = $radio->radio_link;
+                $radioData['audio_link'] = $radio->radio_link;
             } else {
-                $radioData['radio_link'] = 'There is no radio';
+                $radioData['audio_link'] = 'There is no radio';
             }
     
             $response[] = $radioData;
@@ -52,11 +51,11 @@ class RadioApi extends Controller
 
         
         if (!is_null($RadioRecords->radio_file)) {
-            $RadioRecords['radio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
+            $RadioRecords['audio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
         } elseif (!is_null($RadioRecords->radio_link)) {
-            $RadioRecords['radio_link'] = $RadioRecords->radio_link;
+            $RadioRecords['audio_link'] = $RadioRecords->radio_link;
         } else {
-            $RadioRecords['radio_link'] = 'There is no radio';
+            $RadioRecords['audio_link'] = 'There is no radio';
         }
 
         $radioSections = RadioCustomCategory::where('status','active')->where('radio_id', $id)->orderBy('created_at', 'desc')->get();
@@ -117,8 +116,8 @@ class RadioApi extends Controller
                         'id' => $item->id,
                         'title' => $itemTitle,
                         'subtitle' => $itemSubTitle,
-                        'image_link' => $itemImage_link,
-                        'audio' => $itemAudio_link,
+                        'image' => $itemImage_link,
+                        'audio_link' => $itemAudio_link,
                         'type' => $itemType,
                         'created_at' => $item->created_at,
                         'updated_at' => $item->updated_at,

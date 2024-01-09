@@ -43,11 +43,12 @@ class HomeApi extends Controller
                     $result['image'] = asset('image/music/' .  $result['image']);
                     $result['feature_image'] = asset('image/music/' .  $result['feature_image']);
                     if(!is_null($result['music_file'])){
-                        $result['music_link'] = asset('music_file/' .  $result['music_file']);
-                    }elseif(!is_null($result['music_file'])){
-                       $result['music_link'] = $result['music_link'];
-                    }else(
-                       $result['music_link'] = 'There is no audio'
+                        $result['audio_link'] = asset('music_file/' .  $result['music_file']);
+                    }elseif(!is_null($result['music_link'])){
+                       $result['audio_link'] = $result['music_link'];
+                    }
+                    else(
+                       $result['audio_link'] = 'There is no audio'
                     );
                     return $result;
                 });
@@ -58,14 +59,18 @@ class HomeApi extends Controller
                 ->get()
                 ->map(function ($result) {
                     $result['itemType'] = 'podcast';
-                    $result['image']  = asset('podcast/image/' . $result['image']);
-                        if(!is_null($result['audio'])){
-                            $result['audio_link'] = asset('podcast/audio/' . $result['audio']);
-                        }elseif(!is_null($result['audio_file'])){
-                            $result['audio_link'] = $result['audio_link'];
-                        }else(
-                            $result['audio_link'] = 'There is no audio'
-                        );
+                    if(!is_null($result['image'])){
+                        $result['image'] = asset('podcast/image/' . $result['image']);
+                    }else(
+                        $result['image'] = null
+                    );
+                    if(!is_null($result['audio'])){
+                        $result['audio_link'] = asset('podcast/audio/' . $result['audio']);
+                    }elseif(!is_null($result['audio_file'])){
+                        $result['audio_link'] = $result['audio_link'];
+                    }else(
+                        $result['audio_link'] = 'There is no audio'
+                    );
                     return $result;
                 });
 
@@ -78,11 +83,11 @@ class HomeApi extends Controller
                     $result['image']  = asset('image/radio/' . $result['image']);
                     $result['background_color']  = 'oxff' . ltrim($result['background_color'], '#');
                     if (!is_null($result['radio_file'])) {
-                        $result['radio_link'] = asset('radio_file/' . $result['radio_file']);
+                        $result['audio_link'] = asset('radio_file/' . $result['radio_file']);
                     } elseif (!is_null($result['radio_link'])) {
-                        $result['radio_link'] = $result['radio_link'];
+                        $result['audio_link'] = $result['radio_link'];
                     } else {
-                        $result['radio_link'] = 'There is no radio';
+                        $result['audio_link'] = 'There is no radio';
                     }
                     return $result;
                 });
@@ -105,7 +110,6 @@ class HomeApi extends Controller
             return response()->json($results);
         }
     }
-    
 
 
     public function HomeSectionIndexfetch()
@@ -167,7 +171,6 @@ class HomeApi extends Controller
                         $itemType = 'Playlist';
                         $itemImage_link = asset('image/playlist/' . $playlist->image);
                         $itemDetailsLink =  $playlist->id;
-
                         
                     }
                 } elseif (!is_null($item->podcast_categorie_id)) {
@@ -194,8 +197,8 @@ class HomeApi extends Controller
                         'id' => $item->id,
                         'title' => $itemTitle,
                         'subtitle' => $itemSubTitle,
-                        'image_link' => $itemImage_link,
-                        'audio' => $itemAudio_link,
+                        'image' => $itemImage_link,
+                        'audio_link' => $itemAudio_link,
                         'detailsPageLink' => $itemDetailsLink,
                         'item_type' => $itemType,
                         'created_at' => $item->created_at,
@@ -217,11 +220,11 @@ class HomeApi extends Controller
                 'background_color' => 'oxff' . ltrim($radio->background_color, '#'),
             ];
             if (!is_null($radio->radio_file)) {
-                $radioData['radio_link'] = asset('radio_file/' . $radio->radio_file);
+                $radioData['audio_link'] = asset('radio_file/' . $radio->radio_file);
             } elseif (!is_null($radio->radio_link)) {
-                $radioData['radio_link'] = $radio->radio_link;
+                $radioData['audio_link'] = $radio->radio_link;
             } else {
-                $radioData['radio_link'] = 'There is no radio';
+                $radioData['audio_link'] = 'There is no radio';
             }
     
             $responseRadio[] = $radioData;
@@ -257,19 +260,25 @@ class HomeApi extends Controller
             ];
             $response[] = $menuData;
         }
+        $setting = Settings::first();
+        $setting['logo']  = asset('image/setting/' . $setting['logo']);
+        $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
+
         if($id){
             $user = User::find($id);
             return response()->json([
                 'message' => 'Manu List:',
                 'data' => $response,
                 'user' => $user,
+                'setting' => $setting,
             ]);
         }
         return response()->json([
             'message' => 'Manu List:',
             'data' => $response,
+            'setting' => $setting,
+
         ]);
-       
     
     }
     public function settingIndexApi()

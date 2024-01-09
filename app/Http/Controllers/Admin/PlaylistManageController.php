@@ -40,25 +40,44 @@ class PlaylistManageController extends Controller
     }
 
 
-    public function playlistCreate(Request $request)
-    {
-         $request->validate([
+   
+
+
+public function playlistCreate(Request $request)
+{
+
+ $validator = Validator::make($request->all(), [
         'category' => 'required|exists:playlist_categories,id',
         'music' => 'required|exists:playlist_music,id',
     ]);
 
+    if ($validator->fails()) {
+        return redirect()->back()->withInput()->withErrors($validator);
+    }
 
     $categoryId = $request->category;
     $musicId = $request->music;
 
+    // Check if the record already exists
+    $existingRecord = PlaylistCategoryMusic::where('playlist_category_id', $categoryId)
+        ->where('playlist_music_id', $musicId)
+        ->first();
+
+    if ($existingRecord) {
+        return redirect()->back()
+            ->withInput()
+            ->withErrors(['category_music_unique' => 'The combination already exists.']);
+    }
+
+    // If the record doesn't exist, create it
     PlaylistCategoryMusic::create([
         'playlist_category_id' => $categoryId,
         'playlist_music_id' => $musicId,
     ]);
 
     return redirect()->route('playlist.index')->with('success', 'Playlist added successfully.');
-}
 
+}
 
     public function playlistDestroy($id)
     {

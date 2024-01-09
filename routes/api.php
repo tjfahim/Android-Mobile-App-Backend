@@ -31,8 +31,8 @@ Route::get('/playlist-category-get', [PlaylistApi::class, 'playlistCatgoryIndex'
 Route::get('/playlist-category-get-music/{id}', [PlaylistApi::class, 'playlistCategoryMusicshow'])->name('playlistcategory.details.fetch');
 Route::get('/playlist-category-get-music-details/{id}', [PlaylistApi::class, 'playlistMusicDetails'])->name('podcast.details.fetch');
 
-Route::get('/RadioSectionIndexfetch/{id}', [RadioApi::class, 'RadioSectionIndexfetch']);
 Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
+Route::get('/RadioSectionIndexfetch/{id}', [RadioApi::class, 'RadioSectionIndexfetch']);
 
 Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 Route::get('/search/{query}', [HomeApi::class, 'search']);  
@@ -44,7 +44,6 @@ Route::post('/login', [AuthController::class, 'loginApi']);
 Route::post('/logout', [AuthController::class, 'logoutApi']);
 Route::post('/profile/{id}', [AuthController::class, 'profile']);
 Route::post('/updateProfile/{id}', [AuthController::class, 'updateProfile']);
-
 
 Route::post('/favourite/{user_id}/{reel_id}', [VideoReelApi::class, 'store']);
 Route::get('/reelIndexFetch/{user_id}', [VideoReelApi::class, 'reelIndexFetch']);

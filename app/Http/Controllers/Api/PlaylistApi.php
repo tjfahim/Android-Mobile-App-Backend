@@ -19,10 +19,10 @@ class PlaylistApi extends Controller
             $imageUrl = asset('image/playlist/' . $imageName);
             $record->image = $imageUrl;
         }
-            return response()->json([
-                'message' => 'Playlist Category List:',
-                'data' => $playlistCatgory,
-            ]);
+        return response()->json([
+            'message' => 'Playlist Category List:',
+            'data' => $playlistCatgory,
+        ]);
      }
 
    
@@ -50,7 +50,10 @@ class PlaylistApi extends Controller
                 if ($music->music_file) {
                     $musicFileName = $music->music_file;
                     $musicFileUrl = asset('music_file/' . $musicFileName);
-                    $music->music_link = $musicFileUrl;
+                    $music->audio_link = $musicFileUrl;
+                }
+                if ($music->music_link) {
+                    $music->audio_link = $music->music_link;
                 }
     
                 $musicList[] = $music;
@@ -79,19 +82,18 @@ class PlaylistApi extends Controller
 
             if($music->music_link){
                 $musicName = $music->music_link;
-                $music->music_link = $musicName;
+                $music->audio_link = $musicName;
             }elseif($music->music_file){
                 $musicName = $music->music_file;
                 $musicUrl = asset('music_file/' . $musicName);
-                $music->music_link = $musicUrl;
+                $music->audio_link = $musicUrl;
             }else{
-                $music->music_link = 'No music';
+                $music->audio_link = 'No music';
 
             }
-
         return response()->json([
             'message' => 'Single Music Data:',
-            'data' => $music,
+            'data' =>  $music,
         ]);
     }
 }

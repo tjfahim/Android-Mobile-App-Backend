@@ -15,6 +15,9 @@
         <h4 class="my-3">Play-List</h4>
         <form method="POST" action="{{ route('playlist.process') }}" class="mt-3">
             @csrf
+            @error('category_music_unique')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
