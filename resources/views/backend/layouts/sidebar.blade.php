@@ -44,10 +44,16 @@
                     <p>Podcast Manage</p>
                 </a>
             </li>
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/reel') ? ' active' : '' }}">
+            {{-- <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/reel') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('reel.index') }}">
                     <i class="nc-icon nc-button-play"></i>
                     <p>Reel</p>
+                </a>
+            </li> --}}
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/chat') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('chat.index') }}">
+                    <i class="nc-icon nc-chat-round"></i>
+                    <p>Chat</p>
                 </a>
             </li>
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/setting') ? ' active' : '' }}">

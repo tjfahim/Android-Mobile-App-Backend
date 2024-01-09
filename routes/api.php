@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ChatApi;
 use App\Http\Controllers\Api\HomeApi;
 use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
@@ -38,6 +39,8 @@ Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 Route::get('/search/{query}', [HomeApi::class, 'search']);  
 Route::get('/menu-bar/{id?}', [HomeApi::class, 'bar']);  
 Route::get('/setting', [HomeApi::class, 'settingIndexApi']);  
+
+Route::get('/chat-fetch', [ChatApi::class, 'ChatApi']);  
 
 Route::post('/register', [AuthController::class, 'registerApi']);
 Route::post('/login', [AuthController::class, 'loginApi']);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\MenuBarController;
 use App\Http\Controllers\Admin\PlaylistManageController;
@@ -73,6 +74,10 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/setting/menu-bar-details/{id}', [MenuBarController::class, 'MenuBarEdit'])->name('menu.bar.edit');
     Route::put('/setting/menu-bar-status/{id}', [MenuBarController::class, 'MenuBarStatus'])->name('menu.bar.status');
     Route::delete('/setting/menu-bar-destroy/{id}', [MenuBarController::class, 'MenuBarDestroy'])->name('menu.bar.destroy');
+
+    
+    Route::get('/chat', [ChatController::class, 'chatindex'])->name('chat.index');
+    Route::put('/chatProcess', [ChatController::class, 'chatProcess'])->name('chat.process');
 
     Route::get('/reels', [VideoReelController::class, 'VideoReelIndex'])->name('reel.index');
     Route::get('/reels-create', [VideoReelController::class, 'VideoReelCreate'])->name('reel.create');
