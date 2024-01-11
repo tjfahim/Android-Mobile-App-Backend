@@ -47,18 +47,18 @@
                                     <div class="row">
                                         <div class="form-group col-md-12">
                                             <div>Choose Type:</div>
-                                            <div class="form-check form-check-inline">
+                                            {{-- <div class="form-check form-check-inline">
                                                 <input class="mt-3 " type="radio" name="content_type" id="homePodcastCategory" value="podcastCategory">
                                                 <label class="ml-2" for="homePodcastCategory">Podcast Category</label>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-check form-check-inline">
                                                 <input class="mt-3 " type="radio" name="content_type" id="homePodcast" value="podcast">
                                                 <label class="ml-2" for="homePodcast">Podcast</label>
                                             </div>
-                                            <div class="form-check form-check-inline">
+                                            {{-- <div class="form-check form-check-inline">
                                                 <input class="mt-3 " type="radio" name="content_type" id="homePlaylist" value="playlist">
                                                 <label class="ml-2" for="homePlaylist">Playlist</label>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-check form-check-inline">
                                                 <input class="mt-3 " type="radio" name="content_type" id="homeMusic" value="music">
                                                 <label class="ml-2" for="homeMusic">Music</label>
@@ -127,7 +127,7 @@
                                         <div class="custom-section ml-3" style="display: none;">
                                             <div class="mt-2">
                                                 <div class="">
-                                                    <label for="customInput">Custom Link</label>
+                                                    <label for="customInput">Music Api Link</label>
                                                     <input type="text" name="custom_input" id="customInput" class="form-control">
                                                 </div>
                                             </div>
@@ -211,57 +211,57 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const homePodcastCategory = document.getElementById('homePodcastCategory');
+        // const homePodcastCategory = document.getElementById('homePodcastCategory');
     const homeMusic = document.getElementById('homeMusic');
     const homePodcast = document.getElementById('homePodcast');
-    const homePlaylist = document.getElementById('homePlaylist');
+    // const homePlaylist = document.getElementById('homePlaylist');
     const homeCustom = document.getElementById('homeCustom'); 
 
     const podcastSection = document.querySelector('.podcast-section');
     const musicSection = document.querySelector('.music-section');
-    const podcastCategorySection = document.querySelector('.podcast-category-section');
-    const playlistSection = document.querySelector('.playlist-section');
+    // const podcastCategorySection = document.querySelector('.podcast-category-section');
+    // const playlistSection = document.querySelector('.playlist-section');
     const customSection = document.querySelector('.custom-section'); 
 
-    homePodcastCategory.addEventListener('change', function () {
-        podcastCategorySection.style.display = this.checked ? 'block' : 'none';
-        podcastSection.style.display = 'none';
-        musicSection.style.display = 'none';
-        playlistSection.style.display = 'none';
-                customSection.style.display = 'none';
+    // homePodcastCategory.addEventListener('change', function () {
+    //     podcastCategorySection.style.display = this.checked ? 'block' : 'none';
+    //     podcastSection.style.display = 'none';
+    //     musicSection.style.display = 'none';
+    //     playlistSection.style.display = 'none';
+    //             customSection.style.display = 'none';
 
-    });
+    // });
 
-    homePlaylist.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
-        podcastSection.style.display = 'none';
-        musicSection.style.display = 'none';
-        playlistSection.style.display = this.checked ? 'block' : 'none';
-                customSection.style.display = 'none';
+    // homePlaylist.addEventListener('change', function () {
+    //     podcastCategorySection.style.display = 'none';
+    //     podcastSection.style.display = 'none';
+    //     musicSection.style.display = 'none';
+    //     playlistSection.style.display = this.checked ? 'block' : 'none';
+    //             customSection.style.display = 'none';
 
-    });
+    // });
 
     homePodcast.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
+        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = this.checked ? 'block' : 'none';
         musicSection.style.display = 'none';
-        playlistSection.style.display = 'none';
+        // playlistSection.style.display = 'none';
                 customSection.style.display = 'none';
 
     });
 
     homeMusic.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
+        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = 'none';
         musicSection.style.display = this.checked ? 'block' : 'none';
-        playlistSection.style.display = 'none';
+        // playlistSection.style.display = 'none';
         customSection.style.display = 'none';
     });
     homeCustom.addEventListener('change', function () {
-            podcastCategorySection.style.display = 'none';
+            // podcastCategorySection.style.display = 'none';
             podcastSection.style.display = 'none';
             musicSection.style.display = 'none';
-            playlistSection.style.display = 'none';
+            // playlistSection.style.display = 'none';
 
             customSection.style.display = this.checked ? 'block' : 'none';
         });

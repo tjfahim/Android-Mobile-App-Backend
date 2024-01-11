@@ -45,18 +45,18 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div>Choose Type:</div>
-                                    <div class="form-check form-check-inline">
+                                    {{-- <div class="form-check form-check-inline">
                                         <input class="mt-3 " type="radio" name="content_type" id="homePodcastCategory" value="podcastCategory">
                                         <label class="ml-2" for="homePodcastCategory">Podcast Category</label>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-check form-check-inline">
                                         <input class="mt-3 " type="radio" name="content_type" id="homePodcast" value="podcast">
                                         <label class="ml-2" for="homePodcast">Podcast</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
+                                    {{-- <div class="form-check form-check-inline">
                                         <input class="mt-3 " type="radio" name="content_type" id="homePlaylist" value="playlist">
                                         <label class="ml-2" for="homePlaylist">Playlist</label>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-check form-check-inline">
                                         <input class="mt-3 " type="radio" name="content_type" id="homeMusic" value="music">
                                         <label class="ml-2" for="homeMusic">Music</label>
@@ -289,58 +289,58 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const homePodcastCategory = document.getElementById('homePodcastCategory');
+        // const homePodcastCategory = document.getElementById('homePodcastCategory');
     const homeMusic = document.getElementById('homeMusic');
     const homePodcast = document.getElementById('homePodcast');
-    const homePlaylist = document.getElementById('homePlaylist');
+    // const homePlaylist = document.getElementById('homePlaylist');
     const homeEvent = document.getElementById('homeEvent');
 
     const podcastSection = document.querySelector('.podcast-section');
     const musicSection = document.querySelector('.music-section');
-    const podcastCategorySection = document.querySelector('.podcast-category-section');
-    const playlistSection = document.querySelector('.playlist-section');
+    // const podcastCategorySection = document.querySelector('.podcast-category-section');
+    // const playlistSection = document.querySelector('.playlist-section');
     const eventSection = document.querySelector('.event-section');
 
-    homePodcastCategory.addEventListener('change', function () {
-        podcastCategorySection.style.display = this.checked ? 'block' : 'none';
-        podcastSection.style.display = 'none';
-        musicSection.style.display = 'none';
-        playlistSection.style.display = 'none';
-                eventSection.style.display = 'none';
+    // homePodcastCategory.addEventListener('change', function () {
+    //     // podcastCategorySection.style.display = this.checked ? 'block' : 'none';
+    //     podcastSection.style.display = 'none';
+    //     musicSection.style.display = 'none';
+    //     // playlistSection.style.display = 'none';
+    //             eventSection.style.display = 'none';
 
-    });
+    // });
 
-    homePlaylist.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
-        podcastSection.style.display = 'none';
-        musicSection.style.display = 'none';
-        playlistSection.style.display = this.checked ? 'block' : 'none';
-                eventSection.style.display = 'none';
+    // homePlaylist.addEventListener('change', function () {
+    //     // podcastCategorySection.style.display = 'none';
+    //     podcastSection.style.display = 'none';
+    //     musicSection.style.display = 'none';
+    //     // playlistSection.style.display = this.checked ? 'block' : 'none';
+    //             eventSection.style.display = 'none';
 
-    });
+    // });
 
     homePodcast.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
+        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = this.checked ? 'block' : 'none';
         musicSection.style.display = 'none';
-        playlistSection.style.display = 'none';
+        // playlistSection.style.display = 'none';
                 eventSection.style.display = 'none';
 
     });
 
     homeMusic.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
+        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = 'none';
         musicSection.style.display = this.checked ? 'block' : 'none';
-        playlistSection.style.display = 'none';
+        // playlistSection.style.display = 'none';
         eventSection.style.display = 'none';
 
     });
     homeEvent.addEventListener('change', function () {
-        podcastCategorySection.style.display = 'none';
+        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = 'none';
         musicSection.style.display = 'none';
-        playlistSection.style.display = 'none';
+        // playlistSection.style.display = 'none';
         eventSection.style.display = this.checked ? 'block' : 'none';
     });
 });
