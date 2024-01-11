@@ -25,10 +25,10 @@ class RadioApi extends Controller
                 'background_color' => '0xff' . ltrim($radio->background_color, '#'),
 
             ];
-            if (!is_null($radio->radio_file)) {
-                $radioData['audio_link'] = asset('radio_file/' . $radio->radio_file);
-            } elseif (!is_null($radio->radio_link)) {
+            if (!is_null($radio->radio_link)) {
                 $radioData['audio_link'] = $radio->radio_link;
+            } elseif (!is_null($radio->radio_file)) {
+                $radioData['audio_link'] = asset('radio_file/' . $radio->radio_file);
             } else {
                 $radioData['audio_link'] = 'There is no radio';
             }
@@ -50,10 +50,10 @@ class RadioApi extends Controller
                         $RadioRecords->background_color = '0xff' . ltrim($RadioRecords->background_color, '#');
 
         
-        if (!is_null($RadioRecords->radio_file)) {
-            $RadioRecords['audio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
-        } elseif (!is_null($RadioRecords->radio_link)) {
+        if (!is_null($RadioRecords->radio_link)) {
             $RadioRecords['audio_link'] = $RadioRecords->radio_link;
+        } elseif (!is_null($RadioRecords->radio_file)) {
+            $RadioRecords['audio_link'] = asset('radio_file/' . $RadioRecords->radio_file);
         } else {
             $RadioRecords['audio_link'] = 'There is no radio';
         }
@@ -84,10 +84,10 @@ class RadioApi extends Controller
                         $itemType = 'PlaylistMusic';
                         $itemSubTitle = $playlist->subtitle;
                         $itemImage_link = asset('image/music/' . $playlist->image);
-                        if(!is_null($playlist->music_file)){
-                            $itemAudio_link = asset('music_file/' . $playlist->music_file);
-                        }elseif(!is_null($playlist->music_file)){
+                        if(!is_null($playlist->music_link)){
                             $itemAudio_link = $playlist->music_link;
+                        }elseif(!is_null($playlist->music_file)){
+                            $itemAudio_link = asset('music_file/' . $playlist->music_file);
                         }else(
                             $itemAudio_link = 'There is no audio'
                         );
@@ -101,10 +101,10 @@ class RadioApi extends Controller
 
                         $itemSubTitle = $podcast->subtitle;
                         $itemImage_link = asset('podcast/image/' . $podcast->image);
-                        if(!is_null($podcast->audio)){
-                            $itemAudio_link = asset('podcast/audio/' . $podcast->audio);
-                        }elseif(!is_null($podcast->audio_file)){
+                        if(!is_null($podcast->audio_file)){
                             $itemAudio_link = $podcast->audio_link;
+                        }elseif(!is_null($podcast->audio)){
+                            $itemAudio_link = asset('podcast/audio/' . $podcast->audio);
                         }else(
                             $itemAudio_link = 'There is no audio'
                         );
