@@ -3,13 +3,28 @@
 @section('main_content')
 <div class="content">
     <div class="container-fluid">
-        <h4 >Radio Manage</h4>
-        <a href="{{ route('radio.create')}}" class="btn btn-primary">Add New Radio Channel</a>
-        @if(session('success'))
-            <div class="alert alert-success mt-2">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="card">
+            <div class="card-header mb-2">
+                <div class="d-flex gap-2 my-3">
+                    <h4 class="card-title">
+                        Radio Manage
+                     </h4>
+                     <a href="{{ route('radio.create')}}" class="btn btn-primary btn-sm ml-4">Add New Radio Channel</a>
+
+                </div>
+                @if(session('error'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success mt-2">
+                        {{ session('success') }}
+                    </div>
+                @endif
+             </div>
+        </div>
+       
         <div class="row">
             @foreach($RadioRecords as $radio)
                 <div class="col-md-4 mt-3">
@@ -20,7 +35,7 @@
                                 padding-right: 18px;">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Manage</a>
+                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Section Manage</a>
                                     <a class="dropdown-item" href="{{ route('radio.edit', ['id' => $radio->id]) }}">Edit</a>
                                   
                                     <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
@@ -58,11 +73,11 @@
                             </p>
                             <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%;height:200px;object-fit: cover;overfollow:hidden; ">
                     
-                            @if($radio->radio_link)
+                            {{-- @if($radio->radio_link)
                                 <a href="{{ $radio->radio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px">Link: {{ $radio->radio_link }}</a>
                             @else
                                 <a href="{{ asset('radio_file/' . $radio->radio_file) }}" class="card-link " style="margin-top:10px;margin-button:10px">Link: {{ asset('radio_file/' . $radio->radio_file) }}</a>
-                            @endif
+                            @endif --}}
                     
                             @if($radio->radio_file)
                                 <audio controls style="width: 100%;">

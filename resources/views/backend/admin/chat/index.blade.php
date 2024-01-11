@@ -9,15 +9,21 @@
                 <div class="card">
                     <div class="card-header">
                             <h4 class="card-title">
-                                Video & Chat 
+                                Video & Chat Url Link
                              </h4>
+                             @if(session('error'))
+                             <div class="alert alert-danger mt-2">
+                                 {{ session('error') }}
+                             </div>
+                         @endif
+                         @if(session('success'))
+                             <div class="alert alert-success mt-2">
+                                 {{ session('success') }}
+                             </div>
+                         @endif
                     </div>
                     <div class="card-body">
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+                      
                         <form method="POST" action="{{ route('chat.process') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

@@ -47,8 +47,8 @@ class RadioDetailsManageController extends Controller
                 $input = $request->all();                
              
                 $radioSection->update($input);
-                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Category Updated successfully.');
-                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Section Added successfully.');
+                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Category Updated Successfully.');
+                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Section Added Successfully.');
 
                
             } else {
@@ -67,7 +67,7 @@ class RadioDetailsManageController extends Controller
                 ];
                         
                 RadioCustomCategory::create($data);
-                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Section Added successfully.');
+                return redirect()->route('radio.section.index', ['radio_id' => $radio_id])->with('success', 'Radio Section Added Successfully.');
             }
 
         }
@@ -125,7 +125,7 @@ class RadioDetailsManageController extends Controller
             'radio_custom_categorie_id' => $radio_custom_categorie_id,
         ];
         RadioCustomCategoryItem::create($data);
-        return redirect()->back()->with('success', 'Added successfully.');
+        return redirect()->back()->with('success', 'Added Successfully.');
     }
     public function radioSectionItemDelete($radioSectionItemId)
     {

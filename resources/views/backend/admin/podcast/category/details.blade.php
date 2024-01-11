@@ -18,11 +18,16 @@
                            
                         </div>
                     </div>
-        @if(session('success'))
-            <div class="alert alert-success mt-2">
-                {{ session('success') }}
-            </div>
-        @endif
+                    @if(session('error'))
+                    <div class="alert alert-danger mt-2">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success mt-2">
+                        {{ session('success') }}
+                    </div>
+                @endif
         <div class="row justify-content-center col-12 my-3">
             <div class="col-md-6 mb-3">
                 <div class="d-flex align-items-center">
@@ -73,11 +78,11 @@
            {{ $podcast->title }}
                 </td>
                 <td style="width: 350px;display:block">
-                    @if($podcast->audio_link)
+                    {{-- @if($podcast->audio_link)
                             <a href="{{ $podcast->audio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px;width:50%">Link: {{ $podcast->audio_link }}</a>
                     @else
                         <a href="{{ asset('podcast/audio/' . $podcast->audio) }}" class="card-link " style="margin-top:10px;margin-button:10px">Link: {{ asset('podcast/audio/' . $podcast->audio) }}</a>
-                    @endif
+                    @endif --}}
                     @if($podcast->audio)
                     <audio controls style="width: 100%;
                     height: 35px;">
@@ -90,9 +95,9 @@
                     </audio>
                 @endif
                 </td>
-                <td>
+                <th>
                     <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" style="width: 50px; height: 50px">
-                </td>
+                </th>
                 <td>
                     <form class="" action="{{ route('podcast.status', ['id' => $podcast->id]) }}" method="POST">
                         @csrf

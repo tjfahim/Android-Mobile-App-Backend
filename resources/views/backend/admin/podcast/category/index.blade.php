@@ -3,13 +3,28 @@
 @section('main_content')
 <div class="content">
     <div class="container-fluid">
-        <h4 >Category Manage</h4>
-        <a href="{{ route('podcastcategory.create')}}" class="btn btn-primary">Add New Category</a>
-        @if(session('success'))
-            <div class="alert alert-success mt-2">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="card">
+            <div class="card-header mb-2">
+                <div class="d-flex gap-2 my-3">
+                    <h4 class="card-title">
+                        Category Manage
+                     </h4>
+                     <a href="{{ route('podcastcategory.create')}}" class="btn btn-primary btn-sm ml-4">Add New Category</a>
+                </div>
+                @if(session('error'))
+                <div class="alert alert-danger mt-2">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success mt-2">
+                        {{ session('success') }}
+                    </div>
+                @endif
+             </div>
+        </div>
+        
+      
         <div class="row">
             @foreach($podcastCatgories as $podcastCatgory)
                 <div class="col-md-4 mt-3">
@@ -21,7 +36,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                    
-                                    <a class="dropdown-item" href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}">Manage</a>
+                                    <a class="dropdown-item" href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}">Podcast Manage</a>
                                     <a class="dropdown-item" href="{{ route('podcastcategory.edit', ['id' => $podcastCatgory->id]) }}">Edit</a>
                                     <form action="{{ route('podcastcategory.destroy', ['id' => $podcastCatgory->id]) }}" method="post">
                                         @csrf

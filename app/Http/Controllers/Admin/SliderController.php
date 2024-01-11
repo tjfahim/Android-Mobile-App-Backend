@@ -64,7 +64,7 @@ class SliderController extends Controller
       
            $slider->update($input);
            
-           return redirect()->route('home.slider.index')->with('success', 'Slider Updated successfully.');
+           return redirect()->route('home.slider.index')->with('success', 'Slider Updated Successfully.');
 
              
           } else {
@@ -107,7 +107,7 @@ class SliderController extends Controller
            }
 
            Slider::create($input);
-           return redirect()->route('home.slider.index')->with('success', 'slider Added successfully.');
+           return redirect()->route('home.slider.index')->with('success', 'slider Added Successfully.');
           }
 
       }

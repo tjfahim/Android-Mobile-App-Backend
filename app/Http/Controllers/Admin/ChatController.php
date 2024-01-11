@@ -30,7 +30,7 @@ class ChatController extends Controller
             $input = $request->all();
             $chat->update($input);
             
-            return redirect()->route('chat.index')->with('success', 'Video & Chat Updated successfully.');
+            return redirect()->route('chat.index')->with('success', 'Video & Chat Updated Successfully.');
            
     }
 }

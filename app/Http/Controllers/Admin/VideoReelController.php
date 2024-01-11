@@ -36,7 +36,7 @@ class VideoReelController extends Controller
         
             $reel->update($input);
             
-            return redirect()->route('reel.index')->with('success', 'Reel Updated successfully.');
+            return redirect()->route('reel.index')->with('success', 'Reel Updated Successfully.');
  
               
            } else {
@@ -52,7 +52,7 @@ class VideoReelController extends Controller
             $input = $request->all();
             $input['favourite'] = '0';
             VideoReel::create($input);
-            return redirect()->route('reel.index')->with('success', 'Reel Added successfully.');
+            return redirect()->route('reel.index')->with('success', 'Reel Added Successfully.');
            }
  
        }

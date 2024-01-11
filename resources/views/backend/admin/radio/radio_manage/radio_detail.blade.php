@@ -6,6 +6,11 @@
         <h4 >Radio Manage</h4>
         <a href="{{ route('radio.section.create', ['radio_id' => $radio_id])}}" class="btn btn-primary">Radio Section Create</a>
         <a href="" class="btn btn-primary">Music Manage</a>
+        @if(session('error'))
+        <div class="alert alert-danger mt-2">
+            {{ session('error') }}
+        </div>
+        @endif
         @if(session('success'))
             <div class="alert alert-success mt-2">
                 {{ session('success') }}

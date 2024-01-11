@@ -68,7 +68,7 @@ class PodcastManageController extends Controller
             
             
                 $podcastCatgory->update($input);
-                return redirect()->route('podcastcategory.index')->with('success', 'Category Updated successfully.');
+                return redirect()->route('podcastcategory.index')->with('success', 'Category Updated Successfully.');
                
             } else {
                 $validator = Validator::make($request->all(), [
@@ -90,7 +90,7 @@ class PodcastManageController extends Controller
                 }
             
                 PodcastCategory::create($input);
-                return redirect()->route('podcastcategory.index')->with('success', 'Category Added successfully.');
+                return redirect()->route('podcastcategory.index')->with('success', 'Category Added Successfully.');
             }
 
         }
@@ -238,7 +238,7 @@ class PodcastManageController extends Controller
             
                 $podcast->update($input);
 
-                return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Updated successfully.');
+                return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Updated Successfully.');
                
             } else {
                 $validator = Validator::make($request->all(), [
@@ -295,7 +295,7 @@ class PodcastManageController extends Controller
                 }
                 
                 Podcast::create($input);
-                return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Added successfully.');
+                return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Added Successfully.');
 
             }
 
@@ -341,7 +341,7 @@ class PodcastManageController extends Controller
     {
         $podcast = podcast::find($id);
         $podcast->delete();
-        return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast deleted successfully.');
+        return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Deleted Successfully.');
 
     }
 }

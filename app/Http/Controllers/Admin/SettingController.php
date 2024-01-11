@@ -22,6 +22,8 @@ class SettingController extends Controller
     
             $validator = Validator::make($request->all(), [
                 'title' => 'nullable|string|max:255',
+                'playstore_share_link' => 'nullable|url',
+                'appstore_share_link' => 'nullable|url',
             ]);
             if ($request->hasFile('logo')) {
                 $validator->addRules([
@@ -31,6 +33,11 @@ class SettingController extends Controller
             if ($request->hasFile('favicon')) {
                 $validator->addRules([
                     'favicon' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                ]);
+            }
+            if ($request->hasFile('app_topber_logo')) {
+                $validator->addRules([
+                    'app_topber_logo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 ]);
             }
          
@@ -70,8 +77,24 @@ class SettingController extends Controller
             
             }
         
+            if ($app_topber_logo = $request->file('app_topber_logo')) {
+                $destinationPath = 'image/setting';
+                $originalFileName = $app_topber_logo->getClientOriginalName(); 
+                $profileapp_topber_logo = date('YmdHis') . "_" . $originalFileName;
+                $app_topber_logo->move($destinationPath, $profileapp_topber_logo);
+                $input['app_topber_logo'] = $profileapp_topber_logo;
+                
+                if ($setting->app_topber_logo) {
+                    $filePath = public_path($destinationPath . $setting->app_topber_logo);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            
+            }
+        
             $setting->update($input);
-            return redirect()->route('settings.index')->with('success', 'Settings Updated successfully.');
+            return redirect()->route('settings.index')->with('success', 'Settings Updated Successfully.');
            
     }
 

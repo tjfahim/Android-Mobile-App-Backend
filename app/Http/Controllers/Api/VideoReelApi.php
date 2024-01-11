@@ -52,7 +52,7 @@ class VideoReelApi extends Controller
         if ($favorite) {
             $favorite->delete();
             $videoReel->decrement('favourite');
-            return response()->json(['message' => 'Video reel unfavorited successfully'], 200);
+            return response()->json(['message' => 'Video reel unfavorited Successfully'], 200);
         } else {
             $favorite = new VideoReelFavorite();
             $favorite->user_id = $user->id;
@@ -61,7 +61,7 @@ class VideoReelApi extends Controller
     
             $videoReel->increment('favourite');
     
-            return response()->json(['message' => 'Video reel favorited successfully'], 200);
+            return response()->json(['message' => 'Video Reel Favorited Successfully'], 200);
         }
     }
     

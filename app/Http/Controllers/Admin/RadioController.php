@@ -103,7 +103,7 @@ class RadioController extends Controller
                 }
             
                 $radio->update($input);
-                return redirect()->route('radio.index')->with('success', 'Radio Updated successfully.');
+                return redirect()->route('radio.index')->with('success', 'Radio Updated Successfully.');
                
             } else {
                 $validator = Validator::make($request->all(), [
@@ -112,10 +112,7 @@ class RadioController extends Controller
                     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                     'radio_file' => 'file|mimes:mp3,wav|max:20480',
                     'radio_link' => 'nullable|url',
-                  
                 ]);
-        
-        
                 $validator->sometimes(['radio_file', 'radio_link'], 'required_without_all:radio_file,radio_link', function ($input) {
                     return !$input->radio_file && !$input->radio_link;
                 });
@@ -142,10 +139,10 @@ class RadioController extends Controller
                 
             
                 Radio::create($input);
-                return redirect()->route('radio.index')->with('success', 'Radio Added successfully.');
+                return redirect()->route('radio.index')->with('success', 'Radio Added Successfully.');
             }
 
-            return redirect()->route('radio.index')->with('success', 'Radio processed successfully.');
+            return redirect()->route('radio.index')->with('success', 'Radio processed Successfully.');
         }
 
 
@@ -184,7 +181,7 @@ class RadioController extends Controller
     {
         $radio = Radio::find($id);
         $radio->delete();
-        return redirect()->route('radio.index')->with('success', 'Radio deleted successfully.');
+        return redirect()->route('radio.index')->with('success', 'Radio deleted Successfully.');
 
     }
 }

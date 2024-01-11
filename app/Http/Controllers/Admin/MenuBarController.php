@@ -52,7 +52,7 @@ class MenuBarController extends Controller
        
             $bar->update($input);
             
-            return redirect()->route('menu_bar.index')->with('success', 'Menu Updated successfully.');
+            return redirect()->route('menu_bar.index')->with('success', 'Menu Updated Successfully.');
  
               
            } else {
@@ -76,7 +76,7 @@ class MenuBarController extends Controller
                 $input['image'] = $profileImage;
             }
             MenuBar::create($input);
-            return redirect()->route('menu_bar.index')->with('success', 'Menu Added successfully.');
+            return redirect()->route('menu_bar.index')->with('success', 'Menu Added Successfully.');
            }
  
        }

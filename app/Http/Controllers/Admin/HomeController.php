@@ -76,7 +76,7 @@ class HomeController extends Controller
        
             $homeSection->update($input);
             
-             return redirect()->route('home.section.index')->with('success', 'Home Section Updated successfully.');
+             return redirect()->route('home.section.index')->with('success', 'Home Section Updated Successfully.');
 
               
            } else {
@@ -100,7 +100,7 @@ class HomeController extends Controller
             }
                        
             HomeSection::create($input);
-            return redirect()->route('home.section.index')->with('success', 'Home Section Added successfully.');
+            return redirect()->route('home.section.index')->with('success', 'Home Section Added Successfully.');
            }
 
        }
@@ -140,7 +140,7 @@ class HomeController extends Controller
            'home_section_id' => $home_section_id,
        ];
        HomeSectionItem::create($data);
-       return redirect()->back()->with('success', 'Added successfully.');
+       return redirect()->back()->with('success', 'Added Successfully.');
    }
 
 
@@ -212,7 +212,7 @@ class HomeController extends Controller
       
            $event->update($input);
            
-            return redirect()->route('home.section.event.index')->with('success', 'Event Updated successfully.');
+            return redirect()->route('home.section.event.index')->with('success', 'Event Updated Successfully.');
 
              
           } else {
@@ -237,7 +237,7 @@ class HomeController extends Controller
            }
                       
            EventHome::create($input);
-           return redirect()->route('home.section.event.index')->with('success', 'Event Added successfully.');
+           return redirect()->route('home.section.event.index')->with('success', 'Event Added Successfully.');
           }
 
       }

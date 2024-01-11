@@ -62,7 +62,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role === 'user' && $user->status === 'active') {
-                return response()->json(['user' => $user, 'message' => 'Login successful'], 200);
+                return response()->json(['user' => $user, 'message' => 'Login Successful'], 200);
             }else{
                 return response()->json(['message' => 'Your Account is Deactivate'], 404);
             }
@@ -71,9 +71,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
-            return response()->json(['message' => 'Incorrect password'], 404);
+            return response()->json(['message' => 'Incorrect Password'], 404);
         } else {
-            return response()->json(['message' => 'Invalid email'], 404);
+            return response()->json(['message' => 'Invalid Email'], 404);
             }
 
     }
@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         Auth::login($user);
         $user = Auth::user();
-        return response()->json(['user' => $user, 'message' => 'User registered successfully'], 200);
+        return response()->json(['user' => $user, 'message' => 'User Registered Successfully'], 200);
 
     }
     public function updateProfile(Request $request,$id)
@@ -124,7 +124,7 @@ class AuthController extends Controller
 
     $user->save();
 
-    return response()->json(['user' => $user, 'message' => 'Profile updated successfully'], 200);
+    return response()->json(['user' => $user, 'message' => 'Profile Updated Successfully'], 200);
 }
 
 
@@ -146,7 +146,7 @@ class AuthController extends Controller
     public function logoutApi(Request $request)
     {
         Auth::logout();
-        return response()->json(['message' => 'User logout successfully'], 200);
+        return response()->json(['message' => 'User logout Successfully'], 200);
     }
 
 
@@ -181,7 +181,7 @@ class AuthController extends Controller
             
             $user->save();
             
-            return redirect()->route('user.index')->with('success', 'User Updated successfully.');
+            return redirect()->route('user.index')->with('success', 'User Updated Successfully.');
  
               
            } else {
@@ -202,7 +202,7 @@ class AuthController extends Controller
             $user->status = $request->input('status');
             $user->save();
 
-            return redirect()->route('user.index')->with('success', 'User Added successfully.');
+            return redirect()->route('user.index')->with('success', 'User Added Successfully.');
            }
  
        }

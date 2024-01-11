@@ -5,6 +5,11 @@
     <div class="container-fluid">
         <h4>Reel Manage</h4>
         <a href="{{ route('reel.create')}}" class="btn btn-primary">Reel Create</a>
+        @if(session('error'))
+        <div class="alert alert-danger mt-2">
+            {{ session('error') }}
+        </div>
+        @endif
         @if(session('success'))
             <div class="alert alert-success mt-2">
                 {{ session('success') }}

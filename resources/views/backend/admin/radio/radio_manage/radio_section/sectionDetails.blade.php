@@ -29,12 +29,12 @@
 
                     <div class="card-body">
                         @if(session('error'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger mt-2">
                                 {{ session('error') }}
                             </div>
                         @endif
                         @if(session('success'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success mt-2">
                                 {{ session('success') }}
                             </div>
                         @endif
@@ -151,11 +151,11 @@
                                         </td>
                                         <td style="width: 30%">
                                                 @if(isset($categoryItem->playlist_music_id))
-                                                    @if($categoryItem->music->music_link)
+                                                    {{-- @if($categoryItem->music->music_link)
                                                        <a href="{{ $categoryItem->music->music_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px">Link: {{ $categoryItem->music->music_link }}</a>
                                                     @else
                                                         <a href="{{ asset('music_file/' . $categoryItem->music->music_file ) }}" class="card-link " style="margin-top:10px;margin-button:10px">Link: {{ asset('music_file/' . $categoryItem->music->music_file ) }}</a>
-                                                    @endif
+                                                    @endif --}}
                                                     @if($categoryItem->music->music_link )
                                                         <audio controls style="width: 100%;
                                                         height: 35px;">
@@ -169,12 +169,12 @@
                                                         </audio>
                                                     @endif
                                                 @else
-                                                    @if($categoryItem->podcast->audio_link)
+                                                    {{-- @if($categoryItem->podcast->audio_link)
                                                       <a href="{{ $categoryItem->podcast->audio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px">Link: {{ $categoryItem->podcast->audio_link }}</a>
 
                                                     @else
                                                         <a href="{{ asset('podcast/audio/' . $categoryItem->podcast->audio_link ) }}" class="card-link " style="margin-top:10px;margin-button:10px">Link: {{ asset('podcast/audio/' . $categoryItem->podcast->audio_link ) }}</a>
-                                                    @endif
+                                                    @endif --}}
                                                     @if($categoryItem->podcast->audio_link )
                                                          <audio controls style="width: 100%;
                                                             height: 35px;">

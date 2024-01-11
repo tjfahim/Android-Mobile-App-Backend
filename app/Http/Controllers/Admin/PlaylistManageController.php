@@ -75,7 +75,7 @@ public function playlistCreate(Request $request)
         'playlist_music_id' => $musicId,
     ]);
 
-    return redirect()->route('playlist.index')->with('success', 'Playlist added successfully.');
+    return redirect()->route('playlist.index')->with('success', 'Playlist Added Successfully.');
 
 }
 
@@ -83,7 +83,7 @@ public function playlistCreate(Request $request)
     {
         $playlist = PlaylistCategoryMusic::find($id);
         $playlist->delete();
-        return redirect()->back()->with('success', 'deleted successfully.');
+        return redirect()->back()->with('success', 'Deleted Successfully.');
 
     }
 
@@ -140,7 +140,7 @@ public function playlistCreate(Request $request)
             
             
                 $playlistCatgory->update($input);
-                return redirect()->route('playlistcategory.index')->with('success', 'Category Updated successfully.');
+                return redirect()->route('playlistcategory.index')->with('success', 'Category Updated Successfully.');
                
             } else {
                 $validator = Validator::make($request->all(), [
@@ -162,7 +162,7 @@ public function playlistCreate(Request $request)
                 }
             
                 PlaylistCategory::create($input);
-                return redirect()->route('playlistcategory.index')->with('success', 'Category Added successfully.');
+                return redirect()->route('playlistcategory.index')->with('success', 'Category Added Successfully.');
             }
 
         }
@@ -318,7 +318,7 @@ public function playlistCreate(Request $request)
                 }
             
                 $music->update($input);
-                return redirect()->route('playlistmusic.index')->with('success', 'Music Updated successfully.');
+                return redirect()->route('playlistmusic.index')->with('success', 'Music Updated Successfully.');
                
             } else {
                 $validator = Validator::make($request->all(), [
@@ -366,7 +366,7 @@ public function playlistCreate(Request $request)
                 }
                 
                 PlaylistMusic::create($input);
-                return redirect()->route('playlistmusic.index')->with('success', 'Music Added successfully.');
+                return redirect()->route('playlistmusic.index')->with('success', 'Music Added Successfully.');
             }
 
         }
@@ -417,7 +417,7 @@ public function playlistCreate(Request $request)
     {
         $playlistMusic = PlaylistMusic::find($id);
         $playlistMusic->delete();
-        return redirect()->route('playlistmusic.index')->with('success', 'Music deleted successfully.');
+        return redirect()->route('playlistmusic.index')->with('success', 'Music deleted Successfully.');
 
     }
 }
