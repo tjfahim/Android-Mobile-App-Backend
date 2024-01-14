@@ -7,8 +7,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                  
-
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">
                             {{ isset($radio) && $radio->id ? 'Radio Edit' : 'Radio Create' }}
@@ -19,9 +17,8 @@
                                 <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this radio record?')">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this Radio record?')">Delete</button>
                                 </form>
-                            
                           @endif
                         </div>
                     </div>
@@ -88,7 +85,6 @@
                                 </div>
                             </div> --}}
                             <div class="row">
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Image</label>
@@ -99,6 +95,39 @@
                                             <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
                                         @endif
                                         @error('image')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Now Listening</label>
+                                        <input type="number" class="form-control" placeholder="" value="{{ isset($radio) ? $radio->connected_user : old('connected_user') }}" name="connected_user">
+                                        @error('connected_user')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Total Android Users</label>
+                                        <input type="number" class="form-control" value="{{ isset($radio) ? $radio->android_listener : old('android_listener') }}" name="android_listener">
+                                        @error('android_listener')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Total Apple Users</label>
+                                        <input type="number" class="form-control"value="{{ isset($radio) ? $radio->ios_listener : old('ios_listener') }}" name="ios_listener">
+                                        @error('ios_listener')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -119,14 +148,11 @@
                                         <select name="status" id="">
                                             <option value="active" {{ isset($radio) && $radio->status === 'active' ? 'selected' : '' }}>Active</option>
                                             <option value="inactive" {{ isset($radio) && $radio->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
-
-                                          
                                         </select>
                                     </div>
                                  </div>
                                 
                             </div>
-
                             
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($radio) && $radio->id ? 'Update' : 'Add Radio' }}
