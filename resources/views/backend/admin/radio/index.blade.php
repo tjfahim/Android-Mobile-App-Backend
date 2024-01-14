@@ -35,7 +35,6 @@
                                 padding-right: 18px;">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('radio.section.index', ['radio_id' => $radio->id]) }}">Section Manage</a>
                                     <a class="dropdown-item" href="{{ route('radio.edit', ['id' => $radio->id]) }}">Edit</a>
                                   
                                     <form action="{{ route('radio.destroy', ['id' => $radio->id]) }}" method="post">
@@ -67,10 +66,7 @@
                                     @endif
                                 </form>
                             </div>
-                            <p class="card-text">{{ $radio->subtitle }}</p>
-                            <p class="card-text">
-                                
-                            </p>
+                            
                             <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" style="width: 100%;height:200px;object-fit: cover;overfollow:hidden; ">
                     
                             {{-- @if($radio->radio_link)

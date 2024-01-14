@@ -55,9 +55,6 @@ class RadioController extends Controller
                     return Redirect::back()->withInput()->withErrors($validator);
                 }
                 
-              
-
-                
                 // if ($request->has('radio_file') && $request->has('radio_link')) {
                 //     $validator->errors()->add('radio_file', 'Only one of Link or radio File should be set');
                 //     return Redirect::back()->withInput()->withErrors($validator);
@@ -71,7 +68,6 @@ class RadioController extends Controller
                 //     return Redirect::back()->withInput()->withErrors($validator);
                 // }
         
-            
         
                 $input = $request->all();
                 if ($image = $request->file('image')) {
@@ -87,7 +83,6 @@ class RadioController extends Controller
                             unlink($filePath);
                         }
                     }
-                 
                 }
             
                 if ($radio_file = $request->file('radio_file')) {
@@ -98,7 +93,10 @@ class RadioController extends Controller
                     $input['radio_file'] = $radio_fileFileName;
                     
                     if ($radio->radio_file) {
-                        unlink(public_path($destinationPath . $radio->radio_file));
+                        $filePath = public_path($destinationPath . $radio->radio_file);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
                 }
             
@@ -137,15 +135,12 @@ class RadioController extends Controller
                     $input['radio_file'] = $radio_fileFileName;
                 }
                 
-            
                 Radio::create($input);
                 return redirect()->route('radio.index')->with('success', 'Radio Added Successfully.');
             }
 
             return redirect()->route('radio.index')->with('success', 'Radio processed Successfully.');
         }
-
-
 
 
     /**
@@ -166,7 +161,8 @@ class RadioController extends Controller
     
         $radioStatus->status = $request->status;
         $radioStatus->save();
-        return redirect()->back();
+        return redirect()->route('radio.index')->with('success', 'Status Change Successfully.');
+
     }
 
     /**
@@ -180,6 +176,22 @@ class RadioController extends Controller
     public function destroy($id)
     {
         $radio = Radio::find($id);
+
+        if ($radio->radio_file) {
+            $destinationPath = 'radio_file/';
+            $filePath = public_path($destinationPath . $radio->radio_file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        if ($radio->image) {
+            $destinationPath = 'image/radio/';
+            $filePath = public_path($destinationPath . $radio->image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
         $radio->delete();
         return redirect()->route('radio.index')->with('success', 'Radio deleted Successfully.');
 

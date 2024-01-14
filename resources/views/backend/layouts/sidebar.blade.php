@@ -42,11 +42,11 @@
                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                     <a class="nav-link" href="{{ route('live_tv.index') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>List</p>
+                        <p>Live TV List</p>
                     </a>
                     <a class="nav-link" href="{{ route('live_tv.create') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>Add New</p>
+                        <p>Add New Live TV</p>
                     </a>
                 </div>
             </li>
@@ -59,11 +59,28 @@
                 <div class="collapse multi-collapse" id="multiCollapseVideo">
                     <a class="nav-link" href="{{ route('video.index') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>List</p>
+                        <p>Video List</p>
                     </a>
                     <a class="nav-link" href="{{ route('video.create') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>Add New</p>
+                        <p>Add New Video</p>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#multiCollapseRadio" role="button" aria-expanded="false" aria-controls="multiCollapseRadio">
+                    <i class="nc-icon nc-alien-33"></i>
+                   <p>Radio Manage</p>
+                </a>
+
+                <div class="collapse multi-collapse" id="multiCollapseRadio">
+                    <a class="nav-link" href="{{ route('radio.index') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Radio List</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('radio.create') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Add New Radio</p>
                     </a>
                 </div>
             </li>
@@ -80,12 +97,6 @@
                 </a>
             </li>
             
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/radio') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('radio.index') }}">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>Radio Manage</p>
-                </a>
-            </li>
             
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/live-tv') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('live_tv.index') }}">
