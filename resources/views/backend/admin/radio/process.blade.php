@@ -104,7 +104,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Now Listening</label>
-                                        <input type="number" class="form-control" placeholder="" value="{{ isset($radio) ? $radio->connected_user : old('connected_user') }}" name="connected_user">
+                                        <input type="number" class="form-control" placeholder="" value="{{ isset($radio) ? $radio->connected_user : old('connected_user') ?? 0 }}" name="connected_user">
                                         @error('connected_user')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -115,7 +115,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Total Android Users</label>
-                                        <input type="number" class="form-control" value="{{ isset($radio) ? $radio->android_listener : old('android_listener') }}" name="android_listener">
+                                        <input type="number" class="form-control" value="{{ isset($radio) ? $radio->android_listener : old('android_listener') ?? 0 }}" name="android_listener">
                                         @error('android_listener')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -126,7 +126,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Total Apple Users</label>
-                                        <input type="number" class="form-control"value="{{ isset($radio) ? $radio->ios_listener : old('ios_listener') }}" name="ios_listener">
+                                        <input type="number" class="form-control"value="{{ isset($radio) ? $radio->ios_listener : old('ios_listener') ?? 0 }}" name="ios_listener">
                                         @error('ios_listener')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror

@@ -155,6 +155,40 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label>Now Listening</label>
+                                        <input type="number" class="form-control" placeholder="" value="{{ isset($podcast) ? $podcast->connected_user : old('connected_user') ?? 0 }}" name="connected_user">
+                                        @error('connected_user')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Total Android Users</label>
+                                        <input type="number" class="form-control" value="{{ isset($podcast) ? $podcast->android_listener : old('android_listener') ?? 0 }}"
+                                         name="android_listener">
+                                        @error('android_listener')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Total Apple Users</label>
+                                        <input type="number" class="form-control"value="{{ isset($podcast) ? $podcast->ios_listener : old('ios_listener') ?? 0 }}" name="ios_listener">
+                                        @error('ios_listener')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" id="">
                                             <option value="active" {{ isset($podcast) && $podcast->status === 'active' ? 'selected' : '' }}>Active</option>

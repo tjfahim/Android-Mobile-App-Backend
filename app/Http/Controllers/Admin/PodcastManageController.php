@@ -142,6 +142,14 @@ class PodcastManageController extends Controller
     public function podcastCatgorydestroy($id)
     {
         $podcastCatgory = PodcastCategory::find($id);
+        $destinationPath = 'podcast/image';
+       
+        if ($podcastCatgory->image) {
+            $filePath = public_path($destinationPath . $podcastCatgory->image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
         $podcastCatgory->delete();
         return redirect()->route('podcastcategory.index')->with('success', 'podcast Category Deleted Successfully.');
     }
@@ -183,12 +191,7 @@ class PodcastManageController extends Controller
                         'audio' => 'file|mimes:mp3,wav|max:20480',
                     ]);
                 }
-                if ($request->hasFile('video')) {
-                    $validator->addRules([
-                        'video' => 'file|mimes:mp4,avi,mov',
-                    ]);
-                }
-            
+                
                 if ($validator->fails()) {
                     return Redirect::back()->withInput()->withErrors($validator);
                 }
@@ -218,20 +221,14 @@ class PodcastManageController extends Controller
                     $input['audio'] = $audioFileName;
                     
                     if ($podcast->audio) {
-                        unlink(public_path($destinationPath . $podcast->audio));
+                        $filePath = public_path($destinationPath . $podcast->audio);
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                     }
-                }
-                if ($video = $request->file('video')) {
-                    $destinationPath = 'podcast/video/';
-                    $originalFileName = $video->getClientOriginalName(); 
-                    $videoFileName = date('YmdHis') . "_" . $originalFileName; 
-                    $video->move($destinationPath, $videoFileName);
-                    $input['video'] = $videoFileName;
                     
-                    if ($podcast->video) {
-                        unlink(public_path($destinationPath . $podcast->video));
-                    }
                 }
+             
                 $input['podcast_category_id'] = $request->podcast_category_id;
                 $input['status'] = $request->status;
 
@@ -251,26 +248,12 @@ class PodcastManageController extends Controller
                     'audio_link' => 'nullable|url',
                   
                 ]);
-        
-        
-                $validator->sometimes(['audio', 'audio_link'], 'required_without_all:audio,audio_link', 
-                
-                function ($input) {
-                    return !$input->audio && !$input->audio_link;
-                });
 
-                $validator->sometimes(['video', 'video_link'], 'required_without_all:video,video_link', 
-                
-                function ($input) {
-                    return !$input->video && !$input->video_link;
-                });
-          
                 if ($validator->fails()) {
                     return Redirect::back()->withInput()->withErrors($validator);
                 }
                 
                 $input = $request->all();
-           
                 if ($image = $request->file('image')) {
                     $destinationPath = 'podcast/image/';
                     $originalFileName = $image->getClientOriginalName(); 
@@ -279,6 +262,7 @@ class PodcastManageController extends Controller
                     $input['image'] = $profileImage;
                 }
                 $input['podcast_category_id'] = $request->podcast_category_id;
+
                 if ($audio = $request->file('audio')) {
                     $destinationPath = 'podcast/audio/';
                     $originalFileName = $audio->getClientOriginalName(); 
@@ -286,14 +270,7 @@ class PodcastManageController extends Controller
                     $audio->move($destinationPath, $audioFileName);
                     $input['audio'] = $audioFileName;
                 }
-                if ($video = $request->file('video')) {
-                    $destinationPath = 'podcast/video/';
-                    $originalFileName = $video->getClientOriginalName(); 
-                    $videoFileName = date('YmdHis') . "_" . $originalFileName; 
-                    $video->move($destinationPath, $videoFileName);
-                    $input['video'] = $videoFileName;
-                }
-                
+                              
                 Podcast::create($input);
                 return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Added Successfully.');
 
@@ -306,13 +283,9 @@ class PodcastManageController extends Controller
         
                 $podcast->status = $request->status;
                 $podcast->save();
-                return redirect()->back();
-      
-
+                return redirect()->back()->with('success', 'Status Change Successfully.');
+              
         }
-
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -340,6 +313,24 @@ class PodcastManageController extends Controller
     public function podcastDestroy(Request $request,$id)
     {
         $podcast = podcast::find($id);
+        if ($podcast->image) {
+            $destinationPath = 'podcast/image/';
+
+            $filePath = public_path($destinationPath . $podcast->image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        if ($podcast->audio) {
+            $destinationPath = 'podcast/audio/';
+
+            $filePath = public_path($destinationPath . $podcast->audio);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        
         $podcast->delete();
         return redirect()->route('podcastcategory.details', ['id' => $request->podcast_category_id])->with('success', 'Podcast Deleted Successfully.');
 

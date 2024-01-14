@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\EventHome;
+use App\Models\Event;
 use App\Models\HomeSection;
 use App\Models\HomeSectionItem;
-use App\Models\PlaylistCategory;
-use App\Models\PlaylistMusic;
 use App\Models\Podcast;
-use App\Models\PodcastCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -26,13 +23,10 @@ class HomeController extends Controller
        $homeSection = HomeSection::find($id);
        $home_section_id=$homeSection->id;
        $podcasts = Podcast::where('status','active')->get();
-       $musics = PlaylistMusic::where('status','active')->get();
-       $playlist_catgory = PlaylistCategory::where('status','active')->get();
-       $podcast_catgory = PodcastCategory::where('status','active')->get();
-       $events = EventHome::where('status','active')->get();
+    
        $sectionItems = HomeSectionItem::where('home_section_id',$homeSection->id)->get();
 
-       return view('backend.admin.home.sectionDetails', compact('homeSection','musics','podcasts','sectionItems','home_section_id','playlist_catgory','podcast_catgory','events'));
+       return view('backend.admin.home.sectionDetails', compact('homeSection','podcasts','sectionItems','home_section_id'));
 
    }
     public function homeSectionCreate()
@@ -117,10 +111,9 @@ class HomeController extends Controller
    {
        $validator = Validator::make($request->all(), [
            'podcast_id' => 'nullable|numeric',
-           'podcast_categorie_id' => 'nullable|numeric',
-           'playlist_categorie_id' => 'nullable|numeric',
-           'playlist_music_id' => 'nullable|numeric',
            'event_id' => 'nullable|numeric',
+           'radio_id' => 'nullable|numeric',
+           'video_id' => 'nullable|numeric',
        ]);
    
        if ($validator->fails()) {
@@ -128,15 +121,14 @@ class HomeController extends Controller
                ->back()
                ->withInput()
                ->withErrors($validator)
-               ->with('error', 'Please select either Podcast or Music.');
+               ->with('error', 'Please select Only One');
        }
  
        $data = [
            'podcast_id' => $request->podcast_id,
-           'playlist_music_id' => $request->playlist_music_id,
-           'playlist_categorie_id' => $request->playlist_categorie_id,
-           'podcast_categorie_id' => $request->podcast_categorie_id,
            'event_id' => $request->event_id,
+           'radio_id' => $request->radio_id,
+           'video_id' => $request->video_id,
            'home_section_id' => $home_section_id,
        ];
        HomeSectionItem::create($data);
@@ -171,7 +163,7 @@ class HomeController extends Controller
 
    public function homeSectionEventIndex()
    {
-       $events = EventHome::orderBy('created_at', 'desc')->paginate(12);
+       $events = Event::orderBy('created_at', 'desc')->paginate(12);
        return view('backend.admin.home.event.section', ['events' => $events]);
    }
    public function homeSectionEventCreate()
@@ -181,7 +173,7 @@ class HomeController extends Controller
    public function homeSectionEventProcess(Request $request, $id = null)
       {
           if ($id) {
-           $event = EventHome::find($id);
+           $event = Event::find($id);
            $validator = Validator::make($request->all(), [
                'title' => 'required|string|max:255',
                'event_link' => 'required|url',
@@ -236,7 +228,7 @@ class HomeController extends Controller
                $input['image'] = $profileImage;
            }
                       
-           EventHome::create($input);
+           Event::create($input);
            return redirect()->route('home.section.event.index')->with('success', 'Event Added Successfully.');
           }
 
@@ -245,13 +237,13 @@ class HomeController extends Controller
 
   public function homeSectionEventEdit($id)
   {
-      $event = EventHome::find($id);
+      $event = Event::find($id);
       return view('backend.admin.home.event.sectionProcess', ['event' => $event]);
   }
   
   public function homeeventStatus(Request $request,$id)
   {
-      $event = EventHome::find($id);
+      $event = Event::find($id);
       $event->status = $request->status;
         $event->save();
         return redirect()->back();
@@ -259,7 +251,7 @@ class HomeController extends Controller
   
    public function homeSectionEventdestroy($id)
    {
-       $event = EventHome::find($id);
+       $event = Event::find($id);
        $event->delete();
        return redirect()->back()->with('success', 'Event Deleted Successfully.');
    }

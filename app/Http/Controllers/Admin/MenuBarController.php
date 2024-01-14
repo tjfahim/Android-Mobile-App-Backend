@@ -94,12 +94,20 @@ class MenuBarController extends Controller
        $bar = MenuBar::find($id);
        $bar->status = $request->status;
          $bar->save();
-         return redirect()->back();
-   }
+         return redirect()->back()->with('success', 'Status Change Successfully.');
+        }
    
     public function MenuBarDestroy($id)
     {
         $bar = MenuBar::find($id);
+        $destinationPath = 'image/menu_bar/';
+      
+        if ($bar->image) {
+            $filePath = public_path($destinationPath . $bar->image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
         $bar->delete();
         return redirect()->back()->with('success', 'Menu Deleted Successfully.');
     }

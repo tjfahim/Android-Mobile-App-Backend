@@ -44,6 +44,7 @@
                 <th scope="col">Podcast Title</th>
                 <th scope="col">Audio</th>
                 <th scope="col">Image</th>
+                <th scope="col">Total Users</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -53,15 +54,15 @@
                     <td>
                     <!-- Edit option -->
                     <div class="d-flex gap-2">
-                        <form class="" action="{{ route('podcast.edit', ['id' => $podcast->id]) }}">
+                        <form class="mr-1" action="{{ route('podcast.edit', ['id' => $podcast->id]) }}">
                             <input type="hidden" name="podcast_category_id" value="{{$podcastcategory->id}}">
                             <button type="submit" class="btn btn-sm btn-primary mb-2" data-toggle="tooltip" data-placement="top" title="Edit">
                                 <i class="fa fa-edit"></i>
                             </button>
                         </form>
-                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details', ['id' => $podcast->id]) }}" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-info-circle	
+                        {{-- <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details', ['id' => $podcast->id]) }}" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-info-circle	
                             "></i>
-                        </a>
+                        </a> --}}
                         <!-- Delete option -->
                         <form class="" action="{{ route('podcast.destroy', ['id' => $podcast->id]) }}" method="post">
                             @csrf
@@ -77,27 +78,35 @@
                 <td>
            {{ $podcast->title }}
                 </td>
-                <td style="width: 350px;display:block">
-                    {{-- @if($podcast->audio_link)
-                            <a href="{{ $podcast->audio_link }}" class="card-link my-3" style="margin-top:10px;margin-button:10px;width:50%">Link: {{ $podcast->audio_link }}</a>
-                    @else
-                        <a href="{{ asset('podcast/audio/' . $podcast->audio) }}" class="card-link " style="margin-top:10px;margin-button:10px">Link: {{ asset('podcast/audio/' . $podcast->audio) }}</a>
-                    @endif --}}
-                    @if($podcast->audio)
+                <td style="width: 300px;display:block">
+                 @if($podcast->audio_link)
+                    <audio controls style="width: 100%;
+                    height: 35px;">
+                        <source src="{{ $podcast->audio_link }}" type="audio/mpeg">
+                    </audio>
+                @elseif($podcast->audio)
                     <audio controls style="width: 100%;
                     height: 35px;">
                         <source src="{{ asset('podcast/audio/' . $podcast->audio) }}" type="audio/mpeg">
                     </audio>
                 @else
-                    <audio controls style="width: 100%;
-                    height: 35px;">
-                        <source src="{{ $podcast->audio_link }}" type="audio/mpeg">
-                    </audio>
+                  <div class="text-danger">No audio</div>
                 @endif
                 </td>
                 <th>
                     <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" style="width: 50px; height: 50px">
                 </th>
+                <td>
+                    <div style="display: inline;margin-top:30px">
+                        <span><i class="fa fa-users" aria-hidden="true"></i> {{ $podcast->connected_user }}</span>
+                        <div  style="display: inline; float:right">
+                            <p style="display: inline;"><i class="fa fa-android" aria-hidden="true"></i>{{ $podcast->android_listener }}</p>
+                            <p style="display: inline;"><i class="fa fa-apple" aria-hidden="true"></i>
+                                {{ $podcast->ios_listener }}</p>
+                        </div>
+                    </div>
+                </td>
+              
                 <td>
                     <form class="" action="{{ route('podcast.status', ['id' => $podcast->id]) }}" method="POST">
                         @csrf

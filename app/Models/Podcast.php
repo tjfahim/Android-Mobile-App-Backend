@@ -15,13 +15,3 @@ class Podcast extends Model
         return $this->belongsTo(PodcastCategory::class, 'podcast_category_id');
     }
 }
-$table->unsignedBigInteger('podcast_category_id');
-$table->string('title');
-$table->string('subtitle')->nullable();
-$table->string('audio')->nullable();
-$table->string('audio_link')->nullable();
-$table->string('image')->nullable();
-$table->integer('android_listener')->default(0);
-$table->integer('ios_listener')->default(0);
-$table->integer('connected_user')->default(0);
-$table->string('status')->default('active');
