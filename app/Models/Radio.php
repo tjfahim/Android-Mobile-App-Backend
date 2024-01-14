@@ -9,6 +9,6 @@ class Radio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'subtitle', 'image', 'radio_file', 'radio_link', 'status','background_color','android_listener','ios_listener'];
+    protected $fillable = ['title', 'subtitle', 'image', 'radio_file', 'radio_link', 'status','background_color','connected_user','ios_listener','android_listener'];
 
 }

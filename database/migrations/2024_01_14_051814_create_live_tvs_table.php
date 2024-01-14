@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('radio_custom_categories', function (Blueprint $table) {
+        Schema::create('live_tvs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->unsignedBigInteger('radio_id')->nullable();
-
+            $table->string('title')->nullable();
+            $table->text('chat_code_link')->nullable();
+            $table->text('embed_code_link')->nullable();
             $table->string('image')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
-            $table->foreign('radio_id')->references('id')->on('radios')->onDelete('set null');
-
-
-            // Define foreign key constraints
-           
         });
     }
 
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('radio_custom_categories');
+        Schema::dropIfExists('live_tvs');
     }
 };

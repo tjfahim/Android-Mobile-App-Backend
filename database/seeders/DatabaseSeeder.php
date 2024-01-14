@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('user2@user2.com'),
             'role' => 'user2',
         ]);
+    
     }
     
 }

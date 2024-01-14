@@ -20,12 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password', 'status'
+        'user_type',
+        'password', 'status','role'
     ];
-    public function videoReelFavorites()
-    {
-        return $this->hasMany(VideoReelFavorite::class);
-    }
+   
     /**
      * The attributes that should be hidden for serialization.
      *

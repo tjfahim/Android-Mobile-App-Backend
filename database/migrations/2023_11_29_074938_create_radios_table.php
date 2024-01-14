@@ -17,11 +17,10 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->string('image')->nullable();
             $table->string('radio_file')->nullable();
-            $table->string('radio_link')->nullable();
+            $table->text('radio_link')->nullable();
             $table->integer('android_listener')->default(0);
             $table->integer('ios_listener')->default(0);
-            $table->string('background_color')->nullable();
-
+            $table->integer('connected_user')->default(0);
             $table->string('status')->default('active');
             $table->timestamps();
         });

@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('playlist_music', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('event_category_id');
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->string('artist')->nullable();
-            $table->string('music_file')->nullable();
-            $table->string('music_link')->nullable();
+            $table->text('event_link')->nullable();
             $table->string('image')->nullable();
-            $table->string('feature_image')->nullable();
             $table->string('status')->default('active');
-
             $table->timestamps();
+            $table->foreign('event_category_id')->references('id')->on('event_categories')->onDelete('cascade');
+
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('playlist_music');
+        Schema::dropIfExists('events');
     }
 };

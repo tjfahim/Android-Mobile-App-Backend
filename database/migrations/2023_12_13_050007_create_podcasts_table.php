@@ -16,13 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('podcast_category_id');
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->string('video')->nullable();
-            $table->string('video_link')->nullable();
             $table->string('audio')->nullable();
-            $table->string('audio_link')->nullable();
+            $table->text('audio_link')->nullable();
             $table->string('image')->nullable();
-            $table->string('background_color')->nullable();
+            $table->integer('android_listener')->default(0);
+            $table->integer('ios_listener')->default(0);
+            $table->integer('connected_user')->default(0);
             $table->string('status')->default('active');
+
             $table->timestamps();
 
             $table->foreign('podcast_category_id')->references('id')->on('podcast_categories')->onDelete('cascade');
