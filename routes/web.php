@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RadioController;
 use App\Http\Controllers\Admin\RadioDetailsManageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\VideoReelController;
 use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
@@ -82,6 +83,13 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/live-tv-details/{id}', [LiveTvController::class, 'LiveTvEdit'])->name('live_tv.edit');
     Route::put('/live-tv-status/{id}', [LiveTvController::class, 'LiveTvStatus'])->name('live_tv.status');
     Route::delete('/live-tv-destroy/{id}', [LiveTvController::class, 'LiveTvDestroy'])->name('live_tv.destroy');
+
+    Route::get('/video', [VideoController::class, 'VideoIndex'])->name('video.index');
+    Route::get('/video-create', [VideoController::class, 'VideoCreate'])->name('video.create');
+    Route::match(['post', 'put'], '/video-process/{id?}', [VideoController::class, 'VideoProcess'])->name('video.process');
+    Route::get('/video-details/{id}', [VideoController::class, 'VideoEdit'])->name('video.edit');
+    Route::put('/video-status/{id}', [VideoController::class, 'VideoStatus'])->name('video.status');
+    Route::delete('/video-destroy/{id}', [VideoController::class, 'VideoDestroy'])->name('video.destroy');
 
     
     Route::get('/chat', [ChatController::class, 'chatindex'])->name('chat.index');

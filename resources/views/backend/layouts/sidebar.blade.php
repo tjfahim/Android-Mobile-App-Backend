@@ -42,11 +42,28 @@
                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                     <a class="nav-link" href="{{ route('live_tv.index') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>Live TV Manage</p>
+                        <p>List</p>
                     </a>
                     <a class="nav-link" href="{{ route('live_tv.create') }}">
                         <i class="nc-icon nc-paper-2"></i>
-                        <p>Live TV Create</p>
+                        <p>Add New</p>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#multiCollapseVideo" role="button" aria-expanded="false" aria-controls="multiCollapseVideo">
+                    <i class="nc-icon nc-alien-33"></i>
+                   <p>Video Manage</p>
+                </a>
+
+                <div class="collapse multi-collapse" id="multiCollapseVideo">
+                    <a class="nav-link" href="{{ route('video.index') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>List</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('video.create') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Add New</p>
                     </a>
                 </div>
             </li>

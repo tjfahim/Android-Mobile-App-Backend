@@ -9,9 +9,9 @@
              
                 <div class="d-flex gap-2 my-3">
                     <h4 class="card-title">
-                        Live TV Manage
+                       Video Manage
                      </h4>
-                     <a href="{{ route('live_tv.create') }}" class="btn btn-primary btn-sm ml-4 ">Live TV Create </a>
+                     <a href="{{ route('video.create') }}" class="btn btn-primary btn-sm ml-4 ">Video Create </a>
                     
                 </div>
                 @if(session('error'))
@@ -30,7 +30,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-    
                         <div class="row justify-content-center col-12 my-3">
                             <div class="col-md-6 mb-3">
                                 <div class="d-flex align-items-center">
@@ -45,56 +44,61 @@
                                 <th scope="col">Action</th>
                                 <th scope="col">id</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Embed Link</th>
-                                <th scope="col">Chat Link</th>
+                                <th scope="col">Video Link</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Status</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($live_tvs as $live_tv)
-                                <tr id="bar_{{ $live_tv->id }}">
+                                @foreach($videos as $video)
+                                <tr id="bar_{{ $video->id }}">
                                     <td style="width:20%">
     
     
                                     <div class="d-flex gap-2">
-                                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('live_tv.edit', ['id' => $live_tv->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
+                                        <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('video.edit', ['id' => $video->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
                                             "></i>
                                         </a>
-                                        <form class="" action="{{ route('live_tv.destroy', ['id' => $live_tv->id]) }}" method="post">
+                                        <form class="" action="{{ route('video.destroy', ['id' => $video->id]) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Live Tv Bar Item record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Video Record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
                                         </form>
                                     </div>
                                 </td>
-                                <th scope="row"> {{ $live_tv->id }}</th>
+                                <th scope="row"> {{ $video->id }}</th>
                                 <td>
-                                    {{ $live_tv->title }}
+                                    {{ $video->title }}
                                 </td>
                                 <td>
-                                    {{ $live_tv->embed_code_link }}
+                                     @if(isset($video) ? $video->video_link : old('video_link') )
+                                     <video width="300" height="150" controls>
+                                         <source src="{{ isset($video) ? $video->video_link : old('video_link') }}" type="video/mp4">
+                                         Your browser does not support the video.
+                                     </video>
+                                     @endif
                                 </td>
                                 <td>
-                                    {{ $live_tv->chat_code_link }}
+                                    {{ $video->details }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('image/live_tv/' . $live_tv->image) }}" alt="{{ $live_tv->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
+                                    <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
                                 </td>
                                 <td>
-                                    <form class="" action="{{ route('live_tv.status', ['id' => $live_tv->id]) }}" method="POST">
+                                    <form class="" action="{{ route('video.status', ['id' => $video->id]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                        @if($live_tv->status =='active')
+                                        @if($video->status =='active')
                                             <input type="hidden" value="inactive" name="status">
                                             <button type="submit" class="badge badge-success" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                                {{$live_tv->status}}
+                                                {{$video->status}}
                                             </button>
                                         @endif
-                                        @if($live_tv->status =='inactive')
+                                        @if($video->status =='inactive')
                                             <input type="hidden" value="active" name="status">
                                             <button type="submit" class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="Change Status">
-                                                {{$live_tv->status}}
+                                                {{$video->status}}
                                             </button>
                                         @endif
                                     </form>
@@ -107,7 +111,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $live_tvs->links('pagination::bootstrap-4') }}
+                        {{ $videos->links('pagination::bootstrap-4') }}
     
                     </div>
                 </div>
