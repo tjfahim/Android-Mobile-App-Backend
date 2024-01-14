@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventCategory extends Model
+class Banner extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','image', 'status'];
+    protected $fillable = ['banner_category_id', 'title', 'subtitle','banner_link', 'image', 'status'];
 
 }

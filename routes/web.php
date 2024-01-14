@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LiveTvController;
 use App\Http\Controllers\Admin\MenuBarController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\Api\PlaylistApi;
 use App\Http\Controllers\Api\PodcastApi;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Models\EventCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,13 +55,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
 
     Route::delete('/home/section-item-destroy/{id}', [HomeController::class, 'homeSectionItemDelete'])->name('home.section.item.destroy');
 
-    Route::get('/home/section-event', [HomeController::class, 'homeSectionEventIndex'])->name('home.section.event.index');
-    Route::get('/home/section-event-create', [HomeController::class, 'homeSectionEventCreate'])->name('home.section.event.create');
-    Route::match(['post', 'put'], '/home/section-event-process/{id?}', [HomeController::class, 'homeSectionEventProcess'])->name('home.section.event.process');
-    Route::get('/home/section-event-details/{id}', [HomeController::class, 'homeSectionEventEdit'])->name('home.section.event.edit');
-    Route::put('/home/event-status/{id}', [HomeController::class, 'homeeventStatus'])->name('event.status');
-
-    Route::delete('/home/section-event-destroy/{id}', [HomeController::class, 'homeSectionEventDestroy'])->name('home.section.event.destroy');
 
     Route::get('/home/slider', [SliderController::class, 'homeSliderIndex'])->name('home.slider.index');
     Route::get('/home/slider-create', [SliderController::class, 'homeSliderCreate'])->name('home.slider.create');
@@ -155,11 +151,9 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/podcast-category-create', [PodcastManageController::class, 'podcastCatgoryCreate'])->name('podcastcategory.create');
     Route::get('/podcast-category-details/{id}', [PodcastManageController::class, 'podcastCatgorydetails'])->name('podcastcategory.details');
     Route::get('/podcast-category-edit/{id}', [PodcastManageController::class, 'podcastCatgoryEdit'])->name('podcastcategory.edit');
-    Route::get('/podcast-category-edit-status/{id}', [PodcastManageController::class, 'podcastCatgoryEditStatus'])->name('podcastcategory.status');
     Route::match(['post', 'put'], '/podcast-category-process/{id?}', [PodcastManageController::class, 'podcastCatgoryProcess'])->name('podcastcategory.process');
     Route::put('/podcastcategory-status/{id}', [PodcastManageController::class, 'podcastcategoryStatus'])->name('podcastcategory.status');
     Route::delete('/podcast-category-destroy/{id}', [PodcastManageController::class, 'podcastCatgorydestroy'])->name('podcastcategory.destroy');
-
 
     Route::get('/podcast-create', [PodcastManageController::class, 'podcastAdd'])->name('podcast.create');
     Route::match(['post', 'put'], '/podcast-process/{id?}', [PodcastManageController::class, 'podcastPostPut'])->name('podcast.process');
@@ -167,5 +161,23 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/podcast-edit/{id}', [PodcastManageController::class, 'podcastEditpage'])->name('podcast.edit');
     Route::get('/podcast-details/{id}', [PodcastManageController::class, 'podcastDetails'])->name('podcast.details');
     Route::delete('/podcast-destroy/{id}', [PodcastManageController::class, 'podcastDestroy'])->name('podcast.destroy');
+
+    Route::get('/banner-category', [BannerController::class, 'banner_categoryIndex'])->name('banner_category.index');
+    Route::get('/banner-category-create', [BannerController::class, 'banner_categoryCreate'])->name('banner_category.create');
+    Route::get('/banner-category-details/{id}', [BannerController::class, 'banner_categoryDetails'])->name('banner_category.details');
+    Route::get('/banner-category-edit/{id}', [BannerController::class, 'banner_categoryEdit'])->name('banner_category.edit');
+    Route::match(['post', 'put'], '/banner-category-process/{id?}', [BannerController::class, 'banner_categoryProcess'])->name('banner_category.process');
+    Route::put('/banner_category-status/{id}', [BannerController::class, 'banner_categoryStatus'])->name('banner_category.status');
+    Route::delete('/banner-category-destroy/{id}', [BannerController::class, 'banner_categorydestroy'])->name('banner_category.destroy');
+
+    Route::get('/banner-create', [BannerController::class, 'bannerAdd'])->name('banner.create');
+    Route::match(['post', 'put'], '/banner-process/{id?}', [BannerController::class, 'bannerPostPut'])->name('banner.process');
+    Route::put('/banner-status/{id}', [BannerController::class, 'bannerStatus'])->name('banner.status');
+    Route::get('/banner-edit/{id}', [BannerController::class, 'bannerEditpage'])->name('banner.edit');
+    Route::get('/banner-details/{id}', [BannerController::class, 'bannerDetails'])->name('banner.details');
+    Route::delete('/banner-destroy/{id}', [BannerController::class, 'bannerDestroy'])->name('banner.destroy');
+
+
+
 
 });
