@@ -12,7 +12,7 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                     <i class="nc-icon nc-alien-33"></i>
                    <p> Home</p>
@@ -30,6 +30,23 @@
                     <a class="nav-link" href="{{ route('home.section.index')}}">
                         <i class="nc-icon nc-alien-33"></i>
                         <p>Banner Manage</p>
+                    </a>
+                </div>
+            </li> --}}
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                    <i class="nc-icon nc-alien-33"></i>
+                   <p> Live TV Manage</p>
+                </a>
+
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <a class="nav-link" href="{{ route('live_tv.index') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Live TV Manage</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('live_tv.create') }}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Live TV Create</p>
                     </a>
                 </div>
             </li>
@@ -53,10 +70,10 @@
                 </a>
             </li>
             
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/playlist') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('playlist.index') }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/live-tv') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('live_tv.index') }}">
                     <i class="nc-icon nc-paper-2"></i>
-                    <p>Playlist Manage</p>
+                    <p>Live TV Manage</p>
                 </a>
             </li>
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/podcast') ? ' active' : '' }}">
