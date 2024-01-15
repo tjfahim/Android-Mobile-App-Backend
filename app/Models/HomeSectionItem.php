@@ -8,31 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class HomeSectionItem extends Model
 {
     use HasFactory;
-    
-    protected $fillable = [ 'playlist_categorie_id','event_id','podcast_categorie_id','playlist_music_id', 'podcast_id','home_section_id','status'];
+    protected $fillable = ['radio_id','video_id', 'podcast_id','home_section_id','status'];
 
 
-    public function music()
+    public function video()
     {
-        return $this->belongsTo(PlaylistMusic::class, 'playlist_music_id');
+        return $this->belongsTo(Video::class, 'video_id');
     }
     public function podcast()
     {
         return $this->belongsTo(Podcast::class, 'podcast_id');
     }
-    public function podcastCategory()
+    public function radio()
     {
-        return $this->belongsTo(PodcastCategory::class, 'podcast_categorie_id');
+        return $this->belongsTo(Radio::class, 'radio_id');
     }
-    public function playlistMusic()
-    {
-        return $this->belongsTo(PlaylistCategory::class, 'playlist_categorie_id');
-    }
-    public function eventHome()
-    {
-        return $this->belongsTo(EventHome::class, 'event_id');
-    }
-
-
-
 }

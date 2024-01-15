@@ -45,41 +45,22 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div>Choose Type:</div>
-                                    {{-- <div class="form-check form-check-inline">
-                                        <input class="mt-3 " type="radio" name="content_type" id="homePodcastCategory" value="podcastCategory">
-                                        <label class="ml-2" for="homePodcastCategory">Podcast Category</label>
-                                    </div> --}}
+                                
                                     <div class="form-check form-check-inline">
                                         <input class="mt-3 " type="radio" name="content_type" id="homePodcast" value="podcast">
                                         <label class="ml-2" for="homePodcast">Podcast</label>
                                     </div>
-                                    {{-- <div class="form-check form-check-inline">
-                                        <input class="mt-3 " type="radio" name="content_type" id="homePlaylist" value="playlist">
-                                        <label class="ml-2" for="homePlaylist">Playlist</label>
-                                    </div> --}}
+                                  
                                     <div class="form-check form-check-inline">
-                                        <input class="mt-3 " type="radio" name="content_type" id="homeMusic" value="music">
-                                        <label class="ml-2" for="homeMusic">Music</label>
+                                        <input class="mt-3 " type="radio" name="content_type" id="homeVideo" value="video">
+                                        <label class="ml-2" for="homeVideo">Video</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="mt-3 " type="radio" name="content_type" id="homeEvent" value="event">
-                                        <label class="ml-2" for="homeEvent">Event</label>
+                                        <input class="mt-3 " type="radio" name="content_type" id="homeRadio" value="event">
+                                        <label class="ml-2" for="homeRadio">Radio</label>
                                     </div>
                                 </div>
-                                <div class="podcast-category-section" style="display: none;">
-                                    <div class=" mt-2">
-                                        <div class="form-group">
-                                            <label for="podcast">Podcast Category</label>
-                                            <select name="podcast_categorie_id" id="podcast_categorie_id" class="form-control">
-                                                <option value="">Select Podcast Category</option>
-
-                                                @foreach ($podcast_catgory as $podcast_cat)
-                                                    <option value="{{ $podcast_cat->id }}">{{ $podcast_cat->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="podcast-section" style="display: none;">
                                     <div class=" mt-2">
                                         <div class="form-group">
@@ -94,47 +75,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="playlist-section" style="display: none;">
-                                    <div class="mt-2">
-                                        <div class="">
-                                            <label for="music">Playlist:</label>
-                                            <select name="playlist_categorie_id" id="playlist_categorie_id" class="form-control">
-                                                <option value="">Select Playlist</option>
+                                <div class="radio-section" style="display: none;">
+                                    <div class=" mt-2">
+                                        <div class="form-group">
+                                            <label for="radio">Radio</label>
+                                            <select name="radio_id" id="radio_id" class="form-control">
+                                                <option value="">Select Radio</option>
 
-                                                @foreach ($playlist_catgory as $playlist)
-                                                    <option value="{{ $playlist->id }}">{{ $playlist->title }}</option>
+                                                @foreach ($radios as $radio)
+                                                    <option value="{{ $radio->id }}">{{ $radio->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="music-section" style="display: none;">
-                                    <div class="mt-2">
-                                        <div class="">
-                                            <label for="music">Music:</label>
-                                            <select name="playlist_music_id" id="playlist_music_id" class="form-control">
-                                                <option value="">Select Music</option>
-                                                @foreach ($musics as $music)
-                                                    <option value="{{ $music->id }}">{{ $music->title }}</option>
+                                <div class="video-section" style="display: none;">
+                                    <div class=" mt-2">
+                                        <div class="form-group">
+                                            <label for="video">Video</label>
+                                            <select name="video_id" id="video_id" class="form-control">
+                                                <option value="">Select Video</option>
+
+                                                @foreach ($videos as $video)
+                                                    <option value="{{ $video->id }}">{{ $video->title }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="event-section" style="display: none;">
-                                    <div class="mt-2">
-                                        <div class="">
-                                            <label for="event">Event:</label>
-                                            <select name="event_id" id="event_id" class="form-control">
-                                                <option value="">Select Event</option>
-                                                @foreach ($events as $event)
-                                                    <option value="{{ $event->id }}">{{ $event->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="">&nbsp;</label> 
@@ -152,37 +121,29 @@
                                     <th scope="col">Type</th>
                                     <th scope="col">Image</th>
                                 </tr>
+                                
                             </thead>
                             <tbody>
                                 @forelse($sectionItems as $sectionItem)
                                     <tr>
                                         <td style="width:20%">
                                             <div class="d-flex gap-2">
-                                            @if(isset($sectionItem->playlist_categorie_id))
+                                            @if(isset($sectionItem->podcast_id))
                                                 
-                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" data-toggle="tooltip" data-placement="top" title="Playlist Details"><i class="fa fa-info-circle	
-                            "></i>
-                        </a>
-                                            @elseif(isset($sectionItem->playlist_music_id))
-                                                
-                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('playlistmusic.details',['id' => $sectionItem->music->id])}}" data-toggle="tooltip" data-placement="top" title=" Music Details"><i class="fa fa-info-circle	
-                            "></i>
-                        </a>
-                                            @elseif(isset($sectionItem->podcast_categorie_id))
-                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcastcategory.details',['id' => $sectionItem->podcastCategory->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Catgory Details"><i class="fa fa-info-circle	
-                            "></i>
-                        </a>
-                                            @elseif(isset($sectionItem->podcast_id))
+                                            <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Details"><i class="fa fa-info-circle	
+                                                "></i>
+                                            </a>
+                                                                
                                            
-                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" data-toggle="tooltip" data-placement="top" title="Podcast Details"><i class="fa fa-info-circle	
+                                            @elseif(isset($sectionItem->video_id))
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('video.edit',['id' => $sectionItem->video->id])}}" data-toggle="tooltip" data-placement="top" title="Video Details"><i class="fa fa-info-circle	
                             "></i>
                         </a>
-                                            @elseif(isset($sectionItem->event_id))
-                                           
-                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" data-toggle="tooltip" data-placement="top" title="Event Details"><i class="fa fa-info-circle	
+                                            @elseif(isset($sectionItem->radio_id))
+                                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('radio.edit',['id' => $sectionItem->radio->id])}}" data-toggle="tooltip" data-placement="top" title="Radio Details"><i class="fa fa-info-circle	
                             "></i>
                         </a>
-                                       
+                                            
                                     @endif
                                      
                                             <form class="" action="{{ route('home.section.item.destroy', ['id' => $sectionItem->id]) }}" method="post">
@@ -196,73 +157,52 @@
                                                {{ $sectionItem->id }}
                                         </td>
                                         <td>
-                                                @if(isset($sectionItem->playlist_categorie_id))
-                                                <a href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" class="">{{ $sectionItem->playlistMusic->title }}
-                                                </a>
-
-                                                @elseif(isset($sectionItem->playlist_music_id))
-                                                    <a href="{{ route('playlistmusic.details',['id' => $sectionItem->music->id])}}" class="">
-                                                        {{ $sectionItem->music->title }}
-                                                    </a>
-                                                    
-                                                @elseif(isset($sectionItem->podcast_categorie_id))
-                                                    <a href="{{ route('podcastcategory.details',['id' => $sectionItem->podcastCategory->id])}}" class="">
-                                                        {{ $sectionItem->podcastCategory->title }}
-                                                    </a>
-
-                                                @elseif(isset($sectionItem->podcast_id))
+                                                @if(isset($sectionItem->podcast_id))
                                                     <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
                                                         {{ $sectionItem->podcast->title }}
                                                     </a>
-                                                @elseif(isset($sectionItem->event_id))
-                                                    <a href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" class="">
-                                                        {{ $sectionItem->eventHome->title }}
+
+                                                @elseif(isset($sectionItem->video_id))
+                                                    <a href="{{ route('video.edit',['id' => $sectionItem->video->id])}}" class="">
+                                                        {{ $sectionItem->video->title }}
                                                     </a>
 
+                                                @elseif(isset($sectionItem->radio_id))
+                                                    <a href="{{ route('radio.edit',['id' => $sectionItem->radio->id])}}" class="">
+                                                        {{ $sectionItem->radio->title }}
+                                                    </a>
+                                                    
                                                 @endif
                                         </td>
-                                        
                                         <td>
 
-                                                @if(isset($sectionItem->playlist_categorie_id))
-                                                <span class="badge badge-primary">Playlist</span>
+                                                @if(isset($sectionItem->podcast_id))
+                                                <span class="badge badge-primary">Podcast</span>
             
-                                                @elseif(isset($sectionItem->playlist_music_id))
-                                                <span class="badge badge-warning">Music</span>
+                                                @elseif(isset($sectionItem->video_id))
+                                                <span class="badge badge-warning">Video</span>
 
-                                                @elseif(isset($sectionItem->podcast_categorie_id))
-                                                <span class="badge badge-primary">Podcast Category</span>
+                                                @elseif(isset($sectionItem->radio_id))
+                                                <span class="badge badge-primary">Radio</span>
 
-                                                @elseif(isset($sectionItem->podcast_id))
-                                                <span class="badge badge-success">Podcast</span>
-                                                @elseif(isset($sectionItem->event_id))
-                                                <span class="badge badge-success">Event</span>
                                                 @endif
                                         </td>
                                    
                                         <td>
-                                            @if(isset($sectionItem->playlist_categorie_id))
-                                                        <a href="{{ route('playlistcategory.details',['id' => $sectionItem->playlistMusic->id])}}" class="">
-                                                        <img src="{{ asset('image/playlist/' . $sectionItem->playlistMusic->image) }}" alt="{{ $sectionItem->playlistMusic->title }}" style="width: 50px; height: 50px">
-                                                    </a>
-                                            @elseif(isset($sectionItem->playlist_music_id))
-                                                    <a href="{{ route('playlistmusic.details',['id' => $sectionItem->music->id])}}" class="">
-                                                        <img src="{{ asset('image/music/' . $sectionItem->music->image) }}" alt="{{ $sectionItem->music->title }}" style="width: 50px; height: 50px">
-                                                    </a>
-                                            @elseif(isset($sectionItem->podcast_categorie_id))
-                                                    <a href="{{ route('podcastcategory.details',['id' => $sectionItem->podcastCategory->id])}}" class="">
-                                                        <img src="{{ asset('podcast/image/' . $sectionItem->podcastCategory->image) }}" alt="{{ $sectionItem->podcastCategory->title }}" style="width: 50px; height: 50px">
-                                                      </a>
-                                            @elseif(isset($sectionItem->podcast_id))
-                                                      <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
-                                                        <img src="{{ asset('podcast/image/' . $sectionItem->podcast->image) }}" alt="{{ $sectionItem->podcast->title }}" style="width: 50px; height: 50px">
-                                                      </a>
-                                            @elseif(isset($sectionItem->event_id))
-                                                      <a href="{{ route('home.section.event.edit',['id' => $sectionItem->eventHome->id])}}" class="">
-                                                        <img src="{{ asset('image/event/' . $sectionItem->eventHome->image) }}" alt="{{ $sectionItem->eventHome->title }}" style="width: 50px; height: 50px">
-                                                      </a>
-                                                   
-                                                @endif
+                                            @if(isset($sectionItem->podcast_id))
+                                            <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
+                                                <img src="{{ asset('podcast/image/' . $sectionItem->podcast->image) }}" alt="{{ $sectionItem->podcast->title }}" style="width: 50px; height: 50px">
+                                              </a>
+                                            @elseif(isset($sectionItem->video_id))
+                                            <a href="{{ route('video.edit',['id' => $sectionItem->video->id])}}" class="">
+                                                <img src="{{ asset('image/video/' . $sectionItem->video->image) }}" alt="{{ $sectionItem->video->title }}" style="width: 50px; height: 50px">
+                                              </a>
+                                            @elseif(isset($sectionItem->radio_id))
+                                            <a href="{{ route('radio.edit',['id' => $sectionItem->radio->id])}}" class="">
+                                                <img src="{{ asset('image/radio/' . $sectionItem->radio->image) }}" alt="{{ $sectionItem->radio->title }}" style="width: 50px; height: 50px">
+                                              </a>
+
+                                             @endif
 
                                         </td>
                                       
@@ -280,8 +220,6 @@
                 </div>
             </div>
 
-         
-            
           
         </div>
     </div>
@@ -289,59 +227,32 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // const homePodcastCategory = document.getElementById('homePodcastCategory');
-    const homeMusic = document.getElementById('homeMusic');
+    const homeVideo = document.getElementById('homeVideo');
     const homePodcast = document.getElementById('homePodcast');
-    // const homePlaylist = document.getElementById('homePlaylist');
-    const homeEvent = document.getElementById('homeEvent');
+    const homeRadio = document.getElementById('homeRadio');
 
     const podcastSection = document.querySelector('.podcast-section');
-    const musicSection = document.querySelector('.music-section');
-    // const podcastCategorySection = document.querySelector('.podcast-category-section');
-    // const playlistSection = document.querySelector('.playlist-section');
-    const eventSection = document.querySelector('.event-section');
+    const videoSection = document.querySelector('.video-section');
+    const radioSection = document.querySelector('.radio-section');
 
-    // homePodcastCategory.addEventListener('change', function () {
-    //     // podcastCategorySection.style.display = this.checked ? 'block' : 'none';
-    //     podcastSection.style.display = 'none';
-    //     musicSection.style.display = 'none';
-    //     // playlistSection.style.display = 'none';
-    //             eventSection.style.display = 'none';
-
-    // });
-
-    // homePlaylist.addEventListener('change', function () {
-    //     // podcastCategorySection.style.display = 'none';
-    //     podcastSection.style.display = 'none';
-    //     musicSection.style.display = 'none';
-    //     // playlistSection.style.display = this.checked ? 'block' : 'none';
-    //             eventSection.style.display = 'none';
-
-    // });
 
     homePodcast.addEventListener('change', function () {
-        // podcastCategorySection.style.display = 'none';
         podcastSection.style.display = this.checked ? 'block' : 'none';
-        musicSection.style.display = 'none';
-        // playlistSection.style.display = 'none';
-                eventSection.style.display = 'none';
+        videoSection.style.display = 'none';
+                radioSection.style.display = 'none';
 
     });
 
-    homeMusic.addEventListener('change', function () {
-        // podcastCategorySection.style.display = 'none';
+    homeVideo.addEventListener('change', function () {
         podcastSection.style.display = 'none';
-        musicSection.style.display = this.checked ? 'block' : 'none';
-        // playlistSection.style.display = 'none';
-        eventSection.style.display = 'none';
+        videoSection.style.display = this.checked ? 'block' : 'none';
+        radioSection.style.display = 'none';
 
     });
-    homeEvent.addEventListener('change', function () {
-        // podcastCategorySection.style.display = 'none';
+    homeRadio.addEventListener('change', function () {
         podcastSection.style.display = 'none';
-        musicSection.style.display = 'none';
-        // playlistSection.style.display = 'none';
-        eventSection.style.display = this.checked ? 'block' : 'none';
+        videoSection.style.display = 'none';
+        radioSection.style.display = this.checked ? 'block' : 'none';
     });
 });
 </script>

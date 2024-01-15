@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
 use App\Models\HomeSection;
 use App\Models\HomeSectionItem;
 use App\Models\Podcast;
+use App\Models\Radio;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -23,10 +24,12 @@ class HomeController extends Controller
        $homeSection = HomeSection::find($id);
        $home_section_id=$homeSection->id;
        $podcasts = Podcast::where('status','active')->get();
+       $videos = Video::where('status','active')->get();
+       $radios = Radio::where('status','active')->get();
     
        $sectionItems = HomeSectionItem::where('home_section_id',$homeSection->id)->get();
 
-       return view('backend.admin.home.sectionDetails', compact('homeSection','podcasts','sectionItems','home_section_id'));
+       return view('backend.admin.home.sectionDetails', compact('homeSection','podcasts','sectionItems','home_section_id','videos','radios'));
 
    }
     public function homeSectionCreate()
@@ -71,7 +74,6 @@ class HomeController extends Controller
             $homeSection->update($input);
             
              return redirect()->route('home.section.index')->with('success', 'Home Section Updated Successfully.');
-
               
            } else {
             $validator = Validator::make($request->all(), [
@@ -96,7 +98,6 @@ class HomeController extends Controller
             HomeSection::create($input);
             return redirect()->route('home.section.index')->with('success', 'Home Section Added Successfully.');
            }
-
        }
 
 
@@ -106,12 +107,10 @@ class HomeController extends Controller
        return view('backend.admin.home.sectionProcess', ['homeSection' => $homeSection]);
    }
    
-
    public function homeSectionItemCreate(Request $request,$home_section_id)
    {
        $validator = Validator::make($request->all(), [
            'podcast_id' => 'nullable|numeric',
-           'event_id' => 'nullable|numeric',
            'radio_id' => 'nullable|numeric',
            'video_id' => 'nullable|numeric',
        ]);
@@ -126,7 +125,6 @@ class HomeController extends Controller
  
        $data = [
            'podcast_id' => $request->podcast_id,
-           'event_id' => $request->event_id,
            'radio_id' => $request->radio_id,
            'video_id' => $request->video_id,
            'home_section_id' => $home_section_id,
@@ -139,8 +137,16 @@ class HomeController extends Controller
    public function homeSectionItemDelete($id)
    {
        $homeSection = HomeSectionItem::find($id);
+       $destinationPath = 'image/home/';
+      
+       if ($homeSection->image) {
+           $filePath = public_path($destinationPath . $homeSection->image);
+           if (file_exists($filePath)) {
+               unlink($filePath);
+           }
+       }
        $homeSection->delete();
-       return redirect()->route('home.section.index')->with('success', 'Home Section Item Deleted Successfully.');
+       return redirect()->back()->with('success', 'Home Section Item Deleted Successfully.');
    }
   
    public function homeSectionDestroy($id)
@@ -157,7 +163,7 @@ class HomeController extends Controller
    
            $homeSectionDestroy->status = $request->status;
            $homeSectionDestroy->save();
-           return redirect()->back();
+           return redirect()->back()->with('success', 'Status Change Successfully.');
  
    }
 

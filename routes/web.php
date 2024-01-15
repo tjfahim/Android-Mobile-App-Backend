@@ -34,7 +34,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::get('api/podcast-details/{id}', [PodcastApi::class, 'podcastDetails'])->name('podcastDetails');
-Route::get('api/radio-details/{id}', [RadioController::class, 'podcastDetails'])->name('podcastDetails');
+Route::get('api/radio-details/{id}', [RadioController::class, 'radioDetails'])->name('radioDetails');
 Route::get('api/video-details/{id}', [VideoController::class, 'videoDetails'])->name('videoDetails');
     
 
