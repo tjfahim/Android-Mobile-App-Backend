@@ -8,7 +8,7 @@
             <div class="card-header mb-2">
                 <div class="d-flex gap-2 my-3">
                     <h4 class="card-title">
-                        Section Manage
+                        Slider Manage
                      </h4>
                      <a href="{{ route('home.slider.create')}}" class="btn btn-primary btn-sm ml-4">Slider Create</a>
                      <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-4"><i class="fa fa-caret-square-o-left"></i>
@@ -44,15 +44,16 @@
                             @foreach($sliders as $slider)
                           <tr>
                             <td style="width:20%">
-        
-        
                                 <div class="d-flex gap-2">
-                                
+                                    <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.slider.edit', ['id' => $slider->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
+                                        "></i>
+                                    </a>
                                     <form class="" action="{{ route('home.slider.destroy', ['id' => $slider->id]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Slider record?')" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close"></i></button>
                                     </form>
+                                    
                                 </div>
                             </td>
                             <th scope="row"> {{ $slider->id }}</th>
@@ -83,6 +84,7 @@
                                     @endif
                                 </form>
                             </td>
+                            <td></td>
                             
                           </tr>
                           @endforeach

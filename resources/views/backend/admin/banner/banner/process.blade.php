@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>banner Title</label>
+                                        <label>Banner Title</label>
                                         <input type="text" class="form-control" placeholder="Enter Music Name" value="{{ isset($banner) ? $banner->title : old('title') }}" name="title">
                                         @error('title')
                                             <p class="text-danger">{{ $message }}</p>
@@ -58,7 +58,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>banner Link</label>
+                                        <label>Banner Link</label>
                                         <input type="text" class="form-control" placeholder="Enter Link" value="{{ isset($banner) ? $banner->banner_link : old('banner_link') }}" name="banner_link">
                                         @error('banner_link')
                                             <p class="text-danger">{{ $message }}</p>
@@ -94,23 +94,17 @@
                                         </select>
                                     </div>
                                  </div>
-                                
                             </div>
-                                
                             </div>
 
-                      
-                            
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($banner) && $banner->id ? 'Update banner' : 'Add Banner' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>
-                        
                     </div>
                 </div>
             </div>
-          
         </div>
     </div>
 </div>

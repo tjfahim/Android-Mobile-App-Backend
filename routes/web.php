@@ -32,8 +32,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('loginSubmit');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::get('api/playlist-category-get-music-details/{id}', [PlaylistApi::class, 'playlistMusicDetails'])->name('podcast.details.fetch');
-Route::get('api/podcast-category-get-podcast-details/{id}', [PodcastApi::class, 'podcastDetails'])->name('podcastDetails');
+
+Route::get('api/podcast-details/{id}', [PodcastApi::class, 'podcastDetails'])->name('podcastDetails');
+Route::get('api/radio-details/{id}', [RadioController::class, 'podcastDetails'])->name('podcastDetails');
+Route::get('api/video-details/{id}', [VideoController::class, 'videoDetails'])->name('videoDetails');
     
 
 
@@ -43,6 +45,10 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/radio', [RadioController::class, 'index'])->name('radio.index');
     Route::get('/radio-create', [RadioController::class, 'create'])->name('radio.create');
     Route::match(['post', 'put'], '/radio-process/{id?}', [RadioController::class, 'process'])->name('radio.process');
+    Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
+    Route::put('/radio-status/{id}', [RadioController::class, 'radioStatus'])->name('radio.status');
+    Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
+   
 
     Route::get('/home/section', [HomeController::class, 'homeSectionIndex'])->name('home.section.index');
     Route::get('/home/section-create', [HomeController::class, 'homeSectionCreate'])->name('home.section.create');
@@ -88,16 +94,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::delete('/video-destroy/{id}', [VideoController::class, 'VideoDestroy'])->name('video.destroy');
 
     
-    Route::get('/chat', [ChatController::class, 'chatindex'])->name('chat.index');
-    Route::put('/chatProcess', [ChatController::class, 'chatProcess'])->name('chat.process');
-
-    Route::get('/reels', [VideoReelController::class, 'VideoReelIndex'])->name('reel.index');
-    Route::get('/reels-create', [VideoReelController::class, 'VideoReelCreate'])->name('reel.create');
-    Route::match(['post', 'put'], '/reels-process/{id?}', [VideoReelController::class, 'VideoReelProcess'])->name('reel.process');
-    Route::get('/reels-details/{id}', [VideoReelController::class, 'VideoReelEdit'])->name('reel.edit');
-    Route::put('/reels-status/{id}', [VideoReelController::class, 'VideoReelStatus'])->name('reel.status');
-    Route::delete('/reels-destroy/{id}', [VideoReelController::class, 'VideoReelDestroy'])->name('reel.destroy');
-
     Route::get('/users', [AuthController::class, 'userIndex'])->name('user.index');
     Route::get('/users-create', [AuthController::class, 'userCreate'])->name('user.create');
     Route::match(['post', 'put'], '/users-process/{id?}', [AuthController::class, 'userProcess'])->name('user.process');
@@ -107,45 +103,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
 
 
 
-    Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
-    Route::put('/radio-status/{id}', [RadioController::class, 'radioStatus'])->name('radio.status');
-    Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
-    // Route::get('/radio/section/{radio_id}', [RadioDetailsManageController::class, 'RadioSectionIndex'])->name('radio.section.index');
-    // Route::get('/radio/section-create/{radio_id}', [RadioDetailsManageController::class, 'radioSectionCreate'])->name('radio.section.create');
-    // Route::match(['post', 'put'], '/radio/section-process/{radio_id}/{id?}', [RadioDetailsManageController::class, 'radioSectionProcess'])->name('radio.section.process');
-    // Route::get('/radio/section-edit/{radio_id}/{id}', [RadioDetailsManageController::class, 'radioSectionEdit'])->name('radio.section.edit');
-    // Route::put('/radio/radioSection-status/{id}', [RadioDetailsManageController::class, 'radioSectionstatus'])->name('radioSection.status');
-    // Route::get('/radio/section-details/{radio_id}/{id}', [RadioDetailsManageController::class, 'radioSectionDetails'])->name('radio.section.details');
-    // Route::post('/radio/section/item-create/{radio_custom_categorie_id}', [RadioDetailsManageController::class, 'radioSectionItemCreate'])->name('radio.section.item.create');
-    // Route::delete('/radio/section-destroy/{id}', [RadioDetailsManageController::class, 'radioSectiondestroy'])->name('radio.section.destroy');
-    // Route::delete('/radio/section-item-destroy/{radioSectionItemId}', [RadioDetailsManageController::class, 'radioSectionItemDelete'])->name('radio.section.item.destroy');
-    
-
-
-
-    // Route::get('/playlist-manage', [PlaylistManageController::class, 'playlistIndex'])->name('playlist.index');
-    // Route::post('/playlist-category-music-process', [PlaylistManageController::class, 'playlistCreate'])->name('playlist.process');
-    // Route::delete('/playlist-category-music-delete/{id}', [PlaylistManageController::class, 'playlistDestroy'])->name('playlist.destroy');
-
-
-    // Route::get('/playlist-category', [PlaylistManageController::class, 'playlistCatgoryIndex'])->name('playlistcategory.index');
-    // Route::get('/playlist-category-create', [PlaylistManageController::class, 'playlistCatgoryCreate'])->name('playlistcategory.create');
-    // Route::get('/playlist-category-details/{id}', [PlaylistManageController::class, 'playlistCatgorydetails'])->name('playlistcategory.details');
-    // Route::get('/playlist-category-edit/{id}', [PlaylistManageController::class, 'playlistCatgoryEdit'])->name('playlistcategory.edit');
-    // Route::match(['post', 'put'], '/playlist-category-process/{id?}', [PlaylistManageController::class, 'playlistCatgoryProcess'])
-    // ->name('playlistcategory.process');
-    // Route::put('/playlistcategory-status/{id}', [PlaylistManageController::class, 'playlistcategoryStatus'])->name('playlistcategory.status');
-    // Route::delete('/playlist-category-destroy/{id}', [PlaylistManageController::class, 'playlistCatgorydestroy'])->name('playlistcategory.destroy');
-
-
-    // Route::get('/playlist-music', [PlaylistManageController::class, 'playlistMusicIndex'])->name('playlistmusic.index');
-    // Route::get('/playlist-music-create', [PlaylistManageController::class, 'playlistMusicCreate'])->name('playlistmusic.create');
-    // Route::match(['post', 'put'], '/playlist-music-process/{id?}', [PlaylistManageController::class, 'playlistMusicProcess'])
-    // ->name('playlistmusic.process');
-    // Route::put('/playlist-status/{id}', [PlaylistManageController::class, 'playlistStatus'])->name('playlistmusic.status');
-    // Route::get('/playlist-music-edit/{id}', [PlaylistManageController::class, 'playlistMusicEdit'])->name('playlistmusic.edit');
-    // Route::get('/playlist-music-details/{id}', [PlaylistManageController::class, 'playlistMusicDetails'])->name('playlistmusic.details');
-    // Route::delete('/playlist-music-destroy/{id}', [PlaylistManageController::class, 'playlistMusicDestroy'])->name('playlistmusic.destroy');
 
     Route::get('/podcast-category', [PodcastManageController::class, 'podcastCatgoryIndex'])->name('podcastcategory.index');
     Route::get('/podcast-category-create', [PodcastManageController::class, 'podcastCatgoryCreate'])->name('podcastcategory.create');

@@ -74,7 +74,7 @@
                 <td>
            {{ $banner->title }}
                 </td>
-                <th>
+                <th style="width: 50%">
            {{ $banner->banner_link }}
                 </th>
                

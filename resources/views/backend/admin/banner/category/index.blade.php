@@ -10,6 +10,8 @@
                         Category Manage
                      </h4>
                      <a href="{{ route('banner_category.create')}}" class="btn btn-primary btn-sm ml-4">Add New Category</a>
+                     <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-4"><i class="fa fa-caret-square-o-left"></i>
+                        Section List</a>
                 </div>
                 @if(session('error'))
                 <div class="alert alert-danger mt-2">
@@ -23,7 +25,6 @@
                 @endif
              </div>
         </div>
-      
         <div class="row">
             @foreach($banner_category as $bannercategory)
                 <div class="col-md-4 mt-3">
@@ -63,18 +64,34 @@
                                     @endif
                                 </form>
                             </div>
-                            
-
-                            
                         </div>
                     </div>
-                    
-                    
                 </div>
             @endforeach
         </div>
         
-        {{ $banner_category->links('pagination::bootstrap-4') }}
+        {{-- <div class="row p-2">
+            @foreach($banner_category as $bannercategory)
+
+            <div class="card mx-2" style="width: 18rem;background-color: rgb(161 147 151 / 10%);">
+              <a href="{{ route('home.section.index')}}" class=""><img src="{{ asset('image/dashboard/pngtree-note-music-logo-watercolor-background-picture-image_1589075.jpg') }}" alt="Background Image" style="width: 100%;height:200px;object-fit: cover;overfollow:hidden; margin-bottom:10px"></a>
+              
+              <div class="card-body">
+               <div class="row">
+                <div class="col-md-9">          <h4 class="card-title">Home Section</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">Total Sections: </h6>
+                </div>
+                <div class="col-md-3"><a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm float-right card-link"><i class="fa fa-newspaper-o	
+                  "></i>All Sections</a></div>
+               </div>
+              </div>
+            </div>
+            @endforeach
+
+          </div>
+         --}}
+        
+          {{ $banner_category->links('pagination::bootstrap-4') }}
         
     </div>
 </div>

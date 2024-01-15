@@ -112,4 +112,20 @@ class VideoController extends Controller
         $video->delete();
         return redirect()->back()->with('success', 'Video Deleted Successfully.');
     }
+    public function videoDetails($id)
+    {
+        $video = Video::where('status','active')->find($id);
+    
+        if (!$video) {
+            return response()->json('No Video Exits');
+        }
+            $imageName = $video->image;
+            $imageUrl = asset('image/video/' . $imageName);
+            $video->image = $imageUrl;
+          
+        return response()->json([
+            'message' => 'video Details:',
+            'data' => $video,
+        ]);
+    }
 }

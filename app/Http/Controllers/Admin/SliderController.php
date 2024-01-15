@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\HomeSection;
-use App\Models\HomeSectionItem;
-use App\Models\PlaylistCategory;
-use App\Models\PlaylistMusic;
 use App\Models\Podcast;
-use App\Models\PodcastCategory;
+use App\Models\Radio;
 use App\Models\Slider;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -25,11 +22,10 @@ class SliderController extends Controller
    public function homeSliderCreate()
    {
     $podcasts = Podcast::all();
-    $musics = PlaylistMusic::all();
-    $playlist_catgory = PlaylistCategory::all();
-    $podcast_catgory = PodcastCategory::all();
+    $radios = Radio::all();
+    $videos = Video::all();
 
-    return view('backend.admin.home.slider.process', compact('musics','podcasts','playlist_catgory','podcast_catgory'));
+    return view('backend.admin.home.slider.process', compact('radios','podcasts','videos'));
    }
    public function homeSliderProcess(Request $request, $id = null)
       {
@@ -91,16 +87,12 @@ class SliderController extends Controller
            if ( $request->podcast_id) {
             $input['slider_link'] = route('podcastDetails', ['id' => $request->podcast_id]);
             $input['type'] = 'podcast';
-            
-           }elseif($request->playlist_music_id){
-            $input['slider_link'] = route('podcast.details.fetch', ['id' => $request->playlist_music_id]);
-            $input['type'] ='music';
-           }elseif($request->playlist_categorie_id){
-            $input['slider_link'] =  $request->playlist_categorie_id;
-            $input['type'] =  'playlist_category';
-           }elseif( $request->podcast_categorie_id){
-            $input['slider_link'] = $request->podcast_categorie_id;
-            $input['type'] = 'podcast_category';
+           }elseif($request->radio_id){
+            $input['slider_link'] = route('radioDetails', ['id' => $request->radio_id]);
+            $input['type'] ='radio';
+           }elseif($request->video_id){
+            $input['slider_link'] =  route('videoDetails', ['id' => $request->video_id]);
+            $input['type'] =  'video';
            }elseif( $request->custom_input){
             $input['slider_link'] = $request->custom_input;
             $input['type'] = 'link';
@@ -109,14 +101,17 @@ class SliderController extends Controller
            Slider::create($input);
            return redirect()->route('home.slider.index')->with('success', 'slider Added Successfully.');
           }
-
       }
 
 
   public function homeSliderEdit($id)
   {
       $slider = Slider::find($id);
-      return view('backend.admin.home.slider.process', ['slider' => $slider]);
+      $podcasts = Podcast::all();
+      $radios = Radio::all();
+      $videos = Video::all();
+  
+      return view('backend.admin.home.slider.process', compact('radios','podcasts','videos','slider'));
   }
 
 
@@ -125,13 +120,20 @@ class SliderController extends Controller
       $slider = Slider::find($id);
       $slider->status = $request->status;
         $slider->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Status Change Successfully.');
   }
   
-   public function homeSliderDestroy($id)
-   {
-       $slider = Slider::find($id);
-       $slider->delete();
-       return redirect()->route('home.slider.index')->with('success', 'Slider Deleted Successfully.');
-   }
+    public function homeSliderDestroy($id)
+    {
+        $slider = Slider::find($id);
+        $destinationPath = 'image/slider/';
+        if ($slider->image) {
+            $filePath = public_path($destinationPath . $slider->image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        $slider->delete();
+        return redirect()->route('home.slider.index')->with('success', 'Slider Deleted Successfully.');
+    }
 }

@@ -26,6 +26,24 @@ class RadioController extends Controller
         return view('backend.admin.radio.process');
     }
 
+    public function radioDetails($id)
+    {
+        $radio = Radio::where('status','active')->find($id);
+    
+        if (!$radio) {
+            return response()->json('No Radio Exits');
+        }
+            $imageName = $radio->image;
+            $imageUrl = asset('image/radio/' . $imageName);
+            $radio->image = $imageUrl;
+            $radio->audio_link =$radio->radio_link;
+          
+        return response()->json([
+            'message' => 'Radio Details:',
+            'data' => $radio,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
