@@ -97,6 +97,59 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6">
+                                     <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="text" class="form-control" placeholder="Enter Number" value="{{ isset($setting) ? $setting->phone : old('phone') }}" name="phone">
+                                        @error('phone')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                  
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Whats App Number</label>
+                                        <input type="text" class="form-control" placeholder="Enter Number" value="{{ isset($setting) ? $setting->whats_app : old('whats_app') }}" name="whats_app">
+                                        @error('whats_app')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone Logo</label>
+                                        <input type="file" class="form-control" name="phone_logo" id="phoneInput" onchange="previewphone()">
+                                        @if(isset($setting) && $setting->phone_logo)
+                                            <img src="{{ asset('image/setting/' . $setting->phone_logo) }}" alt="{{ $setting->title }}" id="phonePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                        @else
+                                            <img src="#" alt="Preview" id="phonePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                        @endif
+                                        @error('phone')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Whats App Logo</label>
+                                        <input type="file" class="form-control" name="whats_app_logo" id="whats_app_logoInput" onchange="previewwhats_app_logo()">
+                                        @if(isset($setting) && $setting->whats_app_logo)
+                                            <img src="{{ asset('image/setting/' . $setting->whats_app_logo) }}" alt="{{ $setting->title }}" id="whats_app_logoPreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                        @else
+                                            <img src="#" alt="Preview" id="whats_app_logoPreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                        @endif
+                                        @error('whats_app_logo')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>App Store Share Link</label>
@@ -152,6 +205,36 @@
     function previewfavicon() {
         var input = document.getElementById('faviconInput');
         var preview = document.getElementById('faviconPreview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function previewphone() {
+        var input = document.getElementById('phoneInput');
+        var preview = document.getElementById('phonePreview');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function previewwhats_app_logo() {
+        var input = document.getElementById('whats_app_logoInput');
+        var preview = document.getElementById('whats_app_logoPreview');
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();

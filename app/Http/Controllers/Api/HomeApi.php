@@ -81,8 +81,6 @@ class HomeApi extends Controller
             return response()->json($results);
         }
     }
-
-
     public function HomeSectionIndexfetch()
     {
         $homeSections = HomeSection::where('status','active')->orderBy('created_at', 'desc')->get();
@@ -232,6 +230,7 @@ class HomeApi extends Controller
         $setting = Settings::first();
         $setting['logo']  = asset('image/setting/' . $setting['logo']);
         $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
+        $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
 
 
         if($id){
@@ -256,6 +255,9 @@ class HomeApi extends Controller
         $setting = Settings::first();
         $setting['logo']  = asset('image/setting/' . $setting['logo']);
         $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
+        $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
+        $setting['whats_app_logo']  = asset('image/setting/' . $setting['whats_app_logo']);
+        $setting['phone_logo']  = asset('image/setting/' . $setting['phone_logo']);
         return response()->json([
             'message' => 'Setting:',
             'data' => $setting,

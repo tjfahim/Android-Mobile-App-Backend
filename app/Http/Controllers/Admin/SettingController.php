@@ -24,6 +24,8 @@ class SettingController extends Controller
                 'title' => 'nullable|string|max:255',
                 'playstore_share_link' => 'nullable|url',
                 'appstore_share_link' => 'nullable|url',
+                'whats_app' => 'nullable',
+                'phone' => 'nullable',
             ]);
             if ($request->hasFile('logo')) {
                 $validator->addRules([
@@ -38,6 +40,16 @@ class SettingController extends Controller
             if ($request->hasFile('app_topber_logo')) {
                 $validator->addRules([
                     'app_topber_logo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                ]);
+            }
+            if ($request->hasFile('whats_app_logo')) {
+                $validator->addRules([
+                    'whats_app_logo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                ]);
+            }
+            if ($request->hasFile('phone_logo')) {
+                $validator->addRules([
+                    'phone_logo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 ]);
             }
          
@@ -90,9 +102,36 @@ class SettingController extends Controller
                         unlink($filePath);
                     }
                 }
-            
             }
-        
+            if ($whats_app_logo = $request->file('whats_app_logo')) {
+                $destinationPath = 'image/setting';
+                $originalFileName = $whats_app_logo->getClientOriginalName(); 
+                $profilewhats_app_logo = date('YmdHis') . "_" . $originalFileName;
+                $whats_app_logo->move($destinationPath, $profilewhats_app_logo);
+                $input['whats_app_logo'] = $profilewhats_app_logo;
+                
+                if ($setting->whats_app_logo) {
+                    $filePath = public_path($destinationPath . $setting->whats_app_logo);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            }
+            if ($phone_logo = $request->file('phone_logo')) {
+                $destinationPath = 'image/setting';
+                $originalFileName = $phone_logo->getClientOriginalName(); 
+                $profilephone_logo = date('YmdHis') . "_" . $originalFileName;
+                $phone_logo->move($destinationPath, $profilephone_logo);
+                $input['phone_logo'] = $profilephone_logo;
+                
+                if ($setting->phone_logo) {
+                    $filePath = public_path($destinationPath . $setting->phone_logo);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            }
+            
             $setting->update($input);
             return redirect()->route('settings.index')->with('success', 'Settings Updated Successfully.');
            

@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
     use HasFactory;
-    protected $fillable = ['logo', 'title', 'favicon','app_topber_logo','appstore_share_link','playstore_share_link'];
+    protected $fillable = ['logo', 'title', 'favicon','app_topber_logo','whats_app_logo', 'phone_logo', 'whats_app','phone','appstore_share_link','playstore_share_link'];
 
 }
