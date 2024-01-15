@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('banners', function (Blueprint $table) {
-            $table->id();  $table->unsignedBigInteger('banner_category_id');
+            $table->id();  
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->text('banner_link')->nullable();
             $table->string('image')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
-            $table->foreign('banner_category_id')->references('id')->on('banner_categories')->onDelete('cascade');
-
         });
     }
 

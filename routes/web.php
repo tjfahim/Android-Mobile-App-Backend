@@ -119,20 +119,13 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/podcast-details/{id}', [PodcastManageController::class, 'podcastDetails'])->name('podcast.details');
     Route::delete('/podcast-destroy/{id}', [PodcastManageController::class, 'podcastDestroy'])->name('podcast.destroy');
 
-    Route::get('/banner-category', [BannerController::class, 'banner_categoryIndex'])->name('banner_category.index');
-    Route::get('/banner-category-create', [BannerController::class, 'banner_categoryCreate'])->name('banner_category.create');
-    Route::get('/banner-category-details/{id}', [BannerController::class, 'banner_categoryDetails'])->name('banner_category.details');
-    Route::get('/banner-category-edit/{id}', [BannerController::class, 'banner_categoryEdit'])->name('banner_category.edit');
-    Route::match(['post', 'put'], '/banner-category-process/{id?}', [BannerController::class, 'banner_categoryProcess'])->name('banner_category.process');
-    Route::put('/banner_category-status/{id}', [BannerController::class, 'banner_categoryStatus'])->name('banner_category.status');
-    Route::delete('/banner-category-destroy/{id}', [BannerController::class, 'banner_categorydestroy'])->name('banner_category.destroy');
-
-    Route::get('/banner-create', [BannerController::class, 'bannerAdd'])->name('banner.create');
-    Route::match(['post', 'put'], '/banner-process/{id?}', [BannerController::class, 'bannerPostPut'])->name('banner.process');
+    Route::get('/home-banner-category', [BannerController::class, 'BannerIndex'])->name('banner.index');
+    Route::get('/home-banner-create', [BannerController::class, 'bannerAdd'])->name('banner.create');
+    Route::match(['post', 'put'], '/home-banner-process/{id?}', [BannerController::class, 'bannerPostPut'])->name('banner.process');
     Route::put('/banner-status/{id}', [BannerController::class, 'bannerStatus'])->name('banner.status');
-    Route::get('/banner-edit/{id}', [BannerController::class, 'bannerEditpage'])->name('banner.edit');
-    Route::get('/banner-details/{id}', [BannerController::class, 'bannerDetails'])->name('banner.details');
-    Route::delete('/banner-destroy/{id}', [BannerController::class, 'bannerDestroy'])->name('banner.destroy');
+    Route::get('/home-banner-edit/{id}', [BannerController::class, 'bannerEditpage'])->name('banner.edit');
+    Route::get('/home-banner-details/{id}', [BannerController::class, 'bannerDetails'])->name('banner.details');
+    Route::delete('/home-banner-destroy/{id}', [BannerController::class, 'bannerDestroy'])->name('banner.destroy');
 
 
 

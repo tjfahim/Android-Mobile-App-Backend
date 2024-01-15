@@ -10,7 +10,7 @@
                         Section Manage
                      </h4>
                      <a href="{{ route('home.section.create')}}" class="btn btn-primary  btn-sm ml-4">Home Section Create</a>
-                     <a href="{{ route('banner_category.index')}}" class="btn btn-primary  btn-sm ml-4">Banner</a>
+                     <a href="{{ route('banner.index')}}" class="btn btn-primary  btn-sm ml-4">Banner</a>
                      <a href="{{ route('home.slider.index')}}" class="btn btn-primary  btn-sm ml-4">Slider</a>
              
                     </div>

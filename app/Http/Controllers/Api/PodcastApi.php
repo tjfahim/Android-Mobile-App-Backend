@@ -18,10 +18,7 @@ class PodcastApi extends Controller
             $imageName = $record->image;
             $imageUrl = asset('podcast/image/' . $imageName);
             $record->image = $imageUrl;
-             $record->background_color = '0xff' . ltrim($record->background_color, '#');
         }
-               
-
         return response()->json([
             'message' => 'Podcast Category List:',
             'data' => $podcastCategory,
@@ -30,8 +27,6 @@ class PodcastApi extends Controller
     public function podcastCategoryshow($id)
     {
         $podcastCatgory = PodcastCategory::find($id);
-                $podcastCatgory->background_color = '0xff' . ltrim($podcastCatgory->background_color, '#');
-
         $podcasts = Podcast::where('status','active')->where('podcast_category_id', $podcastCatgory->id)->orderBy('created_at', 'desc')->get();
       
         if (!$podcastCatgory) {
@@ -45,17 +40,15 @@ class PodcastApi extends Controller
             $imageName = $record->image;
             $imageUrl = asset('podcast/image/' . $imageName);
             $record->image = $imageUrl;
-            if($record->video){
-                $videoName = $record->video;
-                $videoUrl = asset('podcast/video/' . $videoName);
-                $record->video_link = $videoUrl;
-            }
-            if($record->audio){
-
+    
+            if($record->audio_link){
+                $record->audio_link =$record->audio_link;
+            }elseif($record->audio){
                 $audioName = $record->audio;
                 $audioUrl = asset('podcast/audio/' . $audioName);
                 $record->audio_link = $audioUrl;
-            }
+            }else $record->audio_link = 'no audio';
+
         }
         return response()->json([
             'message' => 'Podcast Category List:',
@@ -74,16 +67,13 @@ class PodcastApi extends Controller
             $imageName = $podcast->image;
             $imageUrl = asset('podcast/image/' . $imageName);
             $podcast->image = $imageUrl;
-            if($podcast->video){
-                $videoName = $podcast->video;
-                $videoUrl = asset('podcast/video/' . $videoName);
-                $podcast->video_link = $videoUrl;
-            }
-            if($podcast->audio){
+            if($podcast->audio_link){
+                $podcast->audio_link =$podcast->audio_link;
+            }elseif($podcast->audio){
                 $audioName = $podcast->audio;
                 $audioUrl = asset('podcast/audio/' . $audioName);
                 $podcast->audio_link = $audioUrl;
-            }
+            }else $podcast->audio_link = 'no audio';
 
         return response()->json([
             'message' => 'Podcast Details:',
