@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('video_link');
             $table->string('details')->nullable();
             $table->string('image')->nullable();
+            $table->string('type')->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
         });

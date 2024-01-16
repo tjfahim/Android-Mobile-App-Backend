@@ -47,8 +47,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Embed Code Link</label>
-                                        <input type="text" class="form-control" placeholder="Enter Embed Code Link" value="{{ isset($live_tv) ? $live_tv->embed_code_link : old('embed_code_link') }}" name="embed_code_link">
+                                        <label>Live TV</label><small class="text-small text-danger"> (* Iframe Live TV Embed Code Link Only)</small>
+                                        <input type="text" class="form-control" placeholder="Enter Live TV Embed Code Link" value="{{ isset($live_tv) ? $live_tv->embed_code_link : old('embed_code_link') }}" name="embed_code_link">
                                         @error('embed_code_link')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
@@ -58,7 +58,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Chat Code Link</label>
+                                        <label>Chat Code Link</label><small class="text-small text-danger"> (* Iframe Chat Code Link)</small>
                                         <input type="text" class="form-control" placeholder="Enter Chat Code Link" value="{{ isset($live_tv) ? $live_tv->chat_code_link : old('chat_code_link') }}" name="chat_code_link">
                                         @error('chat_code_link')
                                             <p class="text-danger">{{ $message }}</p>
@@ -70,7 +70,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
+
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($live_tv) && $live_tv->image)
                                             <img src="{{ asset('image/live_tv/' . $live_tv->image) }}" alt="{{ $live_tv->name }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -96,7 +97,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($live_tv) && $live_tv->id ? 'Update' : 'Add' }}
+                                {{ isset($live_tv) && $live_tv->id ? 'Update Live TV' : 'Add Live TV' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

@@ -30,7 +30,12 @@ Route::get('/podcast-category-get', [PodcastApi::class, 'podcastCategoryindex'])
 Route::get('/podcast-category-get-podcast/{id}', [PodcastApi::class, 'podcastCategoryshow']);
 Route::get('/podcast-category-get-podcast-details/{id}', [PodcastApi::class, 'podcastDetails']);
 
+Route::post('/podcast-android-ios/{id}/{device}', [PodcastApi::class, 'podcastandroidios']);
+Route::post('/podcast-live/{id}/{device}', [PodcastApi::class, 'podcastanLive']);
+
 Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
+Route::post('/radio-android-ios/{id}/{device}', [RadioApi::class, 'radioandroidios']);
+Route::post('/radio-live/{id}/{device}', [RadioApi::class, 'radioanLive']);
 
 Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 

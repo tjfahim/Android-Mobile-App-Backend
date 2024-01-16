@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($slider) && $slider->image)
                                             <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -160,7 +160,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($slider) && $slider->id ? 'Update' : 'Add' }}
+                                {{ isset($slider) && $slider->id ? 'Update Slider' : 'Add Slider' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

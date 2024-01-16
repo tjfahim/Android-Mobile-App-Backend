@@ -10,7 +10,7 @@
                 
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">
-                            {{ isset($homeSection) && $homeSection->id ? 'Section Edit' : 'Section Create' }}
+                            {{ isset($homeSection) && $homeSection->id ? 'Content Section Edit' : 'Content Section Create' }}
                         </h4>
                         <div class="d-flex gap-2">
                             <a href="{{ route('home.section.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Section List</a>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -60,13 +60,12 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select name="status" id="">
-                                    
                                             <option value="active" {{ isset($homeSection) && $homeSection->status === 'active' ? 'selected' : '' }}>Active</option>
                                             <option value="inactive" {{ isset($homeSection) && $homeSection->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
 
@@ -75,7 +74,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($homeSection) && $homeSection->id ? 'Update' : 'Add' }}
+                                {{ isset($homeSection) && $homeSection->id ? 'Update Content Section' : 'Add Content Section' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

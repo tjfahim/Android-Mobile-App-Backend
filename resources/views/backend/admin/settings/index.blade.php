@@ -55,7 +55,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>logo</label>
+                                        <label>Logo </label><small class="text-small text-danger"> (* Preferred Logo 800*800 Circle and PNG)</small>
+
                                         <input type="file" class="form-control" name="logo" id="logoInput" onchange="previewLogo()">
                                         @if(isset($setting) && $setting->logo)
                                             <img src="{{ asset('image/setting/' . $setting->logo) }}" alt="{{ $setting->title }}" id="logoPreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -69,7 +70,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Favicon</label>
+                                        <label>Favicon </label><small class="text-small text-danger"> (* Preferred Favicon 800*800 and PNG)</small>
+
                                         <input type="file" class="form-control" name="favicon" id="faviconInput" onchange="previewfavicon()">
                                         @if(isset($setting) && $setting->favicon)
                                             <img src="{{ asset('image/setting/' . $setting->favicon) }}" alt="{{ $setting->title }}" id="faviconPreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -84,6 +86,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>App Topber Logo</label>
+                                        <label>App Topber Logo </label><small class="text-small text-danger"> (* Preferred App Topber Logo 200*50 and PNG)</small>
                                         <input type="file" class="form-control" name="app_topber_logo" id="app_topber_logoInput" onchange="previewapp_topber_logo()">
                                         @if(isset($setting) && $setting->app_topber_logo)
                                             <img src="{{ asset('image/setting/' . $setting->app_topber_logo) }}" alt="{{ $setting->title }}" id="app_topber_logoPreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -119,10 +122,9 @@
                                 </div>
                             </div>
                             <div class="row">
-                                
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Phone Logo</label>
+                                        <label>Phone Logo </label><small class="text-small text-danger"> (* Preferred Phone Logo 200*200 Circle and PNG)</small>
                                         <input type="file" class="form-control" name="phone_logo" id="phoneInput" onchange="previewphone()">
                                         @if(isset($setting) && $setting->phone_logo)
                                             <img src="{{ asset('image/setting/' . $setting->phone_logo) }}" alt="{{ $setting->title }}" id="phonePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -136,7 +138,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Whats App Logo</label>
+                                        <label>Whats App Logo </label><small class="text-small text-danger"> (* Preferred Whats App Logo 200*200 Circle and PNG)</small>
                                         <input type="file" class="form-control" name="whats_app_logo" id="whats_app_logoInput" onchange="previewwhats_app_logo()">
                                         @if(isset($setting) && $setting->whats_app_logo)
                                             <img src="{{ asset('image/setting/' . $setting->whats_app_logo) }}" alt="{{ $setting->title }}" id="whats_app_logoPreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">

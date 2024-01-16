@@ -28,6 +28,7 @@
         </div>
         <div class="card">
             <div class="card-body mb-2">
+                <h4 class="mt-0">Slider List:</h4>
                 <div class="row">
                     <table class="table table-hover">
                         <thead>

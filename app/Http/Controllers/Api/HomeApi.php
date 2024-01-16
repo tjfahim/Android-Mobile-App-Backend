@@ -26,7 +26,6 @@ class HomeApi extends Controller
     public function search(Request $request,$query)
     {
         {
-
             $podcastResults = Podcast::where('title', 'like', "%{$query}%")
                 ->where('status', 'active')
                 ->get()
@@ -99,13 +98,15 @@ class HomeApi extends Controller
                 $itemSubTitle = null;
                 $itemImage_link = null;
                 $itemAudio_link = null;
+                $itemVideo_link = null;
+                $itemVideoType = null;
                 $itemType = null;
     
                 if (!is_null($item->podcast_id)) {
                     $podcast = Podcast::find($item->podcast_id);
                     if ($podcast) {
                         $itemTitle = $podcast->title;
-                        $itemType = 'Podcast';
+                        $itemType = 'podcast';
                         $itemSubTitle = $podcast->subtitle;
                         $itemImage_link = asset('podcast/image/' . $podcast->image);
                         if(!is_null($podcast->audio_link)){
@@ -133,15 +134,14 @@ class HomeApi extends Controller
                     $video = Video::find($item->video_id);
                     if ($video) {
                         $itemTitle = $video->title;
+                        $itemVideoType = $video->type;
                         $itemType = 'video';
-                        $itemSubTitle = $video->subtitle;
-                        $itemImage_link = asset('video/image/' . $video->image);
+                        $itemSubTitle = $video->details;
+                        $itemImage_link = asset('image/video/' . $video->image);
                         if(!is_null($video->audio)){
-                            $itemAudio_link = asset('video/audio/' . $video->audio);
-                        }elseif(!is_null($video->audio_file)){
-                            $itemAudio_link = $video->audio_link;
+                             $itemVideo_link = $video->video_link;
                         }else(
-                            $itemAudio_link = 'There is no audio'
+                            $itemVideo_link = 'There is no video'
                         );
                     }
                 } 
@@ -152,6 +152,8 @@ class HomeApi extends Controller
                         'subtitle' => $itemSubTitle,
                         'image' => $itemImage_link,
                         'audio_link' => $itemAudio_link,
+                        'video_link' => $itemVideo_link,
+                        'video_type' => $itemVideoType,
                         'item_type' => $itemType,
                         'created_at' => $item->created_at,
                         'updated_at' => $item->updated_at,
@@ -205,12 +207,22 @@ class HomeApi extends Controller
           
             $responseBanner[] = $bannerData;
         }
+        $setting = Settings::first();
+        $setting['logo']  = asset('image/setting/' . $setting['logo']);
+        $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
+        $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
+        $setting['whats_app_logo']  = asset('image/setting/' . $setting['whats_app_logo']);
+        $setting['phone_logo']  = asset('image/setting/' . $setting['phone_logo']);
+        
+
         return response()->json([
             'message' => 'All Section With Item List:',
             'Radio data' => $responseRadio,
             'Slider Data' => $responseSlider,
             'Banner Data' => $responseBanner,
             'Section data' => $response,
+            'Setting' => $setting,
+            
         ]);
     }
 

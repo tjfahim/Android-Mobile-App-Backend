@@ -58,7 +58,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Audio Link</label>
+                                        <label>Audio Link</label><small class="text-small text-danger"> ( *If an audio link is provided, please do not add a audio file.)</small>
                                         <input type="text" class="form-control" placeholder="Enter Link" value="{{ isset($podcast) ? $podcast->audio_link : old('audio_link') }}" name="audio_link">
                                         @error('audio_link')
                                             <p class="text-danger">{{ $message }}</p>
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Audio</label>
+                                        <label>Audio File</label><small class="text-small text-danger"> ( *For the 'Audio File' option, please leave the audio link empty.)</small>
                                         <input type="file" class="form-control" name="audio" id="audioInput" onchange="previewAudio()">
                                         @if(isset($podcast) && $podcast->audio)
                                             <audio controls style="margin-top: 10px;">
@@ -88,46 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Video Link</label>
-                                        <input type="text" class="form-control" placeholder="Enter Link" value="{{ isset($podcast) ? $podcast->video_link : old('video_link') }}" name="video_link">
-                                        @error('video_link')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                        @if(isset($podcast) && $podcast->video_link)
-                                     
-                                        <video controls style="margin-top: 10px; display: none;height:200px;width:200px;" id="videoPreview">
-                                            <source src="{{ asset($podcast->video_link) }}" >
-                                            Your browser does not support the video element.
-                                        </video>
-                                    @endif
-                                    </div>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>video</label>
-                                        <input type="file" class="form-control" name="video" id="videoInput" onchange="previewvideo()">
-                                        @if(isset($podcast) && $podcast->video)
-                                            <video controls style="margin-top: 10px;height:200px;width:200px;">
-                                                <source src="{{ asset('video/' . $podcast->video) }}" type="video/mpeg">
-                                                Your browser does not support the video element.
-                                            </video>
-                                        @else
-                                            <video controls style="margin-top: 10px; display: none;height:200px;width:200px;" id="videoPreview">
-                                                <source src="#" type="video/mpeg">
-                                                Your browser does not support the video element.
-                                            </video>
-                                        @endif
-                                        @error('video')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -153,7 +113,7 @@
                                 </div>
                             </div> --}}
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Now Listening</label>
                                         <input type="number" class="form-control" placeholder="" value="{{ isset($podcast) ? $podcast->connected_user : old('connected_user') ?? 0 }}" name="connected_user">
@@ -162,9 +122,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Total Android Users</label>
                                         <input type="number" class="form-control" value="{{ isset($podcast) ? $podcast->android_listener : old('android_listener') ?? 0 }}"
@@ -174,9 +132,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Total Apple Users</label>
                                         <input type="number" class="form-control"value="{{ isset($podcast) ? $podcast->ios_listener : old('ios_listener') ?? 0 }}" name="ios_listener">
@@ -193,18 +149,10 @@
                                         <select name="status" id="">
                                             <option value="active" {{ isset($podcast) && $podcast->status === 'active' ? 'selected' : '' }}>Active</option>
                                             <option value="inactive" {{ isset($podcast) && $podcast->status === 'inactive' ? 'selected' : '' }}>Inactive</option>
-
-                                          
                                         </select>
                                     </div>
                                  </div>
-                                
                             </div>
-                                
-                            </div>
-
-                      
-                            
                             <button type="submit" class="btn btn-info btn-fill">
                                 {{ isset($podcast) && $podcast->id ? 'Update Podcast' : 'Add Podcast' }}
                             </button>
@@ -273,21 +221,4 @@
     }
 </script>
 
-<script>
-    function previewvideo() {
-        var input = document.getElementById('videoInput');
-        var video = document.getElementById('videoPreview');
-
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                video.src = e.target.result;
-                video.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 @endsection

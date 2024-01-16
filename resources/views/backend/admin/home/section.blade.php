@@ -7,7 +7,7 @@
             <div class="card-header mb-2">
                 <div class="d-flex gap-2 my-3">
                     <h4 class="card-title">
-                        Section Manage
+                        Content Section Manage
                      </h4>
                      <a href="{{ route('home.section.create')}}" class="btn btn-primary  btn-sm ml-4">Home Section Create</a>
                      <a href="{{ route('banner.index')}}" class="btn btn-primary  btn-sm ml-4">Banner</a>
@@ -28,6 +28,7 @@
         </div>
         <div class="card">
             <div class="card-body mb-2">
+                <h4 class="mt-0">Content Section List:</h4>
                 <div class="row">
                     <div class="row justify-content-center col-12 my-3">
                         <div class="col-md-6 mb-3">
@@ -43,25 +44,20 @@
                               <th scope="col">Action</th>
                             <th scope="col">id</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Image</th>
+                            <th scope="col">Content</th>
                             <th scope="col">Status</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($homeSections as $homeSection)
                             <tr id="homeSection_{{ $homeSection->id }}">
-                          
-                            
                             <td style="width:20%">
                                 <!-- Edit option -->
                                 <div class="d-flex gap-2">
-                             
-                                   
-                                    <a class="btn btn-sm btn-primary mb-2 " href="{{ route('home.section.edit', ['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
+                                    <a class="btn btn-sm btn-primary mb-2 mr-1" href="{{ route('home.section.edit', ['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
                                         "></i>
                                     </a>
-                                     <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('home.section.details',['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Section Manage"><i class="fa fa-info	
-                                        "></i>
+                                  
                                     </a>
                                     <!-- Delete option -->
                                     <form class="" action="{{ route('home.section.destroy', ['id' => $homeSection->id]) }}" method="post">
@@ -77,7 +73,8 @@
                                  {{ $homeSection->title }}
                             </td>
                             <td>
-                                <img src="{{ asset('image/home/' . $homeSection->image) }}" alt="{{ $homeSection->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                {{-- <img src="{{ asset('image/home/' . $homeSection->image) }}" alt="{{ $homeSection->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;"> --}}
+                               <button class="btn btn-primary btn-sm"> <a class="" href="{{ route('home.section.details',['id' => $homeSection->id]) }}" data-toggle="tooltip" data-placement="top" title="Section Manage">Content Manage</button>
                             </td>
                             <td>
                                 <form class="" action="{{ route('homesection.status', ['id' => $homeSection->id]) }}" method="POST">

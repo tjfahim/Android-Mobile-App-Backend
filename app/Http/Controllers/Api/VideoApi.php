@@ -16,6 +16,7 @@ class VideoApi extends Controller
                 'id' => $video->id,
                 'title' => $video->title,
                 'video_link' => $video->video_link,
+                'type' => $video->type,
                 'details' => $video->details,
                 'image' => asset('image/video/' . $video->image),
             ];

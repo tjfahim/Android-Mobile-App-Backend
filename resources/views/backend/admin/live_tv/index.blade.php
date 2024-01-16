@@ -30,7 +30,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-    
+                        <h4 class="mt-0">Live TV List:</h4>
+
                         <div class="row justify-content-center col-12 my-3">
                             <div class="col-md-6 mb-3">
                                 <div class="d-flex align-items-center">
@@ -45,7 +46,7 @@
                                 <th scope="col">Action</th>
                                 <th scope="col">id</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Embed Link</th>
+                                <th scope="col">Live TV Link</th>
                                 <th scope="col">Chat Link</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Status</th>
@@ -55,8 +56,6 @@
                                 @foreach($live_tvs as $live_tv)
                                 <tr id="bar_{{ $live_tv->id }}">
                                     <td style="width:20%">
-    
-    
                                     <div class="d-flex gap-2">
                                         <a class="btn btn-sm btn-primary mb-2 mx-1 " href="{{ route('live_tv.edit', ['id' => $live_tv->id]) }}" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit	
                                             "></i>
@@ -72,10 +71,10 @@
                                 <td>
                                     {{ $live_tv->title }}
                                 </td>
-                                <td>
+                                <td style="width: 25%">
                                     {{ $live_tv->embed_code_link }}
                                 </td>
-                                <td>
+                                <td style="width: 25%">
                                     {{ $live_tv->chat_code_link }}
                                 </td>
                                 <td>

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">
-                            {{ isset($podcastcategory) && $podcastcategory->id ? 'Category Edit' : 'Category Create' }}
+                            {{ isset($podcastcategory) && $podcastcategory->id ? 'Podcast Category Edit' : 'Podcast Category Create' }}
                         </h4>
                         <div class="d-flex gap-2">
                             <a href="{{ route('podcastcategory.index')}}" class="btn btn-primary btn-sm ml-2"><i class="fa fa-caret-square-o-left"></i>Category List</a>
@@ -46,7 +46,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
+
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($podcastcategory) && $podcastcategory->image)
                                             <img src="{{ asset('podcast/image/' . $podcastcategory->image) }}" alt="{{ $podcastcategory->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -85,7 +86,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($podcastcategory) && $podcastcategory->id ? 'Update' : 'Add Category' }}
+                                {{ isset($podcastcategory) && $podcastcategory->id ? 'Update Podcast Category' : 'Add Podcast Category' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

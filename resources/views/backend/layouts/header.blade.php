@@ -15,7 +15,25 @@
      <link href="{{ asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
      <link href="{{ asset('backend/assets/css/light-bootstrap-dashboard.css?v=2.0.0')}} " rel="stylesheet" />
      <link href="{{ asset('backend/assets/css/demo.css')}}" rel="stylesheet" />
-     
+     <style>
+        .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        transition: box-shadow 0.3s ease; /* Add smooth transition for hover effect */
+    }
+    
+    /* Hover effect */
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Image styling */
+    .podcast-image {
+        width: 100%;
+        height: 177px;
+        object-fit: cover;
+        overflow: hidden;
+    }
+    </style>
  </head>
  
  <body>

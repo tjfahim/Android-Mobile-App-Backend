@@ -12,7 +12,7 @@ class Video extends Model
         'title',
         'video_link',
         'details',
-        'image', 'status'
+        'image', 'status','type'
     ];
    
 }

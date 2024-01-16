@@ -57,7 +57,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 200*200 Circle and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($bar) && $bar->image)
                                             <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($bar) && $bar->id ? 'Update' : 'Add' }}
+                                {{ isset($bar) && $bar->id ? 'Update Menu' : 'Add Menu' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

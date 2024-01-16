@@ -12,110 +12,71 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-                    <i class="nc-icon nc-alien-33"></i>
-                   <p> Home</p>
-                </a>
-
-                <div class="collapse multi-collapse" id="multiCollapseExample1">
-                    <a class="nav-link" href="{{ route('home.section.index')}}">
-                        <i class="nc-icon nc-alien-33"></i>
-                        <p>Home Manage</p>
-                    </a>
-                    <a class="nav-link" href="{{ route('home.section.index')}}">
-                        <i class="nc-icon nc-alien-33"></i>
-                        <p>Slider Manage</p>
-                    </a>
-                    <a class="nav-link" href="{{ route('home.section.index')}}">
-                        <i class="nc-icon nc-alien-33"></i>
-                        <p>Banner Manage</p>
-                    </a>
-                </div>
-            </li> --}}
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-                    <i class="nc-icon nc-alien-33"></i>
-                   <p> Live TV Manage</p>
-                </a>
-
-                <div class="collapse multi-collapse" id="multiCollapseExample1">
-                    <a class="nav-link" href="{{ route('live_tv.index') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Live TV List</p>
-                    </a>
-                    <a class="nav-link" href="{{ route('live_tv.create') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Add New Live TV</p>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#multiCollapseVideo" role="button" aria-expanded="false" aria-controls="multiCollapseVideo">
-                    <i class="nc-icon nc-alien-33"></i>
-                   <p>Video Manage</p>
-                </a>
-
-                <div class="collapse multi-collapse" id="multiCollapseVideo">
-                    <a class="nav-link" href="{{ route('video.index') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Video List</p>
-                    </a>
-                    <a class="nav-link" href="{{ route('video.create') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Add New Video</p>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#multiCollapseRadio" role="button" aria-expanded="false" aria-controls="multiCollapseRadio">
-                    <i class="nc-icon nc-alien-33"></i>
-                   <p>Radio Manage</p>
-                </a>
-
-                <div class="collapse multi-collapse" id="multiCollapseRadio">
-                    <a class="nav-link" href="{{ route('radio.index') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Radio List</p>
-                    </a>
-                    <a class="nav-link" href="{{ route('radio.create') }}">
-                        <i class="nc-icon nc-paper-2"></i>
-                        <p>Add New Radio</p>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/home') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('home.section.index')}}">
-                    <i class="nc-icon nc-alien-33"></i>
-                    <p>Home Section</p>
-                </a>
-            </li>
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/user') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('user.index')}}">
                     <i class="nc-icon nc-circle-09"></i>
                     <p>Users</p>
                 </a>
             </li>
-            
-            
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/live-tv') ? ' active' : '' }}">
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/radio') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('radio.index') }}">
+                    <i class="nc-icon nc-notification-70"></i>
+                    <p>Radio Manage</p>
+                </a>
+            </li>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/live') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('live_tv.index') }}">
-                    <i class="nc-icon nc-paper-2"></i>
+                    <i class="nc-icon nc-tv-2"></i>
                     <p>Live TV Manage</p>
+                </a>
+            </li>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/video') ? ' active' : '' }}">
+                <a class="nav-link" href="{{ route('video.index') }}">
+                    <i class="nc-icon nc-button-play"></i>
+                    <p>Video Manage</p>
                 </a>
             </li>
             <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/podcast') ? ' active' : '' }}">
                 <a class="nav-link" href="{{ route('podcastcategory.index') }}">
-                    <i class="nc-icon nc-atom"></i>
+                    <i class="nc-icon nc-audio-92"></i>
                     <p>Podcast Manage</p>
                 </a>
             </li>
-   
-            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/setting') ? ' active' : '' }}">
-                <a class="nav-link" href="{{ route('settings.index') }}">
-                    <i class="nc-icon nc-settings-gear-64"></i>
-                    <p>Settings</p>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/home') ? ' active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#HomeSectionManage" role="button" aria-expanded="false" aria-controls="HomeSectionManage">
+                    <i class="nc-icon nc-alien-33"></i>
+                   <p> Home Manage</p>
                 </a>
+                <div class="collapse multi-collapse" id="HomeSectionManage">
+                    <a class="nav-link" href="{{ route('home.section.index')}}">
+                        <i class="nc-icon nc-credit-card"></i>
+                        <p>Content Manage</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('home.slider.index')}}">
+                        <i class="nc-icon nc-album-2"></i>
+                        <p>Slider Manage</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('banner.index')}}">
+                        <i class="nc-icon nc-paper-2"></i>
+                        <p>Banner Manage</p>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item{{ Illuminate\Support\Str::contains(url()->current(), 'admin/setting') ? ' active' : '' }}">
+                <a class="nav-link" data-toggle="collapse" href="#SettingManage" role="button" aria-expanded="false" aria-controls="SettingManage">
+                    <i class="nc-icon nc-settings-gear-64"></i>
+                   <p>All Settings</p>
+                </a>
+                <div class="collapse multi-collapse" id="SettingManage">
+                    <a class="nav-link" href="{{ route('settings.index')}}">
+                        <i class="nc-icon nc-settings-tool-66"></i>
+                        <p>Settings</p>
+                    </a>
+                    <a class="nav-link" href="{{ route('menu_bar.index')}}">
+                        <i class="nc-icon nc-settings-90"></i>
+                        <p>Menu Manage</p>
+                    </a>
+                </div>
             </li>
         </ul>
     </div>

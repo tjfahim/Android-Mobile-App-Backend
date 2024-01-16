@@ -27,6 +27,7 @@ class VideoController extends Controller
                 'title' => 'nullable',
                 'video_link' => 'required|url',
                 'details' => 'nullable',
+                'type' => 'required',
             ]);
             if ($request->hasFile('image')) {
                 $validator->addRules([

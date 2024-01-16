@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Video Link</label>
+                                        <label>Video Link </label><small class="text-small text-danger"> (* Preferred Mp4 Video)</small>
                                         <input type="text" class="form-control" placeholder="Enter Video Link" value="{{ isset($video) ? $video->video_link : old('video_link') }}" name="video_link">
                                         @error('video_link')
                                             <p class="text-danger">{{ $message }}</p>
@@ -66,11 +66,24 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select class="form-control" name="type">
+                                            <option value="video" {{ (isset($video) && $video->type == 'video') ? 'selected' : '' }}>Video</option>
+                                            <option value="iframe" {{ (isset($video) && $video->type == 'iframe') ? 'selected' : '' }}>iFrame</option>
+                                        </select>
+                                        @error('type')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($video) && $video->image)
                                             <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
@@ -96,7 +109,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($video) && $video->id ? 'Update' : 'Add' }}
+                                {{ isset($video) && $video->id ? 'Update Video' : 'Add Video' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

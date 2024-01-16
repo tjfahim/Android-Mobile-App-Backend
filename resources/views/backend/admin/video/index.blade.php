@@ -30,6 +30,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <h4 class="mt-0">Video List:</h4>
                         <div class="row justify-content-center col-12 my-3">
                             <div class="col-md-6 mb-3">
                                 <div class="d-flex align-items-center">
@@ -44,8 +45,9 @@
                                 <th scope="col">Action</th>
                                 <th scope="col">id</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Video Link</th>
+                                <th scope="col">Video</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Type</th>
                                 <th scope="col">Image</th>
                                 <th scope="col">Status</th>
                             </tr>
@@ -73,7 +75,7 @@
                                 </td>
                                 <td>
                                      @if(isset($video) ? $video->video_link : old('video_link') )
-                                     <video width="300" height="150" controls>
+                                     <video width="200" height="120" controls>
                                          <source src="{{ isset($video) ? $video->video_link : old('video_link') }}" type="video/mp4">
                                          Your browser does not support the video.
                                      </video>
@@ -81,6 +83,9 @@
                                 </td>
                                 <td>
                                     {{ $video->details }}
+                                </td>
+                                <td>
+                                    {{ $video->type }}
                                 </td>
                                 <td>
                                     <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">

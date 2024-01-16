@@ -48,7 +48,7 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/radio-edit/{id}', [RadioController::class, 'edit'])->name('radio.edit');
     Route::put('/radio-status/{id}', [RadioController::class, 'radioStatus'])->name('radio.status');
     Route::delete('/radio-destroy/{id}', [RadioController::class, 'destroy'])->name('radio.destroy');
-   
+
 
     Route::get('/home/section', [HomeController::class, 'homeSectionIndex'])->name('home.section.index');
     Route::get('/home/section-create', [HomeController::class, 'homeSectionCreate'])->name('home.section.create');
@@ -68,6 +68,14 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/home/slider-details/{id}', [SliderController::class, 'homeSliderEdit'])->name('home.slider.edit');
     Route::put('/home/slider-status/{id}', [SliderController::class, 'homeSliderStatus'])->name('slider.status');
     Route::delete('/home/slider-destroy/{id}', [SliderController::class, 'homeSliderDestroy'])->name('home.slider.destroy');
+
+    Route::get('/home-banner-category', [BannerController::class, 'BannerIndex'])->name('banner.index');
+    Route::get('/home-banner-create', [BannerController::class, 'bannerAdd'])->name('banner.create');
+    Route::match(['post', 'put'], '/home-banner-process/{id?}', [BannerController::class, 'bannerPostPut'])->name('banner.process');
+    Route::put('/banner-status/{id}', [BannerController::class, 'bannerStatus'])->name('banner.status');
+    Route::get('/home-banner-edit/{id}', [BannerController::class, 'bannerEditpage'])->name('banner.edit');
+    Route::get('/home-banner-details/{id}', [BannerController::class, 'bannerDetails'])->name('banner.details');
+    Route::delete('/home-banner-destroy/{id}', [BannerController::class, 'bannerDestroy'])->name('banner.destroy');
 
 
     Route::get('/setting', [SettingController::class, 'settingindex'])->name('settings.index');
@@ -101,9 +109,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::put('/users-status/{id}', [AuthController::class, 'userStatus'])->name('user.status');
     Route::delete('/users-destroy/{id}', [AuthController::class, 'userDestroy'])->name('user.destroy');
 
-
-
-
     Route::get('/podcast-category', [PodcastManageController::class, 'podcastCatgoryIndex'])->name('podcastcategory.index');
     Route::get('/podcast-category-create', [PodcastManageController::class, 'podcastCatgoryCreate'])->name('podcastcategory.create');
     Route::get('/podcast-category-details/{id}', [PodcastManageController::class, 'podcastCatgorydetails'])->name('podcastcategory.details');
@@ -119,13 +124,6 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/podcast-details/{id}', [PodcastManageController::class, 'podcastDetails'])->name('podcast.details');
     Route::delete('/podcast-destroy/{id}', [PodcastManageController::class, 'podcastDestroy'])->name('podcast.destroy');
 
-    Route::get('/home-banner-category', [BannerController::class, 'BannerIndex'])->name('banner.index');
-    Route::get('/home-banner-create', [BannerController::class, 'bannerAdd'])->name('banner.create');
-    Route::match(['post', 'put'], '/home-banner-process/{id?}', [BannerController::class, 'bannerPostPut'])->name('banner.process');
-    Route::put('/banner-status/{id}', [BannerController::class, 'bannerStatus'])->name('banner.status');
-    Route::get('/home-banner-edit/{id}', [BannerController::class, 'bannerEditpage'])->name('banner.edit');
-    Route::get('/home-banner-details/{id}', [BannerController::class, 'bannerDetails'])->name('banner.details');
-    Route::delete('/home-banner-destroy/{id}', [BannerController::class, 'bannerDestroy'])->name('banner.destroy');
 
 
 
