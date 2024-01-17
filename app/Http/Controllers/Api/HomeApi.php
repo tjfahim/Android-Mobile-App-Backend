@@ -278,6 +278,76 @@ class HomeApi extends Controller
             'data' => $setting,
         ]);
     }
+
+
+
+public function radioPodcastDevice($id, $podcast_id, $device)
+    {
+       if($podcast_id == '-9'){
+        $radio = radio::where('status','active')->find($id);
+    
+        if (!$radio) {
+            return response()->json('No Radio Exits');
+        }
+        if ($device == 1) {
+            $radio->android_listener = $radio->android_listener + 1;
+            $radio->connected_user = $radio->connected_user + 1;
+            $radio->save();
+        }else if ($device == 2) {
+            $radio->ios_listener = $radio->ios_listener + 1;
+            $radio->connected_user = $radio->connected_user + 1;
+            $radio->save();
+        }else if ($device == 0) {
+            if ($radio->connected_user > 0) {
+                $radio->connected_user = $radio->connected_user - 1;
+                $radio->save();
+            }
+        } else {
+            return response()->json([
+                'message' => 'Radio Not Updated:',
+                'data' => $radio,
+            ]);
+        }
+        return response()->json([
+            'message' => 'Radio Device Updated:',
+            'data' => $radio,
+        ]);
+    }
+ 
+        else if($id == '-9'){
+            $podcast = Podcast::where('status','active')->find($podcast_id);
+        
+            if (!$podcast) {
+                return response()->json('No Podcast Exits');
+            }
+            if ($device == 1) {
+                $podcast->android_listener = $podcast->android_listener + 1;
+                $podcast->connected_user = $podcast->connected_user + 1;
+                $podcast->save();
+            }else if ($device == 2) {
+                $podcast->ios_listener = $podcast->ios_listener + 1;
+                $podcast->connected_user = $podcast->connected_user + 1;
+                $podcast->save();
+            }else if ($device == 0) {
+                if ($podcast->connected_user > 0) {
+                    $podcast->connected_user = $podcast->connected_user - 1;
+                    $podcast->save();
+                }
+            } else {
+                return response()->json([
+                    'message' => 'Podcast Not Updated:',
+                    'data' => $podcast,
+                ]);
+            }
+            return response()->json([
+                'message' => 'Podcast Device Updated:',
+                'data' => $podcast,
+            ]);
+        }else{return response()->json([
+                'message' => '-9 Required in url, Updated Failed',
+            ]);}
+        
+    }
     
 }
 

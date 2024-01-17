@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Podcast;
 use App\Models\Radio;
 use Illuminate\Http\Request;
 
@@ -34,37 +35,7 @@ class RadioApi extends Controller
         ]);
     }
 
-    public function radioLiveDevice($id,$device)
-    {
-        $radio = radio::where('status','active')->find($id);
-    
-        if (!$radio) {
-            return response()->json('No Radio Exits');
-        }
-        if ($device == 1) {
-            $radio->android_listener = $radio->android_listener + 1;
-            $radio->connected_user = $radio->connected_user + 1;
-            $radio->save();
-        }else if ($device == 2) {
-            $radio->ios_listener = $radio->ios_listener + 1;
-            $radio->connected_user = $radio->connected_user + 1;
-            $radio->save();
-        }else if ($device == 0) {
-            if ($radio->connected_user > 0) {
-                $radio->connected_user = $radio->connected_user - 1;
-                $radio->save();
-            }
-        } else {
-            return response()->json([
-                'message' => 'Radio Not Updated:',
-                'data' => $radio,
-            ]);
-        }
-        return response()->json([
-            'message' => 'Radio Device Updated:',
-            'data' => $radio,
-        ]);
-    }
+   
  
    
 }

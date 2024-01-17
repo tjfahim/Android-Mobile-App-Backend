@@ -38,6 +38,10 @@ Route::post('/podcast-live-android-ios/{id}/{device}', [PodcastApi::class, 'podc
 Route::get('/radioIndexFetch', [RadioApi::class, 'radioIndexFetch']);
 Route::post('/radio-live-android-ios/{id}/{device}', [RadioApi::class, 'radioLiveDevice']);
 
+
+Route::post('/radio-podcast-device/{radio_id}/{podcast_id)/{device}', [HomeApi::class, 'radioPodcastDevice']);
+
+
 Route::get('/HomeSectionIndexfetch', [HomeApi::class, 'HomeSectionIndexfetch']);
 
 Route::get('/search/{query}', [HomeApi::class, 'search']);  
