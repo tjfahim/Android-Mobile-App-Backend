@@ -2,7 +2,6 @@
 <footer class="footer">
     <div class="container-fluid">
         <nav>
-           
             <p class="mt-3 text-sm text-center">
                 ©   
                 <script>

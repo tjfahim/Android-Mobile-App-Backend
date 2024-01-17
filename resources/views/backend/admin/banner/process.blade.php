@@ -72,9 +72,9 @@
 
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($banner) && $banner->image)
-                                            <img src="{{ asset('image/banner/' . $banner->image) }}" alt="{{ $banner->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/banner/' . $banner->image) }}" alt="{{ $banner->title }}" id="imagePreview" style="width: 320px; height: 50px; margin-top: 10px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 320px; height: 50px; display: none; margin-top: 10px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>

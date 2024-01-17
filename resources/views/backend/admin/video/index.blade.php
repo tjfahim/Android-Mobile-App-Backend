@@ -88,7 +88,7 @@
                                     {{ $video->type }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
+                                    <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="width: 100px; height: 115px;">
                                 </td>
                                 <td>
                                     <form class="" action="{{ route('video.status', ['id' => $video->id]) }}" method="POST">

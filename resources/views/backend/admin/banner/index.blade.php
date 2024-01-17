@@ -73,7 +73,7 @@
                                     {{ $banner->banner_link }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('image/banner/' . $banner->image) }}" alt="{{ $banner->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
+                                    <img src="{{ asset('image/banner/' . $banner->image) }}" alt="{{ $banner->name }}" id="imagePreview" style="width: 320px; height: 50px;">
                                 </td>
                                 <td>
                                     <form class="" action="{{ route('banner.status', ['id' => $banner->id]) }}" method="POST">

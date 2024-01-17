@@ -134,12 +134,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 400*460 and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($slider) && $slider->image)
-                                            <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="width: 100px; height: 115px; margin-top: 10px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 100px; display: none; margin-top: 10px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>

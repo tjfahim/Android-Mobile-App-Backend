@@ -75,7 +75,7 @@
                                     {{ $bar->link }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
+                                    <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="width: 60px; height: 60px;border-radius: 30px;">
                                 </td>
                                 <td>
                                     <form class="" action="{{ route('menu.bar.status', ['id' => $bar->id]) }}" method="POST">

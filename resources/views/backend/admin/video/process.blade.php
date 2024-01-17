@@ -44,17 +44,45 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Video Link </label><small class="text-small text-danger"> (* Preferred Mp4 Video)</small>
-                                        <input type="text" class="form-control" placeholder="Enter Video Link" value="{{ isset($video) ? $video->video_link : old('video_link') }}" name="video_link">
-                                        @error('video_link')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
+                                <div class="form-group col-md-12">
+                                    <div>Choose Type:</div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="" type="radio" name="type" id="video" value="video" {{ (isset($video) && $video->type == 'video') ? 'checked' : '' }}>
+                                        <label class="ml-2" for="video">Video</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="" type="radio" name="type" id="iframe" value="iframe" {{ (isset($video) && $video->type == 'iframe') ? 'checked' : '' }}>
+                                        <label class="ml-2" for="iframe">Iframe</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="video-section ml-2 col-md-8" style="display: none;">
+                                    <div class=" mt-2">
+                                        <div class="form-group">
+                                            <label for="video_link">Enter Video Link</label><small class="text-small text-danger"> (* Preferred Mp4 Video)</small>
+                                            <input type="text" class="form-control" placeholder="Enter Video Link" value="{{ isset($video) ? $video->video_link : old('video_link') }}" name="video_link">
+                                            @error('video_link')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="iframe-section ml-2 col-md-8" style="display: none;">
+                                    <div class=" mt-2">
+                                        <div class="form-group">
+                                            <label for="iframe_link">Iframe Video Link </label><small class="text-small text-danger"> (* Iframe Video Link Only)</small>
+                                            <input type="text" class="form-control" placeholder="Enter Iframe Link" value="{{ isset($video) ? $video->video_link : old('video_link') }}" name="iframe_link">
+                                            @error('iframe_link')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -66,29 +94,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Type</label>
-                                        <select class="form-control" name="type">
-                                            <option value="video" {{ (isset($video) && $video->type == 'video') ? 'selected' : '' }}>Video</option>
-                                            <option value="iframe" {{ (isset($video) && $video->type == 'iframe') ? 'selected' : '' }}>iFrame</option>
-                                        </select>
-                                        @error('type')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+                         
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 800*800 and PNG)</small>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 400*460 and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($video) && $video->image)
-                                            <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/video/' . $video->image) }}" alt="{{ $video->name }}" id="imagePreview" style="width: 100px; height: 115px; margin-top: 10px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 115px; display: none; margin-top: 10px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>
@@ -116,7 +131,6 @@
                     </div>
                 </div>
             </div>
-          
         </div>
     </div>
 </div>
@@ -137,8 +151,25 @@
         }
     }
 </script>
-
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const iframe = document.getElementById('iframe');
+        const video = document.getElementById('video');
+    
+        const iframeSection = document.querySelector('.iframe-section');
+        const videoSection = document.querySelector('.video-section');
+    
+        iframe.addEventListener('change', function () {
+            iframeSection.style.display = this.checked ? 'block' : 'none';
+            videoSection.style.display = 'none';
+        });
+    
+        video.addEventListener('change', function () {
+            iframeSection.style.display = 'none';
+            videoSection.style.display = this.checked ? 'block' : 'none';
+        });
+    });
+    </script>
 
 
 @endsection

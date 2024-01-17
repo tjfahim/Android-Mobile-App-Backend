@@ -20,7 +20,6 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Are you sure you want to delete this User record?')">Delete</button>
                                 </form>
-                            
                           @endif
                         </div>
                     </div>
@@ -67,11 +66,21 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label>Device Type</label>
+                                        <select name="user_type" id="">
+                                            <option value="android" {{ isset($user) && $user->user_type === 'android' ? 'selected' : '' }}>Android</option>
+                                            <option value="apple" {{ isset($user) && $user->user_type === 'apple' ? 'selected' : '' }}>Apple</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label>Role</label>
                                         <select name="role" id="">
                                             <option value="user" {{ isset($user) && $user->role === 'user' ? 'selected' : '' }}>User</option>
                                             <option value="admin" {{ isset($user) && $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-
                                         </select>
                                     </div>
                                 </div>

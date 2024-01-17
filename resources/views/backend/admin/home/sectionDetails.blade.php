@@ -191,15 +191,15 @@
                                         <td>
                                             @if(isset($sectionItem->podcast_id))
                                             <a href="{{ route('podcast.details',['id' => $sectionItem->podcast->id])}}" class="">
-                                                <img src="{{ asset('podcast/image/' . $sectionItem->podcast->image) }}" alt="{{ $sectionItem->podcast->title }}" style="width: 50px; height: 50px">
+                                                <img src="{{ asset('podcast/image/' . $sectionItem->podcast->image) }}" alt="{{ $sectionItem->podcast->title }}" style="width: 50px; height: 57px">
                                               </a>
                                             @elseif(isset($sectionItem->video_id))
                                             <a href="{{ route('video.edit',['id' => $sectionItem->video->id])}}" class="">
-                                                <img src="{{ asset('image/video/' . $sectionItem->video->image) }}" alt="{{ $sectionItem->video->title }}" style="width: 50px; height: 50px">
+                                                <img src="{{ asset('image/video/' . $sectionItem->video->image) }}" alt="{{ $sectionItem->video->title }}" style="width: 50px; height: 57px">
                                               </a>
                                             @elseif(isset($sectionItem->radio_id))
                                             <a href="{{ route('radio.edit',['id' => $sectionItem->radio->id])}}" class="">
-                                                <img src="{{ asset('image/radio/' . $sectionItem->radio->image) }}" alt="{{ $sectionItem->radio->title }}" style="width: 50px; height: 50px">
+                                                <img src="{{ asset('image/radio/' . $sectionItem->radio->image) }}" alt="{{ $sectionItem->radio->title }}" style="width: 50px; height: 57px">
                                               </a>
 
                                              @endif

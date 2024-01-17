@@ -108,9 +108,9 @@
                                         {{ isset($podcast) ? asset('podcast/image/' .$podcast->image) : old('image') }}
 
                                         @if(isset($podcast) && $podcast->image)
-                                            <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('podcast/image/' . $podcast->image) }}" alt="{{ $podcast->title }}" id="imagePreview" style="width: 100px; height: 115px; margin-top: 10px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 115px; display: none; margin-top: 10px;">
                                         @endif
                                     </div>
                                 </div>

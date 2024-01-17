@@ -34,51 +34,37 @@ class RadioApi extends Controller
         ]);
     }
 
-    public function radioandroidios($id,$device)
+    public function radioLiveDevice($id,$device)
     {
         $radio = radio::where('status','active')->find($id);
     
         if (!$radio) {
-            return response()->json('No radio Exits');
+            return response()->json('No Radio Exits');
         }
         if ($device == 1) {
             $radio->android_listener = $radio->android_listener + 1;
-            $radio->save();
-        }
-        
-        if ($device == 0) {
-            $radio->ios_listener = $radio->ios_listener + 1;
-            $radio->save();
-        }
-        return response()->json([
-            'message' => 'radio Device Updated:',
-            'data' => $radio,
-        ]);
-    }
-    public function radioanLive($id,$device)
-    {
-        $radio = radio::where('status','active')->find($id);
-    
-        if (!$radio) {
-            return response()->json('No radio Exits');
-        }
-        if ($device == 1) {
             $radio->connected_user = $radio->connected_user + 1;
             $radio->save();
-        }
-        
-        if ($device == 0) {
+        }else if ($device == 2) {
+            $radio->ios_listener = $radio->ios_listener + 1;
+            $radio->connected_user = $radio->connected_user + 1;
+            $radio->save();
+        }else if ($device == 0) {
             if ($radio->connected_user > 0) {
                 $radio->connected_user = $radio->connected_user - 1;
                 $radio->save();
             }
+        } else {
+            return response()->json([
+                'message' => 'Radio Not Updated:',
+                'data' => $radio,
+            ]);
         }
         return response()->json([
-            'message' => 'radio Live Updated:',
+            'message' => 'Radio Device Updated:',
             'data' => $radio,
         ]);
     }
-    
  
    
 }

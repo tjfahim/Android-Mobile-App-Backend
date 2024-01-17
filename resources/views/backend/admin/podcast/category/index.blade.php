@@ -32,7 +32,7 @@
                     @foreach($podcastCatgories as $podcastCatgory)
                         <div class="col-md-4 mt-3">
                             <div class="card  podcast-card">
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <div class="dropdown float-right">
                                         <button class="btn btn-sm btn-secondary dropdown-toggle dropdown-btn-bg-none" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: none;font-size: 25px;    margin-top: -6px;
                                         padding-right: 18px;">
@@ -68,8 +68,8 @@
                                             @endif
                                         </form>
                                     </div>
-                                    
-                                    <a href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}"><img src="{{ asset('podcast/image/' . $podcastCatgory->image) }}" alt="{{ $podcastCatgory->title }}" style="width: 100%; height: 177px; object-fit:cover;overflow:hidden;"></a>
+                                    <div class="text-center ml-0 mr-0"> <a href="{{ route('podcastcategory.details', ['id' => $podcastCatgory->id]) }}"><img src="{{ asset('podcast/image/' . $podcastCatgory->image) }}" alt="{{ $podcastCatgory->title }}" style="width: 100%; height: 240px; object-fit:cover;overflow:hidden;"></a></div>
+                                   
                                 </div>
                             </div>
                         </div>

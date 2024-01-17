@@ -65,7 +65,7 @@
                                  {{ $slider->type }}
                             </td>
                             <td>
-                                <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                <img src="{{ asset('image/slider/' . $slider->image) }}" alt="{{ $slider->title }}" id="imagePreview" style="width: 100px; height: 115px; margin-top: 10px;">
                             </td>
                             <td>
                                 <form class="" action="{{ route('slider.status', ['id' => $slider->id]) }}" method="POST">

@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Radio Link</label>
+                                        <label>Radio Link </label><small class="text-small text-danger"> (* Radio Link must be Live Stream)</small>
                                         <input type="text" class="form-control" placeholder="Enter Link" value="{{ isset($radio) ? $radio->radio_link : old('radio_link') }}" name="radio_link">
                                         @error('radio_link')
                                             <p class="text-danger">{{ $message }}</p>
@@ -87,12 +87,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 500*500 Circle and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($radio) && $radio->image)
-                                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/radio/' . $radio->image) }}" alt="{{ $radio->title }}" id="imagePreview" style="width: 100px; height: 100px; margin-top: 10px;border-radius: 50px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 100px; display: none; margin-top: 10px;border-radius: 50px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Now Listening</label>
                                         <input type="number" class="form-control" placeholder="" value="{{ isset($radio) ? $radio->connected_user : old('connected_user') ?? 0 }}" name="connected_user">
@@ -110,9 +110,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Total Android Users</label>
                                         <input type="number" class="form-control" value="{{ isset($radio) ? $radio->android_listener : old('android_listener') ?? 0 }}" name="android_listener">
@@ -121,9 +119,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Total Apple Users</label>
                                         <input type="number" class="form-control"value="{{ isset($radio) ? $radio->ios_listener : old('ios_listener') ?? 0 }}" name="ios_listener">
@@ -155,7 +151,7 @@
                             </div>
                             
                             <button type="submit" class="btn btn-info btn-fill">
-                                {{ isset($radio) && $radio->id ? 'Update' : 'Add Radio' }}
+                                {{ isset($radio) && $radio->id ? 'Update Radio' : 'Add Radio' }}
                             </button>
                             <div class="clearfix"></div>
                         </form>

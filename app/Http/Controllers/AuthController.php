@@ -172,6 +172,7 @@ class AuthController extends Controller
                 return Redirect::back()->withInput()->withErrors($validator);
             }
             $user->name = $request->input('name');
+            $user->user_type = $request->input('user_type');
             $user->role = $request->input('role');
             $user->status = $request->input('status');
 
@@ -198,6 +199,7 @@ class AuthController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = bcrypt($request->input('password'));
+            $user->user_type = $request->input('user_type');
             $user->role = $request->input('role');
             $user->status = $request->input('status');
             $user->save();

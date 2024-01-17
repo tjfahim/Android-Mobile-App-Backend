@@ -60,9 +60,9 @@
                                         <label>Image </label><small class="text-small text-danger"> (* Preferred Image 200*200 Circle and PNG)</small>
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($bar) && $bar->image)
-                                            <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                                            <img src="{{ asset('image/menu_bar/' . $bar->image) }}" alt="{{ $bar->name }}" id="imagePreview" style="width: 100px; height: 100px; margin-top: 10px;border-radius: 50px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="max-width: 100px; max-height: 100px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 100px; display: none; margin-top: 10px;border-radius: 50px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>

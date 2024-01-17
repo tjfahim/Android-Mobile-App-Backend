@@ -8,18 +8,13 @@ use App\Models\EventHome;
 use App\Models\HomeSection;
 use App\Models\HomeSectionItem;
 use App\Models\MenuBar;
-use App\Models\PlaylistCategory;
-use App\Models\PlaylistMusic;
 use App\Models\Podcast;
-use App\Models\PodcastCategory;
 use App\Models\Radio;
 use App\Models\Settings;
 use App\Models\Slider;
 use App\Models\User;
 use App\Models\Video;
-use App\Models\VideoReel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeApi extends Controller
 {
@@ -68,7 +63,7 @@ class HomeApi extends Controller
                 ->where('status', 'active')
                 ->get()
                 ->map(function ($result) {
-                    $result['itemType'] = 'reel';
+                    $result['itemType'] = $result['type'];
                     return $result;
                 });
 
@@ -99,7 +94,6 @@ class HomeApi extends Controller
                 $itemImage_link = null;
                 $itemAudio_link = null;
                 $itemVideo_link = null;
-                $itemVideoType = null;
                 $itemType = null;
     
                 if (!is_null($item->podcast_id)) {
@@ -134,11 +128,10 @@ class HomeApi extends Controller
                     $video = Video::find($item->video_id);
                     if ($video) {
                         $itemTitle = $video->title;
-                        $itemVideoType = $video->type;
-                        $itemType = 'video';
+                        $itemType =  $video->type;
                         $itemSubTitle = $video->details;
                         $itemImage_link = asset('image/video/' . $video->image);
-                        if(!is_null($video->audio)){
+                        if(!is_null($video->video_link)){
                              $itemVideo_link = $video->video_link;
                         }else(
                             $itemVideo_link = 'There is no video'
@@ -153,7 +146,6 @@ class HomeApi extends Controller
                         'image' => $itemImage_link,
                         'audio_link' => $itemAudio_link,
                         'video_link' => $itemVideo_link,
-                        'video_type' => $itemVideoType,
                         'item_type' => $itemType,
                         'created_at' => $item->created_at,
                         'updated_at' => $item->updated_at,
@@ -212,9 +204,20 @@ class HomeApi extends Controller
         $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
         $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
         $setting['whats_app_logo']  = asset('image/setting/' . $setting['whats_app_logo']);
+        $setting['menu_bar_background']  = asset('image/setting/' . $setting['menu_bar_background']);
         $setting['phone_logo']  = asset('image/setting/' . $setting['phone_logo']);
-        
 
+        $menus = MenuBar::where('status','active')->orderBy('created_at', 'desc')->get();
+        foreach ($menus as $menu) {
+            $menuData = [
+                'id' => $menu->id,
+                'name' => $menu->name,
+                'link' => $menu->link,
+                'image' => asset('image/menu_bar/' . $menu->image),
+            ];
+            $menusData[] = $menuData;
+        }
+       
         return response()->json([
             'message' => 'All Section With Item List:',
             'Radio data' => $responseRadio,
@@ -222,6 +225,7 @@ class HomeApi extends Controller
             'Banner Data' => $responseBanner,
             'Section data' => $response,
             'Setting' => $setting,
+            'Menu' => $menusData,
             
         ]);
     }
@@ -243,7 +247,6 @@ class HomeApi extends Controller
         $setting['logo']  = asset('image/setting/' . $setting['logo']);
         $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
         $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
-
 
         if($id){
             $user = User::find($id);
@@ -277,3 +280,5 @@ class HomeApi extends Controller
     }
     
 }
+
+

@@ -52,6 +52,11 @@ class SettingController extends Controller
                     'phone_logo' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 ]);
             }
+            if ($request->hasFile('menu_bar_background')) {
+                $validator->addRules([
+                    'menu_bar_background' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                ]);
+            }
          
             if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator);
@@ -126,6 +131,20 @@ class SettingController extends Controller
                 
                 if ($setting->phone_logo) {
                     $filePath = public_path($destinationPath . $setting->phone_logo);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            }
+            if ($menu_bar_background = $request->file('menu_bar_background')) {
+                $destinationPath = 'image/setting';
+                $originalFileName = $menu_bar_background->getClientOriginalName(); 
+                $profilemenu_bar_background = date('YmdHis') . "_" . $originalFileName;
+                $menu_bar_background->move($destinationPath, $profilemenu_bar_background);
+                $input['menu_bar_background'] = $profilemenu_bar_background;
+                
+                if ($setting->menu_bar_background) {
+                    $filePath = public_path($destinationPath . $setting->menu_bar_background);
                     if (file_exists($filePath)) {
                         unlink($filePath);
                     }

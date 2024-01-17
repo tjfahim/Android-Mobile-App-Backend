@@ -78,7 +78,7 @@
                                     {{ $live_tv->chat_code_link }}
                                 </td>
                                 <td>
-                                    <img src="{{ asset('image/live_tv/' . $live_tv->image) }}" alt="{{ $live_tv->name }}" id="imagePreview" style="max-width: 60px; max-height: 60px;">
+                                    <img src="{{ asset('image/live_tv/' . $live_tv->image) }}" alt="{{ $live_tv->name }}" id="imagePreview" style="width: 50px; height: 58px;">
                                 </td>
                                 <td>
                                     <form class="" action="{{ route('live_tv.status', ['id' => $live_tv->id]) }}" method="POST">

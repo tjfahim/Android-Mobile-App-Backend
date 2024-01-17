@@ -25,7 +25,7 @@ class VideoController extends Controller
             $video = Video::find($id);
             $validator = Validator::make($request->all(), [
                 'title' => 'nullable',
-                'video_link' => 'required|url',
+                'video_link' => 'nullable|url',
                 'details' => 'nullable',
                 'type' => 'required',
             ]);
@@ -44,7 +44,7 @@ class VideoController extends Controller
                 $Videoimage = date('YmdHis') . "_" . $originalFileName;
                 $image->move($destinationPath, $Videoimage);
                 $input['image'] = $Videoimage;
- 
+                
                 if ($video->image) {
                     $filePath = public_path($destinationPath . $video->image);
                     if (file_exists($filePath)) {
@@ -52,6 +52,10 @@ class VideoController extends Controller
                     }
                 }
             }
+            if($request->iframe_link){
+                $input['video_link'] = $request->iframe_link;
+            }
+
        
             $video->update($input);
             

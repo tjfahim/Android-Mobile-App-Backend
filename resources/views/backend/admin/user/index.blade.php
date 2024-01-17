@@ -27,6 +27,7 @@
 
         <div class="card">
             <div class="card-body mb-2">
+                <h4 class="mt-0">User List:</h4>
                 <div class="row">
                     <div class="row justify-content-center col-12">
                         <div class="col-md-6 mb-3">
@@ -43,6 +44,7 @@
                             <th scope="col">id</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Device</th>
                             <th scope="col">Role</th>
                             <th scope="col">Status</th>
                           </tr>
@@ -68,6 +70,13 @@
                             </td>
                             <td>
                                  {{ $user->email }}
+                            </td>
+                            <td>
+                                @if($user->user_type =='android')
+                                <i class="fa fa-android" aria-hidden="true"></i>
+                                @elseif($user->user_type =='apple')
+                                    <i class="fa fa-apple" aria-hidden="true"></i>
+                                @endif
                             </td>
                             <td>
                                 @if($user->role =='user')
