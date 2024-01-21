@@ -86,7 +86,10 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::get('/setting/menu-bar-details/{id}', [MenuBarController::class, 'MenuBarEdit'])->name('menu.bar.edit');
     Route::put('/setting/menu-bar-status/{id}', [MenuBarController::class, 'MenuBarStatus'])->name('menu.bar.status');
     Route::delete('/setting/menu-bar-destroy/{id}', [MenuBarController::class, 'MenuBarDestroy'])->name('menu.bar.destroy');
- 
+    
+    Route::get('/mobileview', [SettingController::class, 'mobileview'])->name('settings.mobileview');
+
+
     Route::get('/live-tv', [LiveTvController::class, 'LiveTvIndex'])->name('live_tv.index');
     Route::get('/live-tv-create', [LiveTvController::class, 'LiveTvCreate'])->name('live_tv.create');
     Route::match(['post', 'put'], '/live-tv-process/{id?}', [LiveTvController::class, 'LiveTvProcess'])->name('live_tv.process');

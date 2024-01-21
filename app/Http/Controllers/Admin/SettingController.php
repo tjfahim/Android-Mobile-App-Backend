@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
+    public function mobileview()
+    {
+        return view('backend.admin.settings.mobileview');
+    }
+ 
     public function settingindex()
     {
         $setting = Settings::first();

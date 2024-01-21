@@ -95,10 +95,13 @@ class HomeApi extends Controller
                 $itemAudio_link = null;
                 $itemVideo_link = null;
                 $itemType = null;
+                $radio_id = null;
+                $podcast_id = null;
     
                 if (!is_null($item->podcast_id)) {
                     $podcast = Podcast::find($item->podcast_id);
                     if ($podcast) {
+                        $podcast_id = $podcast->id;
                         $itemTitle = $podcast->title;
                         $itemType = 'podcast';
                         $itemSubTitle = $podcast->subtitle;
@@ -114,6 +117,7 @@ class HomeApi extends Controller
                 } elseif (!is_null($item->radio_id)) {
                     $radio = radio::find($item->radio_id);
                     if ($radio) {
+                        $radio_id = $radio->id;
                         $itemTitle = $radio->title;
                         $itemType = 'radio';
                         $itemSubTitle = $radio->subtitle;
@@ -141,6 +145,8 @@ class HomeApi extends Controller
                 if (!is_null($itemTitle)) {
                     $sectionDataItem['items'][] = [
                         'id' => $item->id,
+                        'podcast_id' => $item->podcast_id,
+                        'radio_id' => $item->radio_id,
                         'title' => $itemTitle,
                         'subtitle' => $itemSubTitle,
                         'image' => $itemImage_link,
@@ -247,6 +253,9 @@ class HomeApi extends Controller
         $setting['logo']  = asset('image/setting/' . $setting['logo']);
         $setting['favicon']  = asset('image/setting/' . $setting['favicon']);
         $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
+        $setting['whats_app_logo']  = asset('image/setting/' . $setting['whats_app_logo']);
+        $setting['phone_logo']  = asset('image/setting/' . $setting['phone_logo']);
+        $setting['menu_bar_background']  = asset('image/setting/' . $setting['menu_bar_background']);
 
         if($id){
             $user = User::find($id);
@@ -273,6 +282,7 @@ class HomeApi extends Controller
         $setting['app_topber_logo']  = asset('image/setting/' . $setting['app_topber_logo']);
         $setting['whats_app_logo']  = asset('image/setting/' . $setting['whats_app_logo']);
         $setting['phone_logo']  = asset('image/setting/' . $setting['phone_logo']);
+        $setting['menu_bar_background']  = asset('image/setting/' . $setting['menu_bar_background']);
         return response()->json([
             'message' => 'Setting:',
             'data' => $setting,
