@@ -46,13 +46,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 400*460 and PNG)</small>
+                                        <label>Image </label><small class="text-small text-danger"> (* Preferred Image 130*155 and PNG)</small>
 
                                         <input type="file" class="form-control" name="image" id="imageInput" onchange="previewImage()">
                                         @if(isset($podcastcategory) && $podcastcategory->image)
-                                            <img src="{{ asset('podcast/image/' . $podcastcategory->image) }}" alt="{{ $podcastcategory->title }}" id="imagePreview" style="width: 100px; height: 115px; margin-top: 10px;">
+                                            <img src="{{ asset('podcast/image/' . $podcastcategory->image) }}" alt="{{ $podcastcategory->title }}" id="imagePreview" style="width: 130px; height: 155px; margin-top: 10px;">
                                         @else
-                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 115px; display: none; margin-top: 10px;">
+                                            <img src="#" alt="Preview" id="imagePreview" style="width: 100px; height: 155px; display: none; margin-top: 10px;">
                                         @endif
                                         @error('image')
                                             <p class="text-danger">{{ $message }}</p>
